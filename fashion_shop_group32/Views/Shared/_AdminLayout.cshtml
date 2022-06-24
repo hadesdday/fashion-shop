@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.title | NLU</title>
+    <link rel="shortcut icon" href="~/Content/admin/images/admin-icon.png">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+    <!-- Datatable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+    <link href="~/Content/admin/css/lib/data-table/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/admin/css/lib/data-table/buttons.bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Common -->
+    <link href="~/Content/admin/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/admin/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="~/Content/admin/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="~/Content/admin/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/admin/css/lib/helper.css" rel="stylesheet">
+    <link href="~/Content/admin/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/admin/css/lib/toastr/toastr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <!-- Common -->
+    <script src="~/Scripts/admin/js/lib/jquery.min.js"></script>
+
+    <script src="~/Scripts/admin/js/lib/menubar/sidebar.js"></script>
+
+    <script src="~/Scripts/admin/js/lib/bootstrap.min.js"></script>
+    <script src="~/Scripts/admin/js/scripts.js"></script>
+
+
+    <script src="~/Scripts/admin/js/lib/data-table/datatables.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/data-table/buttons.flash.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/data-table/jszip.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="~/Scripts/admin/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/data-table/datatables-init.js"></script>
+    <script src="~/Scripts/admin/js/lib/sweetalert/sweetalert.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/toastr/toastr.min.js"></script>
+</head>
+
+<body>
+    <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+        <div class="nano">
+            <div class="nano-content">
+                <ul>
+                    <div class="logo">
+                        <a href="/Admin">
+                            <span>NLU</span>
+                        </a>
+                    </div>
+                    <li class="label">Trang chủ</li>
+                    <li>
+                        <a href="/Admin"><i class="ti-home"></i> Trang chủ </a>
+                    </li>
+                    <li class="label">Quản Lý</li>
+                    <li><a href="/Admin/Product"><i class="ti-desktop"></i> Sản phẩm</a>
+                    <li><a href="/Admin/Order"><i class="ti-bag"></i> Hóa đơn</a>
+                    <li>
+                        <a href="/Admin/UserManagement"><i class="ti-user"></i>Người dùng</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/Customer"><i class="ti-user"></i>Khách hàng</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/Sales"><i class="ti-star"></i>Khuyến mãi</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/Review"><i class="ti-star"></i>Đánh giá sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/ProductType"><i class="ti-star"></i>Loại sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/PaymentMethod"><i class="ti-star"></i>Phương thức thanh toán</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/SizeBoard"><i class="ti-star"></i>Bảng size</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/ColorBoard"><i class="ti-star"></i>Bảng màu</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /# sidebar -->
+    <div class="header">
+        <div class="container-fluid p-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="float-right">
+                        <div class="dropdown dib">
+                            <div class="dropdown show">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="ti-user pr-2"></i>
+                                        <span>Thông tin</span>
+                                    </a>
+                                    <a class="dropdown-item" href="page-login.html">
+                                        <i class="ti-power-off pr-2"></i>
+                                        Đăng
+                                        xuất
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+</body>
+
+</html>
+
