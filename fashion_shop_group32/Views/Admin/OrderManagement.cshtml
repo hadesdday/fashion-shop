@@ -1,0 +1,231 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["title"] = "Quản lý hóa đơn";
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <h2>Quản lý hóa đơn</h2>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+
+                <button id="addBtn" type="button" class="btn btn-primary">Thêm hóa đơn</button>
+                <!--modal them hoa don-->
+
+                <form action="#">
+                    <div id="addModal" class="custom-modal">
+                        <div class="custom-modal-content">
+                            <div class="custom-modal-header">
+                                <span class="custom-close">&times;</span>
+                                <h2>Thêm hóa đơn</h2>
+                            </div>
+                            <div class="custom-modal-body">
+                                <label>Mã hóa đơn</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="oid">
+                                </div>
+
+                                <label>Mã khách hàng</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="cid">
+                                </div>
+
+                                <label>Đơn giá</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" name="totalPrice">
+                                </div>
+
+                                <label>Phương thức thanh toán</label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" name="paymentMethod">
+                                        <option selected hidden disabled value="0">Chọn phương thức thanh toán</option>
+                                        <option value="BANK">Chuyển khoản ngân hàng</option>
+                                        <option value="COD">Thanh toán khi nhận hàng</option>
+                                        <option value="MOMO">Momo</option>
+                                    </select>
+                                </div>
+
+                                <label>Mã giảm giá</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="coupon">
+                                </div>
+
+                                <label>Trạng thái</label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" name="status">
+                                        <option selected hidden disabled value="0">Chọn trạng thái đơn hàng</option>
+                                        <option value="1">Bị hủy bỏ</option>
+                                        <option value="2">Đang chờ xử lý</option>
+                                        <option value="3">Hết hạn xử lý</option>
+                                        <option value="4">Khách hàng trả lại hàng</option>
+                                        <option value="5">Đơn hàng được giao thành công</option>
+                                        <option value="6">Khách hàng từ chối nhận hàng</option>
+                                        <option value="7">Đang vận chuyển</option>
+                                        <option value="8">Đã được xử lý</option>
+                                        <option value="9">Đang xử lý</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="custom-modal-footer">
+                                <button type="button" class="btn btn-secondary close-btn">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+                <!-- modal sua thong tin hoa don -->
+                <form action="#">
+                    <div id="editModal" class="custom-modal">
+                        <div class="custom-modal-content">
+                            <div class="custom-modal-header">
+                                <span class="custom-close">&times;</span>
+                                <h2>Sửa thông tin hóa đơn</h2>
+                            </div>
+                            <div class="custom-modal-body">
+                                <label>Mã hóa đơn</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editoid">
+                                </div>
+
+                                <label>Mã khách hàng</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editcid">
+                                </div>
+
+                                <label>Đơn giá</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" name="edittotalPrice">
+                                </div>
+
+                                <label>Phương thức thanh toán</label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" name="editpaymentMethod">
+                                        <option selected hidden disabled value="0">Chọn phương thức thanh toán</option>
+                                        <option value="BANK">Chuyển khoản ngân hàng</option>
+                                        <option value="COD">Thanh toán khi nhận hàng</option>
+                                        <option value="MOMO">Momo</option>
+                                    </select>
+                                </div>
+
+                                <label>Mã giảm giá</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editcoupon">
+                                </div>
+
+                                <label>Trạng thái</label>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" name="editstatus">
+                                        <option selected hidden disabled value="0">Chọn trạng thái đơn hàng</option>
+                                        <option value="1">Bị hủy bỏ</option>
+                                        <option value="2">Đang chờ xử lý</option>
+                                        <option value="3">Hết hạn xử lý</option>
+                                        <option value="4">Khách hàng trả lại hàng</option>
+                                        <option value="5">Đơn hàng được giao thành công</option>
+                                        <option value="6">Khách hàng từ chối nhận hàng</option>
+                                        <option value="7">Đang vận chuyển</option>
+                                        <option value="8">Đã được xử lý</option>
+                                        <option value="9">Đang xử lý</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="custom-modal-footer">
+                                <button type="button" class="btn btn-secondary close-btn">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form action="#">
+                    <div id="confirmDelete" class="custom-modal">
+                        <div class="custom-modal-content">
+                            <div class="custom-modal-header">
+                                <span class="custom-close">&times;</span>
+                                <h2>Xác nhận</h2>
+                            </div>
+                            <div class="custom-modal-body">
+                                <h6>Bạn có chắc chắn muốn xóa hóa đơn này ?</h6>
+                            </div>
+                            <div class="custom-modal-footer">
+                                <button type="button" class="btn btn-secondary close-btn">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /# row -->
+            <section id="main-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="bootstrap-data-table-panel">
+                                <div class="table-responsive">
+                                    <table id="bootstrap-data-table-export"
+                                           class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã hóa đơn</th>
+                                                <th>Mã khách hàng</th>
+                                                <th>Đơn giá</th>
+                                                <th>Phương thức thanh toán</th>
+                                                <th>Mã giảm giá</th>                        
+                                                <th>Trạng thái</th>
+                                                <th>Ngày mua</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>KH01</td>
+                                                <td>1250000</td>
+                                                <td>1/1/2019</td>
+                                                <td>Thanh toán khi nhận hàng</td>
+                                                <td>123</td>
+                                                <td>Chưa thanh toán</td>
+                                                <td>
+                                                    <a href="#" class="btn rounded bg-warning" id="editBtn"
+                                                       onclick="showEditModal()">
+                                                        <i class="ti-pencil"></i>
+                                                    </a>
+                                                    <a href="#" class="btn rounded bg-danger" id="deleteAction"
+                                                       onclick="showDeleteModal()">
+                                                        <i class="ti-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer">
+                            <p>
+                                2021 © Admin Dashboard. - Functions Developed By <a href="https://github.com/hadesdday" target="_blank">
+                                    Nguyen
+                                    Van Hieu
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
