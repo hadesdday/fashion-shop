@@ -303,6 +303,7 @@
     <Compile Include="Controllers\admin\AdminController.cs" />
     <Compile Include="Controllers\admin\ColorController.cs" />
     <Compile Include="Controllers\admin\CustomerController.cs" />
+    <Compile Include="Controllers\admin\GetStatisticController.cs" />
     <Compile Include="Controllers\admin\OrderManagementController.cs" />
     <Compile Include="Controllers\admin\PaymentMethodController.cs" />
     <Compile Include="Controllers\admin\ProductManagementController.cs" />
@@ -598,6 +599,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\admin\images\upload\product\" />
     <Folder Include="Views\Customer\" />
+    <Folder Include="Views\GetStatistic\" />
     <Folder Include="Views\OrderManagement\" />
     <Folder Include="Views\ProductManagement\" />
     <Folder Include="Views\Review\" />
