@@ -40,9 +40,6 @@
                                 <div class="input-group mb-3">
                                     <select class="form-select w-100" name="tid">
                                         <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                        <option value="casual">Casual</option>
-                                        <option value="formal">Formal</option>
-                                        <option value="sport">Sport</option>
                                     </select>
                                 </div>
 
@@ -50,8 +47,6 @@
                                 <div class="input-group mb-3">
                                     <select class="form-select w-100" name="cid">
                                         <option selected hidden disabled value="0">Chọn mã màu sản phẩm</option>
-                                        <option value="do">Màu đỏ</option>
-                                        <option value="xanh">Màu xanh</option>
                                     </select>
                                 </div>
 
@@ -59,9 +54,6 @@
                                 <div class="input-group mb-3">
                                     <select class="form-select w-100" name="sid">
                                         <option selected hidden disabled value="0">Chọn mã size sản phẩm</option>
-                                        <option value="l">L</option>
-                                        <option value="x">X</option>
-                                        <option value="xxl">XXL</option>
                                     </select>
                                 </div>
 
@@ -138,9 +130,6 @@
                                 <div class="input-group mb-3">
                                     <select class="form-select w-100" name="edittid">
                                         <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
-                                        <option value="casual">Casual</option>
-                                        <option value="formal">Formal</option>
-                                        <option value="sport">Sport</option>
                                     </select>
                                 </div>
 
@@ -148,8 +137,6 @@
                                 <div class="input-group mb-3">
                                     <select class="form-select w-100" name="editcid">
                                         <option selected hidden disabled value="0">Chọn mã màu sản phẩm</option>
-                                        <option value="do">Màu đỏ</option>
-                                        <option value="xanh">Màu xanh</option>
                                     </select>
                                 </div>
 
@@ -157,9 +144,6 @@
                                 <div class="input-group mb-3">
                                     <select class="form-select w-100" name="editsid">
                                         <option selected hidden disabled value="0">Chọn mã size sản phẩm</option>
-                                        <option value="l">L</option>
-                                        <option value="x">X</option>
-                                        <option value="xxl">XXL</option>
                                     </select>
                                 </div>
 
@@ -382,6 +366,48 @@
                 { "data": "active" },
             ],
         });
+
+        $.ajax({
+            url: "https://localhost:44332/ProductType/GetProductTypeList",
+            method: "GET",
+            success: data => {
+                let returnedData = data["data"];
+                returnedData.map(x => {
+                    let elm = "<option value='" + x["ma_loaisp"] + "'>" + x["ten_loaisp"] + "</option>";
+                    $("select[name='tid']").append(elm);
+                    $("select[name='edittid']").append(elm);
+                });
+                $('select').niceSelect("update");
+            }
+        });
+
+        $.ajax({
+            url: "https://localhost:44332/Color/GetColorList",
+            method: "GET",
+            success: data => {
+                let returnedData = data["data"];
+                returnedData.map(x => {
+                    let elm = "<option value='" + x["ma_mausp"] + "'>" + x["mausp"] + "</option>";
+                    $("select[name='cid']").append(elm);
+                    $("select[name='editcid']").append(elm);
+                });
+                $('select').niceSelect("update");
+            }
+        });
+
+        $.ajax({
+            url: "https://localhost:44332/Size/GetSizeList",
+            method: "GET",
+            success: data => {
+                let returnedData = data["data"];
+                returnedData.map(x => {
+                    let elm = "<option value='" + x["ma_sizesp"] + "'>" + x["ten_sizesp"] + "</option>";
+                    $("select[name='sid']").append(elm);
+                    $("select[name='editsid']").append(elm);
+                });
+                $('select').niceSelect("update");
+            }
+        });
     });
 
     function reloadTable() {
@@ -432,7 +458,7 @@
             active,
         ];
 
-        if (isEmpty(inp) || price < 1 || stock < 0) {
+        if (isEmpty(inp) || price < 1 || stock < 0 || active < 1) {
             swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
         } else {
             var url = "https://localhost:44332/ProductManagement/Add?id_sanpham=" + id + "&ten_sp=" + name + "&ma_loaisp=" + type + "&ma_mau=" + color + "&ma_size=" + size + "&gia=" + price + "&loai=" + gender
@@ -514,7 +540,7 @@
             active,
         ];
 
-        if (isEmpty(inp) || price < 1 || stock < 0) {
+        if (isEmpty(inp) || price < 1 || stock < 0 || active < 1) {
             swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
         } else {
             var url = "https://localhost:44332/ProductManagement/UpdateInformation?id_sanpham=" + id + "&ten_sp=" + name + "&ma_loaisp=" + type + "&ma_mau=" + color + "&ma_size=" + size + "&gia=" + price + "&loai=" + gender
