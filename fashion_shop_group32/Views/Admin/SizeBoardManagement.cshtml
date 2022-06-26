@@ -203,7 +203,7 @@
         var name = $("input[name='sName']").val();
 
         if (id.length < 1 || name.length < 1) {
-            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error"); swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
         } else {
             $.ajax({
                 url: "/Size/AddNewSize",
@@ -272,7 +272,7 @@
                     closeModal("#editModal");
                 },
                 error: function (data) {
-                    if (data.status === 400 || 500)
+                    if (data.status === 400 || data.status === 500)
                         swal("Thất bại", "Dữ liệu không hợp lệ vui lòng nhập lại", "error");
                     else
                         swal("Thất bại", "Cập nhật thông tin thất bại", "error");

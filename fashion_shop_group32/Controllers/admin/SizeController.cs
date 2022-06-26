@@ -5,9 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
-using System.Web.Helpers;
-using System.Web.Http;
 using System.Web.Mvc;
 
 namespace fashion_shop_group32.Controllers.admin.SizeBoard
@@ -112,54 +109,6 @@ namespace fashion_shop_group32.Controllers.admin.SizeBoard
                 }
             }
             return new JsonHttpStatusResult("delete success", HttpStatusCode.OK);
-        }
-
-        public JsonResult AddNewCustomerAndUserAsync()
-        {
-            using (var context = new AdminDbContext())
-            {
-                try
-                {
-                    context.Database.EnsureCreated();
-                    var cs = new Customer
-                    {
-                        ten_kh = "new kh",
-                        diachi = "new dia chi",
-                        sodt = "new sdt",
-                        email = "new email",
-                    };
-                    context.khachhang.Add(cs);
-                    int rowInserted = context.SaveChanges();
-                    if (rowInserted == 1)
-                    {
-                        context.Entry(cs).GetDatabaseValues();
-                        int id = cs.id_khachhang;
-
-                        var user = new User
-                        {
-                            username = "testaccount",
-                            password = "testaccount",
-                            role = "testaccount",
-                            email = "testaccount",
-                            id_khachhang = id,
-                            active = 1,
-                        };
-                        context.User.Add(user);
-                        context.SaveChanges();
-                    }
-                }
-                catch (DbUpdateException ex)
-                {
-                    return new JsonHttpStatusResult("existed data", HttpStatusCode.Conflict);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-
-                    return new JsonHttpStatusResult("invalid data", HttpStatusCode.InternalServerError);
-                }
-            }
-            return new JsonHttpStatusResult("success", HttpStatusCode.OK);
         }
     }
 }

@@ -28,6 +28,7 @@
     <link href="~/Content/admin/css/lib/helper.css" rel="stylesheet">
     <link href="~/Content/admin/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/admin/css/lib/toastr/toastr.min.css">
+    <link href="~/Content/admin/css/lib/nice-select.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
     <!-- Common -->
     <script src="~/Scripts/admin/js/lib/jquery.min.js"></script>
@@ -49,6 +50,7 @@
     <script src="~/Scripts/admin/js/lib/data-table/datatables-init.js"></script>
     <script src="~/Scripts/admin/js/lib/sweetalert/sweetalert.min.js"></script>
     <script src="~/Scripts/admin/js/lib/toastr/toastr.min.js"></script>
+    <script src="~/Scripts/admin/js/lib/jquery.nice-select.min.js"></script>
 </head>
 
 <body>
@@ -128,6 +130,11 @@
         </div>
     </div>
     @RenderBody()
+    <script>
+        $(document).ready(function () {
+            $('select').niceSelect();
+        });
+    </script>
 </body>
 
 </html>

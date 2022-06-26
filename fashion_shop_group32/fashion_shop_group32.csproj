@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -298,7 +301,16 @@
     <Compile Include="Areas\Identity\AdminDbContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\admin\AdminController.cs" />
-    <Compile Include="Controllers\admin\SizeBoard\SizeController.cs" />
+    <Compile Include="Controllers\admin\ColorController.cs" />
+    <Compile Include="Controllers\admin\CustomerController.cs" />
+    <Compile Include="Controllers\admin\OrderManagementController.cs" />
+    <Compile Include="Controllers\admin\PaymentMethodController.cs" />
+    <Compile Include="Controllers\admin\ProductManagementController.cs" />
+    <Compile Include="Controllers\admin\ProductTypeController.cs" />
+    <Compile Include="Controllers\admin\ReviewController.cs" />
+    <Compile Include="Controllers\admin\SaleController.cs" />
+    <Compile Include="Controllers\admin\SizeController.cs" />
+    <Compile Include="Controllers\admin\UserController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
@@ -313,11 +325,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\JsonHttpStatusResult.cs" />
     <Compile Include="Models\MockProduct.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductEntity.cs" />
+    <Compile Include="Models\ProductType.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModelIndex.cs" />
@@ -336,6 +355,7 @@
     <Content Include="Content\admin\css\lib\materialize.min.css" />
     <Content Include="Content\admin\css\lib\menubar\sidebar.css" />
     <Content Include="Content\admin\css\lib\mmc-chat.css" />
+    <Content Include="Content\admin\css\lib\nice-select.css" />
     <Content Include="Content\admin\css\lib\sample.css" />
     <Content Include="Content\admin\css\lib\themify-icons.css" />
     <Content Include="Content\admin\css\lib\toastr\toastr.min.css" />
@@ -520,6 +540,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\admin\js\lib\jquery.nice-select.min.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\custom.js" />
     <Content Include="Scripts\js\jquery.min.js" />
@@ -576,6 +597,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\admin\images\upload\product\" />
+    <Folder Include="Views\Customer\" />
+    <Folder Include="Views\OrderManagement\" />
+    <Folder Include="Views\ProductManagement\" />
+    <Folder Include="Views\Review\" />
+    <Folder Include="Views\Sale\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\fontawesome-webfont.eot" />

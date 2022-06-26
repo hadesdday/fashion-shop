@@ -263,3 +263,5 @@ D:\Visual Studio Community 2019 Workspace\fashion_shop_group32\fashion_shop_grou
 D:\Visual Studio Community 2019 Workspace\fashion_shop_group32\fashion_shop_group32\bin\Microsoft.EntityFrameworkCore.Relational.xml
 D:\Visual Studio Community 2019 Workspace\fashion_shop_group32\fashion_shop_group32\bin\MySql.Data.xml
 D:\Visual Studio Community 2019 Workspace\fashion_shop_group32\fashion_shop_group32\bin\MySql.EntityFrameworkCore.xml
+D:\Visual Studio Community 2019 Workspace\fashion_shop_group32\fashion_shop_group32\bin\BCrypt.Net-Next.dll
+D:\Visual Studio Community 2019 Workspace\fashion_shop_group32\fashion_shop_group32\bin\BCrypt.Net-Next.xml

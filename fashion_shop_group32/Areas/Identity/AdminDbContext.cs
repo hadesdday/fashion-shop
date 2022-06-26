@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using fashion_shop_group32.Models;
+﻿using fashion_shop_group32.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace fashion_shop_group32.Context
 {
     public class AdminDbContext : DbContext
     {
-        public DbSet<Size> Size { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<Customer> khachhang { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;database=.net;port=3306;user=root;password=;charset=utf8;");
@@ -46,6 +39,73 @@ namespace fashion_shop_group32.Context
                 entity.Property(e => e.active).IsRequired();
             });
 
+            modelBuilder.Entity<Color>(entity =>
+            {
+                entity.HasKey(e => e.ma_mausp);
+                entity.Property(e => e.mausp).IsRequired();
+            });
+
+            modelBuilder.Entity<ProductType>(entity =>
+            {
+                entity.HasKey(e => e.ma_loaisp);
+                entity.Property(e => e.ten_loaisp).IsRequired();
+            });
+            modelBuilder.Entity<PaymentMethod>(entity =>
+            {
+                entity.HasKey(e => e.mapttt);
+                entity.Property(e => e.tenpttt).IsRequired();
+            });
+            modelBuilder.Entity<Review>(entity =>
+            {
+                entity.HasKey(e => e.id);
+                entity.Property(e => e.username).IsRequired();
+                entity.Property(e => e.id_sanpham).IsRequired();
+                entity.Property(e => e.sosao).IsRequired();
+                entity.Property(e => e.noidung).IsRequired();
+            });
+            modelBuilder.Entity<Sale>(entity =>
+            {
+                entity.HasKey(e => e.id_km);
+                entity.Property(e => e.ten_km);
+                entity.Property(e => e.noidung_km);
+                entity.Property(e => e.rate);
+                entity.Property(e => e.active);
+            });
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasKey(e => e.id_hoadon);
+                entity.Property(e => e.id_khachHang).IsRequired();
+                entity.Property(e => e.id_magg);
+                entity.Property(e => e.mapttt).IsRequired();
+                entity.Property(e => e.trigia).IsRequired();
+                entity.Property(e => e.trangthai).IsRequired();
+            });
+            modelBuilder.Entity<ProductEntity>(entity =>
+            {
+                entity.HasKey(e => e.id_sanpham);
+                entity.Property(e => e.ten_sp).IsRequired();
+                entity.Property(e => e.ma_loaisp).IsRequired();
+                entity.Property(e => e.ma_mau).IsRequired();
+                entity.Property(e => e.ma_size).IsRequired();
+                entity.Property(e => e.gia).IsRequired();
+                entity.Property(e => e.loai).IsRequired();
+                entity.Property(e => e.id_km);
+                entity.Property(e => e.thuonghieu).IsRequired();
+                entity.Property(e => e.soluongton).IsRequired();
+                entity.Property(e => e.mota).IsRequired();
+                entity.Property(e => e.active).IsRequired();
+            });
         }
+
+        public DbSet<Size> Size { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Customer> khachhang { get; set; }
+        public DbSet<Color> mausanpham { get; set; }
+        public DbSet<ProductType> loaisanpham { get; set; }
+        public DbSet<PaymentMethod> thanhtoan { get; set; }
+        public DbSet<Review> review { get; set; }
+        public DbSet<Sale> khuyenmai { get; set; }
+        public DbSet<Order> hoadon { get; set; }
+        public DbSet<ProductEntity> sanpham { get; set; }
     }
 }
