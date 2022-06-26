@@ -38,8 +38,8 @@
                                     <i class="ti-money color-success border-success"></i>
                                 </div>
                                 <div class="stat-content dib">
-                                    <div class="stat-text">Doanh thu</div>
-                                    <div class="stat-digit">100.000.000 VNĐ</div>
+                                    <div class="stat-text">Tổng Doanh Thu</div>
+                                    <div class="stat-digit" id="sumTurnover">0</div>
                                 </div>
                             </div>
                         </div>
@@ -51,8 +51,8 @@
                                     <i class="ti-user color-primary border-primary"></i>
                                 </div>
                                 <div class="stat-content dib">
-                                    <div class="stat-text">Số khách hàng</div>
-                                    <div class="stat-digit">1000</div>
+                                    <div class="stat-text">Số Khách Hàng</div>
+                                    <div class="stat-digit" id="totalCustomer">0</div>
                                 </div>
                             </div>
                         </div>
@@ -64,8 +64,8 @@
                                     <i class="ti-receipt color-pink border-pink"></i>
                                 </div>
                                 <div class="stat-content dib">
-                                    <div class="stat-text">Hóa đơn</div>
-                                    <div class="stat-digit">1001</div>
+                                    <div class="stat-text">Hóa Đơn</div>
+                                    <div class="stat-digit" id="totalOrder"></div>
                                 </div>
                             </div>
                         </div>
@@ -89,46 +89,62 @@
 
 <script>
     $(() => {
-        var chartArea = $("#myChart");
-        if (chartArea !== undefined) {
-            drawChart();
-        }
-    });
-    function drawChart() {
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+        $.ajax({
+            url: "https://localhost:44332/GetStatistic/GetStats",
+            method: "GET",
+            success: data => {
+                $("#sumTurnover").text(new Intl.NumberFormat("vi-VN").format(data["sumTurnover"]) + " đ")
+                $("#totalCustomer").text(data["sumCustomer"]);
+                $("#totalOrder").text(data["sumOrder"]);
+
+                let se = data["turnoverByMonths"];
+                let re = [];
+                for (let i = 1; i < 13; i++) {
+                    re.push(se[`${i}`]);
                 }
+
+                array = [...re];
+                drawChart(array);
+            },
+            error: data => {
+                console.log(data);
             }
         });
-    }
+    });
+    function drawChart(arrayData) {
+        const labels = [
+            'Tháng 1',
+            'Tháng 2',
+            'Tháng 3',
+            'Tháng 4',
+            'Tháng 5',
+            'Tháng 6',
+            'Tháng 7',
+            'Tháng 8',
+            'Tháng 9',
+            'Tháng 10',
+            'Tháng 11',
+            'Tháng 12'
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Doanh thu',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: arrayData,
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    };
 </script>
