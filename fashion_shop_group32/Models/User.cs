@@ -1,17 +1,11 @@
-﻿using MySql.EntityFrameworkCore.DataAnnotations;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace fashion_shop_group32.Models
 {
     public class User
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("username", TypeName = "varchar(255)")]
         public string username { get; set; }
         [Required(ErrorMessage = "- Enter password")]
@@ -29,5 +23,7 @@ namespace fashion_shop_group32.Models
         [Required(ErrorMessage = "- Unknown status")]
         [Column("active", TypeName = "tinyint")]
         public int active { get; set; }
+        [Column("token", TypeName = "varchar(255)")]
+        public string token { get; set; }
     }
 }

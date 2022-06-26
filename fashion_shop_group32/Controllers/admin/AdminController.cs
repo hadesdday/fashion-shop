@@ -1,10 +1,4 @@
-﻿using fashion_shop_group32.Models;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http.Description;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 namespace fashion_shop_group32.Controllers.admin
 {
     public class AdminController : Controller

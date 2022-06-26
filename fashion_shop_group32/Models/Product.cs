@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace fashion_shop_group32.Models
 {
@@ -11,7 +12,7 @@ namespace fashion_shop_group32.Models
         public double rateDiscount { get; set; }
         public string id_km { get; set; }
         public string ma_mau { get; set; }
-        public string ma_size  { get; set; }   
+        public string ma_size { get; set; }
         public string thuonghieu { get; set; }
         public string loai { get; set; }
         public int soluongton { get; set; }

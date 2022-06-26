@@ -12,18 +12,18 @@
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
+                <button id="addBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Thêm người dùng</button>
 
-                <button id="addBtn" type="button" class="btn btn-primary">Thêm người dùng</button>
-                <!--modal them hoa don-->
-
-                <form action="#">
-                    <div id="addModal" class="custom-modal">
-                        <div class="custom-modal-content">
-                            <div class="custom-modal-header">
-                                <span class="custom-close">&times;</span>
-                                <h2>Thêm người dùng</h2>
+                <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Thêm người dùng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
                             </div>
-                            <div class="custom-modal-body">
+                            <div class="modal-body">
                                 <label>Username</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" name="username">
@@ -46,7 +46,8 @@
 
                                 <label>Role</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="role">
+                                    <select class="form-select w-100" name="role">
+                                        <option selected hidden disabled value="0">Chọn role</option>
                                         <option value="admin">admin</option>
                                         <option value="user">user</option>
                                     </select>
@@ -54,44 +55,35 @@
 
                                 <label>Trạng thái</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="active">
+                                    <select class="form-select w-100" name="active">
+                                        <option selected hidden disabled value="-1">Chọn trạng thái</option>
                                         <option value="0">Bị cấm</option>
                                         <option value="1">Chưa kích hoạt</option>
                                         <option value="2">Đã kích hoạt</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="custom-modal-footer">
-                                <button type="button" class="btn btn-secondary close-btn">Hủy</button>
-                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="add-action">Lưu</button>
                             </div>
-
                         </div>
                     </div>
-                </form>
+                </div>
 
-                <!-- modal sua thong tin hoa don -->
-                <form action="#">
-                    <div id="editModal" class="custom-modal">
-                        <div class="custom-modal-content">
-                            <div class="custom-modal-header">
-                                <span class="custom-close">&times;</span>
-                                <h2>Sửa thông tin hóa đơn</h2>
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Sửa thông tin người dùng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
                             </div>
-                            <div class="custom-modal-body">
+                            <div class="modal-body">
                                 <label>Username</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="editusername">
-                                </div>
-
-                                <label>Mã khách hàng</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="editcid">
-                                </div>
-
-                                <label>Mật khẩu</label>
-                                <div class="input-group mb-3">
-                                    <input type="password" class="form-control" name="editpassword">
+                                    <input type="text" class="form-control" name="editusername" disabled>
                                 </div>
 
                                 <label>Email</label>
@@ -101,7 +93,8 @@
 
                                 <label>Role</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="editrole">
+                                    <select class="form-select w-100" name="editrole">
+                                        <option selected hidden disabled value="0">Chọn role</option>
                                         <option value="admin">admin</option>
                                         <option value="user">user</option>
                                     </select>
@@ -109,39 +102,41 @@
 
                                 <label>Trạng thái</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" name="editactive">
+                                    <select class="form-select w-100" name="editactive">
                                         <option value="0">Bị cấm</option>
                                         <option value="1">Chưa kích hoạt</option>
                                         <option value="2">Đã kích hoạt</option>
                                     </select>
                                 </div>
-
                             </div>
-                            <div class="custom-modal-footer">
-                                <button type="button" class="btn btn-secondary close-btn">Hủy</button>
-                                <button type="submit" class="btn btn-primary">Lưu</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <form action="#">
-                    <div id="confirmDelete" class="custom-modal">
-                        <div class="custom-modal-content">
-                            <div class="custom-modal-header">
-                                <span class="custom-close">&times;</span>
-                                <h2>Xác nhận</h2>
-                            </div>
-                            <div class="custom-modal-body">
-                                <h6>Bạn có chắc chắn muốn xóa người dùng này ?</h6>
-                            </div>
-                            <div class="custom-modal-footer">
-                                <button type="button" class="btn btn-secondary close-btn">Hủy</button>
-                                <button type="submit" class="btn btn-primary">Đồng ý</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="edit-action">Lưu</button>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Xóa người dùng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="deleteId" disabled hidden>
+                                <h6>Bạn có chắc chắn muốn xóa dòng này ?</h6>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="delete-action">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <!-- /# row -->
@@ -151,47 +146,28 @@
                         <div class="card">
                             <div class="bootstrap-data-table-panel">
                                 <div class="table-responsive">
-                                    <table id="bootstrap-data-table-export"
-                                           class="table table-striped table-bordered">
+                                    <table id="user-board"
+                                           class="table table-striped table-bordered" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>
+                                                <th width="18%">
                                                     Username
                                                 </th>
-                                                <th>
+                                                <th width="18%">
                                                     Mã khách hàng
                                                 </th>
-                                                <th>
+                                                <th width="18%">
                                                     Email
                                                 </th>
-                                                <th>
+                                                <th width="18%">
                                                     Role
                                                 </th>
-                                                <th>
+                                                <th width="18%">
                                                     Trạng thái
                                                 </th>
-                                                <th>Hành động</th>
+                                                <th width="10%">Hành động</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>KH01</td>
-                                                <td>1250000</td>
-                                                <td>1/1/2019</td>
-                                                <td>Thanh toán khi nhận hàng</td>
-                                                <td>
-                                                    <a href="#" class="btn rounded bg-warning" id="editBtn"
-                                                       onclick="showEditModal()">
-                                                        <i class="ti-pencil"></i>
-                                                    </a>
-                                                    <a href="#" class="btn rounded bg-danger" id="deleteAction"
-                                                       onclick="showDeleteModal()">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -218,3 +194,212 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#user-board").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "/Scripts/admin/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "https://localhost:44332/User/GetUserList",
+                "dataSrc": "data"
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "width": "18%",
+                },
+                {
+                    "targets": 1,
+                    "width": "18%",
+                },
+                {
+                    "targets": 2,
+                    "width": "18%",
+                },
+                {
+                    "targets": 3,
+                    "width": "18%",
+                },
+                {
+                    "targets": 4,
+                    "width": "18%",
+                },
+                {
+                    "targets": 5,
+                    "searchable": false,
+                    "width": "10%",
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)' data-toggle='modal' data-target='#editModal'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" data-toggle="modal" data-target="#deleteModal">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                { "data": "username" },
+                { "data": "id_khachhang" },
+                { "data": "email" },
+                { "data": "role" },
+                { "data": "active" },
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#user-board").DataTable().ajax.reload(null, false);
+    }
+
+    function clearData() {
+        $("input").val("");
+    }
+
+    function isEmpty(inp) {
+        for (let i of inp) {
+            if (i === null || i.length < 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function closeModal(id) {
+        $(id).trigger('click');
+    }
+
+    $("#add-action").click(() => {
+        var username = $("input[name='username']").val();
+        var cid = Number($("input[name='cid']").val());
+        var password = $("input[name='password']").val();
+        var email = $("input[name='email']").val();
+        var role = $("select[name='role'] option:selected").val();
+        var active = Number($("select[name='active'] option:selected").val());
+
+        let inp = [username, cid, password, email, role, active];
+
+        if (isEmpty(inp) || active < 0 || cid < 1) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            $.ajax({
+                url: "/User/Add",
+                method: "POST",
+                data: {
+                    username: username,
+                    password: password,
+                    role: role,
+                    email: email,
+                    id_khachhang: cid,
+                    active: active
+                },
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Thêm người dùng mới thành công", "success");
+                    clearData();
+                    closeModal("#addModal");
+                },
+                error: function (data) {
+                    swal("Thất bại", "Thêm người dùng mới thất bại", "error");
+                }
+            });
+        }
+    });
+
+    function setData(data) {
+        $("input[name='editusername']").val(data.username);
+        $("input[name")
+        $("input[name='editemail']").val(data.email);
+        $("select[name='editrole']").val(data.role);
+        $("select[name='editactive']").val(data.active);
+        $('select').niceSelect('update');
+    }
+
+    function onEdit(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = s.text();
+
+        $.ajax({
+            url: "/User/GetUser",
+            method: "GET",
+            data: {
+                id: id
+            },
+            success: data => {
+                setData(data);
+            }, error: data => {
+                swal("Thất bại", "Không tìm thấy người dùng", "error");
+            }
+        });
+    }
+
+    $("#edit-action").click(() => {
+        var username = $("input[name='editusername']").val();
+        var email = $("input[name='editemail']").val();
+        var role = $("select[name='editrole'] option:selected").val();
+        var active = Number($("select[name='editactive'] option:selected").val());
+
+        let inp = [username, email, role, active];
+
+        if (isEmpty(inp) || active < 1) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            $.ajax({
+                url: "/User/UpdateInformation",
+                method: "PUT",
+                data: {
+                    username: username,
+                    role: role,
+                    email: email,
+                    active: active
+                },
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Sửa thông tin người dùng thành công", "success");
+                    closeModal("#editModal");
+                },
+                error: function (data) {
+                    if (data.status === 400 || data.status === 500)
+                        swal("Thất bại", "Dữ liệu không hợp lệ vui lòng nhập lại", "error");
+                    else
+                        swal("Thất bại", "Cập nhật thông tin thất bại", "error");
+                }
+            })
+        }
+    });
+
+    function onDelete(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = s.text();
+        $("input[name='deleteId']").val(id);
+    }
+
+    $("#delete-action").click(() => {
+        var id = $("input[name='deleteId']").val();
+
+        $.ajax({
+            url: "/User/Delete",
+            method: "DELETE",
+            data: {
+                id: id
+            },
+            success: data => {
+                reloadTable();
+                swal("Thành công", "Xóa thành công", "success");
+                closeModal("#deleteModal");
+            },
+            error: (data) => {
+                swal("Thất bại", "Xóa thất bại", "error");
+            }
+        });
+    });
+</script>

@@ -11,16 +11,16 @@ namespace fashion_shop_group32
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            //config.Routes.MapHttpRoute(
-            //    name: "DefaultApi",
-            //    routeTemplate: "api/{controller}/{id}",
-            //    defaults: new { id = RouteParameter.Optional }
-            //);
             config.Routes.MapHttpRoute(
-             name: "SizeApi",
-             routeTemplate: "api/{controller}/{action}",
-             defaults: new { controller = "SizeController", action = RouteParameter.Optional }
-         );
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+         //   config.Routes.MapHttpRoute(
+         //    name: "SizeApi",
+         //    routeTemplate: "api/{controller}/{action}",
+         //    defaults: new { controller = "SizeController", action = RouteParameter.Optional }
+         //);
         }
     }
 }
