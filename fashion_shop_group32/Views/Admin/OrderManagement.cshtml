@@ -39,9 +39,6 @@
                                 <div class="input-group mb-3">
                                     <select class="form-select w-100" name="paymentMethod">
                                         <option selected hidden disabled value="0">Chọn phương thức thanh toán</option>
-                                        <option value="BANK">Chuyển khoản ngân hàng</option>
-                                        <option value="COD">Thanh toán khi nhận hàng</option>
-                                        <option value="MOMO">Momo</option>
                                     </select>
                                 </div>
 
@@ -103,9 +100,6 @@
                                 <div class="input-group mb-3">
                                     <select class="form-select w-100" name="editpaymentMethod">
                                         <option selected hidden disabled value="0">Chọn phương thức thanh toán</option>
-                                        <option value="BANK">Chuyển khoản ngân hàng</option>
-                                        <option value="COD">Thanh toán khi nhận hàng</option>
-                                        <option value="MOMO">Momo</option>
                                     </select>
                                 </div>
 
@@ -276,6 +270,23 @@
                 { "data": "trangthai" },
                 { "data": "createdat" }
             ],
+        });
+
+        $.ajax({
+            url: "https://localhost:44332/PaymentMethod/GetPaymentMethodList",
+            method: "GET",
+            success: data => {
+                let returnedData = data["data"];
+                returnedData.map(x => {
+                    let elm = "<option value='" + x["mapttt"] + "'>" + x["tenpttt"] + "</option>";
+                    $("select[name='paymentMethod']").append(elm);
+                    $("select[name='editpaymentMethod']").append(elm);
+                });
+                $('select').niceSelect("update");
+            },
+            error: data => {
+                console.log(data);
+            }
         });
     });
 
