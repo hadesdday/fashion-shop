@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace fashion_shop_group32.Models
 {
@@ -11,7 +7,7 @@ namespace fashion_shop_group32.Models
         Product GetProduct(string id);
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> GetProductsByCategory(string cat);
-        IEnumerable<Product> GetProductsByCategoryAndLoai(string cat,string loai);
+        IEnumerable<Product> GetProductsByCategoryAndLoai(string cat, string loai);
         IEnumerable<Product> GetLatestProducts();
         IEnumerable<Product> GetRandomProducts();
         IEnumerable<Product> GetMostSoldProducts();

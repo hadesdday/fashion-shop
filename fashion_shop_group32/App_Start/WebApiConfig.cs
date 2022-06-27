@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace fashion_shop_group32
 {
@@ -19,6 +16,11 @@ namespace fashion_shop_group32
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            //   config.Routes.MapHttpRoute(
+            //    name: "SizeApi",
+            //    routeTemplate: "api/{controller}/{action}",
+            //    defaults: new { controller = "SizeController", action = RouteParameter.Optional }
+            //);
         }
     }
 }

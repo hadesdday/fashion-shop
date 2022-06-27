@@ -1,0 +1,308 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["title"] = "Quản lý phương thức thanh toán";
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <h2>Quản lý phương thức thanh toán</h2>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <button id="addBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Thêm phương thức thanh toán</button>
+                <!--modal them hoa don-->
+
+                <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Thêm phương thức thanh toán</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Mã phương thức thanh toán</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="pid">
+                                </div>
+
+                                <label>Tên phương thức thanh toán</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="pName">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="add-action">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Sửa thông tin phương thức thanh toán</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Mã phương thức thanh toán</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editpid" disabled>
+                                </div>
+
+                                <label>Tên phương thức thanh toán</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editpName">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="edit-action">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Xóa phương thức thanh toán</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="deleteId" disabled hidden>
+                                <h6>Bạn có chắc chắn muốn xóa dòng này ?</h6>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="delete-action">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /# row -->
+            <section id="main-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="bootstrap-data-table-panel">
+                                <div class="table-responsive">
+                                    <table id="payment-method-board"
+                                           class="table table-striped table-bordered" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="30%">Mã phương thức thanh toán</th>
+                                                <th width="30%">Tên phương thức thanh toán</th>
+                                                <th width="30%">Ngày tạo</th>
+                                                <th width="10%">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer">
+                            <p>
+                                2021 © Admin Dashboard. - Functions Developed By <a href="https://github.com/hadesdday" target="_blank">
+                                    Nguyen
+                                    Van Hieu
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#payment-method-board").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "/Scripts/admin/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "https://localhost:44332/PaymentMethod/GetPaymentMethodList",
+                "dataSrc": "data"
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "width": "30%",
+                },
+                {
+                    "targets": 1,
+                    "width": "30%",
+                },
+                {
+                    "targets": 2,
+                    "width": "30%",
+                },
+                {
+                    "targets": 3,
+                    "searchable": false,
+                    "width": "10%",
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)' data-toggle='modal' data-target='#editModal'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" data-toggle="modal" data-target="#deleteModal">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                { "data": "mapttt" },
+                { "data": "tenpttt" },
+                { "data": "createdat" }
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#payment-method-board").DataTable().ajax.reload(null, false);
+    }
+
+    function closeModal(id) {
+        $(id).trigger('click');
+    }
+
+    $("#add-action").click(() => {
+        var id = $("input[name='pid']").val();
+        var name = $("input[name='pName']").val();
+
+        if (id.length < 1 || name.length < 1) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            $.ajax({
+                url: "/PaymentMethod/Add",
+                method: "POST",
+                data: {
+                    mapttt: id,
+                    tenpttt: name
+                },
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Thêm phương thức thanh toán mới thành công", "success");
+                    $("input[name='pid']").val("");
+                    $("input[name='pName']").val("");
+                    closeModal("#addModal");
+                },
+                error: function (data) {
+                    if (data.status === 409)
+                        swal("Thất bại", "Phương thức thanh toán đã tồn tại trong hệ thống", "error");
+                    else
+                        swal("Thất bại", "Thêm phương thức thanh toán mới thất bại", "error");
+                }
+            })
+        }
+    });
+
+    function setData(data) {
+        $("input[name='editpid']").val(data.mapttt);
+        $("input[name='editpName']").val(data.tenpttt);
+    }
+
+    function onEdit(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = s.text();
+
+        $.ajax({
+            url: "/PaymentMethod/GetPaymentMethod",
+            method: "GET",
+            data: {
+                id: id
+            },
+            success: data => {
+                setData(data);
+            }, error: data => {
+                swal("Thất bại", "Không tìm thấy phương thức thanh toán", "error");
+            }
+        });
+    }
+
+    $("#edit-action").click(() => {
+        var id = $("input[name='editpid']").val();
+        var name = $("input[name='editpName']").val();
+
+        if (id.length < 1 || name.length < 1) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            $.ajax({
+                url: "/PaymentMethod/UpdateInformation",
+                method: "PUT",
+                data: {
+                    mapttt: id,
+                    tenpttt: name
+                },
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Sửa thông tin phương thức thanh toán thành công", "success");
+                    closeModal("#editModal");
+                },
+                error: function (data) {
+                    if (data.status === 400 || data.status === 500)
+                        swal("Thất bại", "Dữ liệu không hợp lệ vui lòng nhập lại", "error");
+                    else
+                        swal("Thất bại", "Cập nhật thông tin thất bại", "error");
+                }
+            })
+        }
+    });
+
+    function onDelete(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = s.text();
+        $("input[name='deleteId']").val(id);
+    }
+
+    $("#delete-action").click(() => {
+        var id = $("input[name='deleteId']").val();
+
+        $.ajax({
+            url: "/PaymentMethod/Delete",
+            method: "DELETE",
+            data: {
+                id: id
+            },
+            success: data => {
+                reloadTable();
+                swal("Thành công", "Xóa thành công", "success");
+                closeModal("#deleteModal");
+            },
+            error: (data) => {
+                swal("Thất bại", "Xóa thất bại", "error");
+            }
+        });
+    });
+</script>

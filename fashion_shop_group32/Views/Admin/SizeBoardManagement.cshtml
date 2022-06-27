@@ -1,0 +1,312 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["title"] = "Quản lý bảng size";
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <h2>Quản lý bảng size</h2>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <button id="addBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Thêm size mới</button>
+                <!--modal them hoa don-->
+
+                <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Thêm size mới</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Mã size</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="sid">
+                                </div>
+
+                                <label>Tên size</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="sName">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="add-action">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- modal sua thong tin hoa don -->
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Sửa thông tin size</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Mã size</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editsid" disabled>
+                                </div>
+
+                                <label>Tên size</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editsName">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="edit-action">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Xóa size</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="deleteId" disabled hidden>
+                                <h6>Bạn có chắc chắn muốn xóa dòng này ?</h6>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="delete-action">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /# row -->
+            <section id="main-content" style="width:100% !important; ">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="bootstrap-data-table-panel">
+                                <div class="table-responsive">
+                                    <table id="size-board"
+                                           class="table table-striped table-bordered" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="30%">Mã size</th>
+                                                <th width="30%">Tên size</th>
+                                                <th width="30%">Ngày tạo</th>
+                                                <th width="10%">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer">
+                            <p>
+                                2021 © Admin Dashboard. - Functions Developed By <a href="https://github.com/hadesdday" target="_blank">
+                                    Nguyen
+                                    Van Hieu
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#size-board").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "/Scripts/admin/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "https://localhost:44332/Size/GetSizeList",
+                "dataSrc": "data"
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "width": "30%",
+                },
+                {
+                    "targets": 1,
+                    "width": "30%",
+                },
+                {
+                    "targets": 2,
+                    "width": "30%",
+                },
+                {
+                    "targets": 3,
+                    "searchable": false,
+                    "width": "10%",
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)' data-toggle='modal' data-target='#editModal'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" data-toggle="modal" data-target="#deleteModal">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                { "data": "ma_sizesp" },
+                { "data": "ten_sizesp" },
+                { "data": "createdat" }
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#size-board").DataTable().ajax.reload(null, false);
+    }
+
+    function closeModal(id) {
+        $(id).trigger('click');
+    }
+
+    $("#add-action").click(() => {
+        var id = $("input[name='sid']").val();
+        var name = $("input[name='sName']").val();
+
+        if (id.length < 1 || name.length < 1) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            $.ajax({
+                url: "/Size/AddNewSize",
+                method: "POST",
+                data: {
+                    ma_sizesp: id,
+                    ten_sizesp: name
+                },
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Thêm size mới thành công", "success");
+                    $("input[name='sid']").val("");
+                    $("input[name='sName']").val("");
+                    closeModal("#addModal");
+                },
+                error: function (data) {
+                    if (data.status === 409)
+                        swal("Thất bại", "Size đã tồn tại trong hệ thống", "error");
+                    else
+                        swal("Thất bại", "Thêm mới size thất bại", "error");
+                }
+            })
+        }
+    });
+
+    function setData(data) {
+        $("input[name='editsid']").val(data.ma_sizesp);
+        $("input[name='editsName']").val(data.ten_sizesp);
+    }
+
+    function onEdit(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = s.text();
+
+        $.ajax({
+            url: "/Size/GetSize",
+            method: "GET",
+            data: {
+                id: id
+            },
+            success: data => {
+                setData(data);
+            }, error: data => {
+                swal("Thất bại", "Không tìm thấy size", "error");
+            }
+        });
+    }
+
+    $("#edit-action").click(() => {
+        var id = $("input[name='editsid']").val();
+        var name = $("input[name='editsName']").val();
+
+        if (id.length < 1 || name.length < 1) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            $.ajax({
+                url: "/Size/UpdateInformation",
+                method: "PUT",
+                data: {
+                    ma_sizesp: id,
+                    ten_sizesp: name
+                },
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Sửa thông tin size thành công", "success");
+                    closeModal("#editModal");
+                },
+                error: function (data) {
+                    if (data.status === 400 || data.status === 500)
+                        swal("Thất bại", "Dữ liệu không hợp lệ vui lòng nhập lại", "error");
+                    else
+                        swal("Thất bại", "Cập nhật thông tin thất bại", "error");
+                }
+            })
+        }
+    });
+
+    function onDelete(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = s.text();
+        $("input[name='deleteId']").val(id);
+    }
+
+    $("#delete-action").click(() => {
+        var id = $("input[name='deleteId']").val();
+
+        $.ajax({
+            url: "/Size/Delete",
+            method: "DELETE",
+            data: {
+                id: id
+            },
+            success: data => {
+                reloadTable();
+                swal("Thành công", "Xóa thành công", "success");
+                closeModal("#deleteModal");
+            },
+            error: (data) => {
+                swal("Thất bại", "Xóa thất bại", "error");
+            }
+        });
+    });
+
+
+</script>
+

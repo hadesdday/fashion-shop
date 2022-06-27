@@ -1,8 +1,5 @@
 ﻿using fashion_shop_group32.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace fashion_shop_group32.Controllers
@@ -31,7 +28,7 @@ namespace fashion_shop_group32.Controllers
         }
 
         [ActionName("ProductList")]
-        public ActionResult ProductList(string cat, string loai,string mau, string size, string gia)
+        public ActionResult ProductList(string cat, string loai, string mau, string size, string gia)
         {
             ViewBag.loai = loai;
             ViewBag.cat = cat;
@@ -39,7 +36,7 @@ namespace fashion_shop_group32.Controllers
             ViewBag.size = size;
             ViewBag.gia = gia;
             System.Diagnostics.Debug.WriteLine("ProductList3.");
-            var model = _product.GetProductsByCategoryAndLoaiAndFilter(cat,loai,mau,size,gia);
+            var model = _product.GetProductsByCategoryAndLoaiAndFilter(cat, loai, mau, size, gia);
             return View(model);
         }
 
@@ -53,8 +50,8 @@ namespace fashion_shop_group32.Controllers
         }
 
 
-        
-        public ActionResult ProductDetails(string id,string name)
+
+        public ActionResult ProductDetails(string id, string name)
         {
             ViewModelIndex2 viewModel = new ViewModelIndex2();
             viewModel.product = new MockProduct().GetProductsByID(id);

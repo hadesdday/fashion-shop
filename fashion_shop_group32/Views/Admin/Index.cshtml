@@ -1,0 +1,150 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["title"] = "Trang chủ";
+}
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Xin chào , Admin</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                                <li class="breadcrumb-item active">Tổng quan</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <!-- /# row -->
+            <section id="main-content">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib">
+                                    <i class="ti-money color-success border-success"></i>
+                                </div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Tổng Doanh Thu</div>
+                                    <div class="stat-digit" id="sumTurnover">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib">
+                                    <i class="ti-user color-primary border-primary"></i>
+                                </div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Số Khách Hàng</div>
+                                    <div class="stat-digit" id="totalCustomer">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="stat-widget-one">
+                                <div class="stat-icon dib">
+                                    <i class="ti-receipt color-pink border-pink"></i>
+                                </div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Hóa Đơn</div>
+                                    <div class="stat-digit" id="totalOrder"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Tổng quan cửa hàng</h4>
+                                <canvas id="myChart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(() => {
+        $.ajax({
+            url: "https://localhost:44332/GetStatistic/GetStats",
+            method: "GET",
+            success: data => {
+                $("#sumTurnover").text(new Intl.NumberFormat("vi-VN").format(data["sumTurnover"]) + " đ")
+                $("#totalCustomer").text(data["sumCustomer"]);
+                $("#totalOrder").text(data["sumOrder"]);
+
+                let se = data["turnoverByMonths"];
+                let re = [];
+                for (let i = 1; i < 13; i++) {
+                    re.push(se[`${i}`]);
+                }
+
+                array = [...re];
+                drawChart(array);
+            },
+            error: data => {
+                console.log(data);
+            }
+        });
+    });
+    function drawChart(arrayData) {
+        const labels = [
+            'Tháng 1',
+            'Tháng 2',
+            'Tháng 3',
+            'Tháng 4',
+            'Tháng 5',
+            'Tháng 6',
+            'Tháng 7',
+            'Tháng 8',
+            'Tháng 9',
+            'Tháng 10',
+            'Tháng 11',
+            'Tháng 12'
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Doanh thu',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: arrayData,
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    };
+</script>
