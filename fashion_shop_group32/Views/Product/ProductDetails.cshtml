@@ -2,7 +2,9 @@
 @{
     ViewBag.Title = "Product Details";
 }
+@{ 
 
+}
 <section id="aa-catg-head-banner">
     <img src="~/Content/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
     <div class="aa-catg-head-banner-area">
@@ -85,10 +87,13 @@
                                         </p>
                                     </div>
                                     <div class="aa-prod-view-bottom">
-                                        <a class="aa-add-to-cart-btn" href="#">Add To Cart</a>
-                                        <a class="aa-add-to-cart-btn" href="#">Wishlist</a>
-                                        <a class="aa-add-to-cart-btn" href="#">Compare</a>
-                                    </div>
+                                        <!--Dong nay t them vi no chua link qua cart-->
+                                        
+                                            <a class="aa-add-to-cart-btn" href="#">@Html.ActionLink("AddToCart", "AddToCart", "Cart", new { product_id = Model.product.id_sanpham },null)</a>
+                                            <a class="aa-add-to-cart-btn" href="#">Wishlist</a>
+                                            <a class="aa-add-to-cart-btn" href="#">Compare</a>
+                                        
+                                        </div>
                                 </div>
                             </div>
                         </div>

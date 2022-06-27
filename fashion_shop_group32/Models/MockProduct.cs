@@ -218,10 +218,16 @@ namespace fashion_shop_group32.Models
                 }
                 else Console.WriteLine("No rows found.");
             }
-            _productList[0].imgs = imgs;
+            //Dòng code t fix là từ chỗ này(Hiệp>3)
+            if (_productList.Count != 1) return null;
+            //nó bị lỗi ArgumentOutOfRangeException
+            //productlist[0] đc nó xác định là empty nên ko thể thay thế imgs trong đó đc
+            //nên t đã thêm 1 dòng dùng để clone nó ra
+            Product pro = _productList[0];
+            pro.imgs = imgs;
             conn.Close();
-
-            return _productList[0];
+            
+            return pro;
         }
 
         public Product GetProductsByName(string name)
