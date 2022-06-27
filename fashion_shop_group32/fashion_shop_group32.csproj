@@ -304,6 +304,7 @@
     <Compile Include="Controllers\admin\ColorController.cs" />
     <Compile Include="Controllers\admin\CustomerController.cs" />
     <Compile Include="Controllers\admin\GetStatisticController.cs" />
+    <Compile Include="Controllers\admin\ImageController.cs" />
     <Compile Include="Controllers\admin\OrderManagementController.cs" />
     <Compile Include="Controllers\admin\PaymentMethodController.cs" />
     <Compile Include="Controllers\admin\ProductManagementController.cs" />
@@ -328,6 +329,7 @@
     </Compile>
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\JsonHttpStatusResult.cs" />
     <Compile Include="Models\MockProduct.cs" />
@@ -598,13 +600,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\admin\images\upload\product\" />
-    <Folder Include="Views\Customer\" />
-    <Folder Include="Views\GetStatistic\" />
-    <Folder Include="Views\OrderManagement\" />
-    <Folder Include="Views\ProductManagement\" />
-    <Folder Include="Views\Review\" />
-    <Folder Include="Views\Sale\" />
-    <Folder Include="Views\User\" />
+    <Folder Include="Content\upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -683,6 +679,7 @@
     <Content Include="Views\Admin\ColorBoardManagement.cshtml" />
     <Content Include="Views\Admin\ProductTypeManagement.cshtml" />
     <Content Include="Views\Admin\SizeBoardManagement.cshtml" />
+    <Content Include="Views\Admin\Image.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -48,5 +48,9 @@ namespace fashion_shop_group32.Controllers.admin
         {
             return View("ProductTypeManagement");
         }
+        public ActionResult Image()
+        {
+            return View("Image");
+        }
     }
 }
