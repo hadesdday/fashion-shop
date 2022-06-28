@@ -329,6 +329,9 @@
     </Compile>
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Dao\CartDao.cs" />
+    <Compile Include="Models\Dao\CartItem.cs" />
+    <Compile Include="Models\Dao\UserDao.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\JsonHttpStatusResult.cs" />
@@ -342,6 +345,7 @@
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Models\ViewModelIndex.cs" />
     <Compile Include="Models\ViewModelIndex2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -657,7 +661,7 @@
     <Content Include="fonts\admin\fonts\weathericons-regular-webfont.woff" />
     <Content Include="fonts\admin\fonts\weathericons-regular-webfont.woff2" />
     <None Include="packages.config" />
-    <Content Include="Views\Account\AccountHome.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Blog\BlogHome.cshtml" />
     <Content Include="Views\Cart\CartHome.cshtml" />
     <Content Include="Views\Blog\SingleBlog.cshtml" />
@@ -680,6 +684,8 @@
     <Content Include="Views\Admin\ProductTypeManagement.cshtml" />
     <Content Include="Views\Admin\SizeBoardManagement.cshtml" />
     <Content Include="Views\Admin\Image.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

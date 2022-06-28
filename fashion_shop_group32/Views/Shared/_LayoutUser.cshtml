@@ -89,7 +89,7 @@
                                     <li class="hidden-xs"><a href="/Wishlist">Wishlist</a></li>
                                     <li class="hidden-xs"><a href="/Cart">My Cart</a></li>
                                     <li class="hidden-xs"><a href="/Checkout">Checkout</a></li>
-                                    <li><a href="/Account" data-target="#login-modal">Login</a></li>
+                                    <li><a href="/Account" data-target="#login-modal">Hello @Session["UserName"].ToString()</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -117,16 +117,8 @@
                             <!-- / logo  -->
                             <!-- cart box -->
                             @{
-                                int numberItem;
                                 List<CartDao> carts = (List<CartDao>)Session["cart"];
-                                if (carts == null)
-                                {
-                                    numberItem = 0;
-                                }
-                                else
-                                {
-                                    numberItem = carts.Count();
-                                }
+                                int numberItem = carts.Count();
                             }
 
 
