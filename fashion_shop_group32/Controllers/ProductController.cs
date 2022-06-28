@@ -63,5 +63,18 @@ namespace fashion_shop_group32.Controllers
             return View(viewModel);
             //return View("ProductDetails");
         }
+        public JsonResult SetViewBagColor(string color)
+        {
+            ViewBag.color = color;
+
+            return Json(new { Result = color }, JsonRequestBehavior.AllowGet);
+        }
+    
+        public ActionResult SetViewBagSize(string size)
+        {
+            ViewBag.size = size;
+            System.Diagnostics.Debug.WriteLine(ViewBag.size);
+            return View();
+        }
     }
 }

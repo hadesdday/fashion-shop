@@ -59,14 +59,14 @@
                                     <div class="aa-prod-view-size">
                                         @foreach (var size in Model.list2)
                                         {
-                                            <a href="javascript:">@size</a>
+                                            <a href="javascript:" class="size">@size</a>
                                         }
                                         </div>
                                     <h4>Color</h4>
                                     <div class="aa-color-tag">
                                         @foreach (var color in Model.list1)
                                         {
-                                            <a href="javascript:" class="aa-color-@color"></a>                                     
+                                            <a href="javascript:" class="aa-color-@color color" color="@color"></a>                                     
                                         }
                                         </div>
                                     <div class="aa-prod-quantity">

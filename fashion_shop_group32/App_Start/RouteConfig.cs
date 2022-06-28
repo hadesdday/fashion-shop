@@ -33,6 +33,11 @@ namespace fashion_shop_group32
                 "{controller}/{action}/{s1}",
                new { controller = "Product", action = "ProductList", s1 = UrlParameter.Optional }
            );
+            routes.MapRoute(
+                "setviewbagsize",
+                "{controller}/{action}/{s1}",
+               new { controller = "Product", action = "SetViewBagSize", s1 = UrlParameter.Optional }
+           );
 
 
 
