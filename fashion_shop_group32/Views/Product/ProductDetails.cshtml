@@ -2,7 +2,9 @@
 @{
     ViewBag.Title = "Product Details";
 }
+@{
 
+}
 <section id="aa-catg-head-banner">
     <img src="~/Content/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
     <div class="aa-catg-head-banner-area">
@@ -42,7 +44,7 @@
                                                     <img style="width:45px;height:45px;" src="~/Content/@img">
                                                 </a>
                                             }
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -61,14 +63,14 @@
                                         {
                                             <a href="javascript:">@size</a>
                                         }
-                                        </div>
+                                    </div>
                                     <h4>Color</h4>
                                     <div class="aa-color-tag">
                                         @foreach (var color in Model.list1)
                                         {
-                                            <a href="javascript:" class="aa-color-@color"></a>                                     
+                                            <a href="javascript:" class="aa-color-@color"></a>
                                         }
-                                        </div>
+                                    </div>
                                     <div class="aa-prod-quantity">
                                         <form action="">
                                             <select id="" name="">
@@ -85,9 +87,12 @@
                                         </p>
                                     </div>
                                     <div class="aa-prod-view-bottom">
-                                        <a class="aa-add-to-cart-btn" href="#">Add To Cart</a>
+                                        <!--Dong nay t them vi no chua link qua cart-->
+
+                                        <a class="aa-add-to-cart-btn" href="#">@Html.ActionLink("AddToCart", "AddToCart", "Cart", new { product_id = Model.product.id_sanpham }, null)</a>
                                         <a class="aa-add-to-cart-btn" href="#">Wishlist</a>
                                         <a class="aa-add-to-cart-btn" href="#">Compare</a>
+
                                     </div>
                                 </div>
                             </div>
