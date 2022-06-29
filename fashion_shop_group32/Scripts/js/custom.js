@@ -374,33 +374,34 @@ jQuery(function($){
         jQuery(this).addClass("selected")
     });
 
-    function removeSize() {
-        jQuery(".size").each(function () {
-            if (jQuery(this).hasClass("selected")) {
-                jQuery(this).removeClass("selected");
-            }
-        });
-    }
-    jQuery(".size").on("click", function (e) {
-        e.preventDefault(e);
-        alert("asdadad")
-        removeSize();
-        var s = jQuery(this).text();
-        alert(s)
-        jQuery(this).addClass("selected")
-        $.ajax({
-            type: "POST",
-            url: '/Product/SetViewBagSize',
-            data: { size: s},
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (r) {
-                alert("success")
-            },
-            error: function (data, textStatus, xhr) {
-                alert(data)
-            }
-        });
-    });
+    //function removeSize() {
+    //    jQuery(".size").each(function () {
+    //        if (jQuery(this).hasClass("selected")) {
+    //            jQuery(this).removeClass("selected");
+    //        }
+    //    });
+    //}
+    //jQuery(".size").on("click", function (e) {
+    //    e.preventDefault(e);
+    //    alert("asdadad")
+    //    removeSize();
+    //    var s = jQuery(this).text();
+    //    alert(s)
+    //    jQuery(this).addClass("selected")
+    //    $.ajax({
+    //        type: "POST",
+    //        url: '/Product/SetViewBagSize',
+    //        data: { size: s},
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json",
+    //        success: function (r) {
+    //            alert("success")
+    //        },
+    //        error: function (data, textStatus, xhr) {
+    //            alert(data)
+               
+    //        }
+    //    });
+    //});
 });
 

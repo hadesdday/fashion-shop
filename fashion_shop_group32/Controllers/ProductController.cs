@@ -1,6 +1,7 @@
 ﻿using fashion_shop_group32.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -69,12 +70,11 @@ namespace fashion_shop_group32.Controllers
 
             return Json(new { Result = color }, JsonRequestBehavior.AllowGet);
         }
-    
+
         public ActionResult SetViewBagSize(string size)
         {
             ViewBag.size = size;
-            System.Diagnostics.Debug.WriteLine(ViewBag.size);
-            return View();
+            return Json(new { Result = size }, JsonRequestBehavior.AllowGet);
         }
     }
 }

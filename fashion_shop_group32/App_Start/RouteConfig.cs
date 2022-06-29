@@ -38,7 +38,7 @@ namespace fashion_shop_group32
                 "{controller}/{action}/{s1}",
                new { controller = "Product", action = "SetViewBagSize", s1 = UrlParameter.Optional }
            );
-
+           
 
 
         }
