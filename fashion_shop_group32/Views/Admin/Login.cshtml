@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Đăng nhập | NLU</title>
+
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="https://pic.onlinewebfonts.com/svg/img_239979.png">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+    <!-- Styles -->
+    <link href="~/Content/admin/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/admin/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="~/Content/admin/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/admin/css/lib/helper.css" rel="stylesheet">
+    <link href="~/Content/admin/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/admin/css/lib/toastr/toastr.min.css">
+</head>
+
+<body class="bg-primary">
+    <div class="unix-login ">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="login-content">
+                        <div class="login-form">
+                            <div id="overlay">
+                                <div id="overlay__elm">
+                                    <div class="dashed-loading"></div>
+                                </div>
+                            </div>
+                            <h4>Đăng Nhập</h4>
+                            <form action="/Admin/LoginAdmin" method="POST" id="form-login">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" placeholder="Email/Username" name="username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" placeholder="Password" name="password">
+                                </div>
+                                <button type="button" class="btn btn-primary btn-flat m-b-30 m-t-30 submit-login">
+                                    Đăng nhập
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Scripts/admin/js/lib/toastr/toastr.min.js"></script>
+    <script>
+        $(".submit-login").click(() => {
+            var username = $("input[name='username']").val();
+            var password = $("input[name='password']").val();
+            $("#overlay").css("display", "block");
+            setTimeout(() => {
+                $.ajax({
+                    url: $("#form-login").attr('action'),
+                    method: "POST",
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: data => {
+                        $("#overlay").css("display", "none");
+                        window.location.href = "https://localhost:44332/Admin/";
+
+                    }, error: data => {
+                        toastr.error(data.responseText, "Error");
+                        $("#overlay").css("display", "none");
+                    }
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

@@ -16,5 +16,5 @@ namespace fashion_shop_group32.Models.Dao
 
         public Product Pro { get => pro; set => pro = value; }
         public string Id { get => id; set => id = value; }
-
     }
+}
