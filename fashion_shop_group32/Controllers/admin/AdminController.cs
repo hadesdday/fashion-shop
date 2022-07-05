@@ -91,18 +91,33 @@ namespace fashion_shop_group32.Controllers.admin
             if (!IsAdmin()) return RedirectToAction("Login");
             return View("Image");
         }
+        static bool Verify(string username, string password)
+        {
+            try
+            {
+                using (var ctx = new AdminDbContext())
+                {
+                    User u = ctx.User.Where(t => t.username.Equals(username)).FirstOrDefault<User>();
+                    var hashedPassword = u.password;
+                    return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         public JsonResult LoginAdmin()
         {
             string username = Request["username"];
             string password = Request["password"];
-
             User s = null;
             using (var ctx = new AdminDbContext())
             {
-                s = ctx.User.Where(t => (t.username.Equals(username) && t.password.Equals(password))).FirstOrDefault<User>();
+                s = ctx.User.Where(t => (t.username.Equals(username))).FirstOrDefault<User>();
             }
 
-            if (s == null)
+            if (!Verify(username, password))
             {
                 return new JsonHttpStatusResult("Error occurred", HttpStatusCode.InternalServerError);
             }
