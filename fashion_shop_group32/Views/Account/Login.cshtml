@@ -1,6 +1,11 @@
-﻿@{
-    ViewBag.Title = "Account";
+﻿@model fashion_shop_group32.Models.Users
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Login</h2>
 
 <section id="aa-catg-head-banner">
     <img src="~/Content/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
@@ -18,6 +23,9 @@
 </section>
 <!-- / catg header banner section -->
 <!-- Cart view section -->
+<!--T có sửa phần view của trang Login nha (Hiệp)-->
+
+
 <section id="aa-myaccount">
     <div class="container">
         <div class="row">
@@ -27,33 +35,35 @@
                         <div class="col-md-6">
                             <div class="aa-myaccount-login">
                                 <h4>Login</h4>
-                                <form action="" class="aa-login-form">
-                                    <label for="">Username or Email address<span>*</span></label>
-                                    <input type="text" placeholder="Username or email">
+                                @using (Html.BeginForm())
+                                {
+                                    <p style="color:red">@ViewBag.Message</p>
+                                    <br />
+                                    <label for="">Username<span>*</span></label>
+                                    <br />
+                                    <input type="text" placeholder="Username" name="username">
+                                    <br />
                                     <label for="">Password<span>*</span></label>
-                                    <input type="password" placeholder="Password">
+                                    <br />
+                                    <input type="password" placeholder="password" name="password">
+                                    <hr />
                                     <button type="submit" class="aa-browse-btn">Login</button>
+                                    <hr />
                                     <label class="rememberme" for="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
                                     <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
-                                </form>
+                                    <div class="aa-register-now">
+                                        Don't have an account?<a href="/Account/Register">Register now!</a>
+                                    </div>
+                                }
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="aa-myaccount-register">
-                                <h4>Register</h4>
-                                <form action="" class="aa-login-form">
-                                    <label for="">Username or Email address<span>*</span></label>
-                                    <input type="text" placeholder="Username or email">
-                                    <label for="">Password<span>*</span></label>
-                                    <input type="password" placeholder="Password">
-                                    <button type="submit" class="aa-browse-btn">Register</button>
-                                </form>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,591 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["title"] = "Quản lý sản phẩm";
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <h2>Quản lý sản phẩm</h2>
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+                <button id="addBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Thêm sản phẩm mới</button>
+
+                <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="margin-top:85%">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Thêm sản phẩm mới</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Mã sản phẩm</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="pid">
+                                </div>
+
+                                <label>Tên sản phẩm</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="pName">
+
+                                </div>
+
+                                <label>Mã loại sản phẩm</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select w-100" name="tid">
+                                        <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
+                                    </select>
+                                </div>
+
+                                <label>Mã màu</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select w-100" name="cid">
+                                        <option selected hidden disabled value="0">Chọn mã màu sản phẩm</option>
+                                    </select>
+                                </div>
+
+                                <label>Mã size</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select w-100" name="sid">
+                                        <option selected hidden disabled value="0">Chọn mã size sản phẩm</option>
+                                    </select>
+                                </div>
+
+                                <label>Giá</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" name="price">
+                                </div>
+
+                                <label>Loại</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="type">
+                                </div>
+
+                                <label>Mã khuyến mãi</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="saleId">
+                                </div>
+
+                                <label>Thương hiệu</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="brand">
+                                </div>
+
+                                <label>Số lượng tồn</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="quantity">
+                                </div>
+
+                                <label>Mô tả</label>
+                                <div class="input-group mb-3">
+                                    <textarea name="details" rows="15" cols="95%" class="text__details"></textarea>
+                                </div>
+
+                                <label>Active</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select w-100" name="active">
+                                        <option selected hidden disabled value="0">Chọn trạng thái cho sản phẩm</option>
+                                        <option value="0">Hàng sắp về</option>
+                                        <option value="1">Còn hàng</option>
+                                        <option value="2">Hết hàng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="add-action">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="margin-top:85%">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Sửa thông tin sản phẩm</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Mã sản phẩm</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editpid" disabled>
+                                </div>
+
+                                <label>Tên sản phẩm</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editpName">
+
+                                </div>
+
+                                <label>Mã loại sản phẩm</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select w-100" name="edittid">
+                                        <option selected hidden disabled value="0">Chọn loại sản phẩm</option>
+                                    </select>
+                                </div>
+
+                                <label>Mã màu</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select w-100" name="editcid">
+                                        <option selected hidden disabled value="0">Chọn mã màu sản phẩm</option>
+                                    </select>
+                                </div>
+
+                                <label>Mã size</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select w-100" name="editsid">
+                                        <option selected hidden disabled value="0">Chọn mã size sản phẩm</option>
+                                    </select>
+                                </div>
+
+                                <label>Giá</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" name="editprice">
+                                </div>
+
+                                <label>Loại</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="edittype">
+                                </div>
+
+                                <label>Mã khuyến mãi</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editsaleId">
+                                </div>
+
+                                <label>Thương hiệu</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editbrand">
+                                </div>
+
+                                <label>Số lượng tồn</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editquantity">
+                                </div>
+
+                                <label>Mô tả</label>
+                                <div class="input-group mb-3">
+                                    <textarea name="editdetails" rows="15" cols="95%" class="text__details"></textarea>
+                                </div>
+
+                                <label>Active</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select w-100" name="editactive">
+                                        <option selected hidden disabled value="0">Chọn trạng thái cho sản phẩm</option>
+                                        <option value="0">Hàng sắp về</option>
+                                        <option value="1">Còn hàng</option>
+                                        <option value="2">Hết hàng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="edit-action">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal sua thong tin hoa don -->
+
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Xóa sản phẩm</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="deleteId" disabled hidden>
+                                <h6>Bạn có chắc chắn muốn xóa dòng này ?</h6>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="delete-action">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /# row -->
+            <section id="main-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="bootstrap-data-table-panel">
+                                <div class="table-responsive">
+                                    <table id="product-board"
+                                           class="table table-striped table-bordered" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="8%">Mã sản phẩm</th>
+                                                <th width="8%">Tên sản phẩm</th>
+                                                <th width="8%">Mã loại sản phẩm</th>
+                                                <th width="8%">Mã màu</th>
+                                                <th width="8%">Mã size</th>
+                                                <th width="8%">Giá</th>
+                                                <th width="8%">Loại</th>
+                                                <th width="8%">Mã khuyến mãi</th>
+                                                <th width="8%">Thương hiệu</th>
+                                                <th width="8%">Số lượng tồn</th>
+                                                <th width="8%">Mô tả</th>
+                                                <th width="8%">Active</th>
+                                                <th width="4%">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer">
+                            <p>
+                                2021 © Admin Dashboard. - Functions Developed By <a href="https://github.com/hadesdday" target="_blank">
+                                    Nguyen
+                                    Van Hieu
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#product-board").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "/Scripts/admin/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "https://localhost:44332/ProductManagement/GetProductList",
+                "dataSrc": "data"
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "width": "8%",
+                },
+                {
+                    "targets": 1,
+                    "width": "8%",
+                },
+                {
+                    "targets": 2,
+                    "width": "8%",
+                },
+                {
+                    "targets": 3,
+                    "width": "8%",
+                },
+                {
+                    "targets": 4,
+                    "width": "8%",
+                },
+                {
+                    "targets": 5,
+                    "width": "8%",
+                },
+                {
+                    "targets": 6,
+                    "width": "8%",
+                },
+                {
+                    "targets": 7,
+                    "width": "8%",
+                },
+                {
+                    "targets": 8,
+                    "width": "8%",
+                },
+                {
+                    "targets": 9,
+                    "width": "8%",
+                },
+                {
+                    "targets": 10,
+                    "width": "8%",
+                },
+                {
+                    "targets": 11,
+                    "width": "8%",
+                },
+                {
+                    "targets": 12,
+                    "searchable": false,
+                    "width": "4%",
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)' data-toggle='modal' data-target='#editModal'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" data-toggle="modal" data-target="#deleteModal">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                { "data": "id_sanpham" },
+                { "data": "ten_sp" },
+                { "data": "ma_loaisp" },
+                { "data": "ma_mau" },
+                { "data": "ma_size" },
+                { "data": "gia" },
+                { "data": "loai" },
+                { "data": "id_km" },
+                { "data": "thuonghieu" },
+                { "data": "soluongton" },
+                { "data": "mota" },
+                { "data": "active" },
+            ],
+        });
+
+        $.ajax({
+            url: "https://localhost:44332/ProductType/GetProductTypeList",
+            method: "GET",
+            success: data => {
+                let returnedData = data["data"];
+                returnedData.map(x => {
+                    let elm = "<option value='" + x["ma_loaisp"] + "'>" + x["ten_loaisp"] + "</option>";
+                    $("select[name='tid']").append(elm);
+                    $("select[name='edittid']").append(elm);
+                });
+                $('select').niceSelect("update");
+            }
+        });
+
+        $.ajax({
+            url: "https://localhost:44332/Color/GetColorList",
+            method: "GET",
+            success: data => {
+                let returnedData = data["data"];
+                returnedData.map(x => {
+                    let elm = "<option value='" + x["ma_mausp"] + "'>" + x["mausp"] + "</option>";
+                    $("select[name='cid']").append(elm);
+                    $("select[name='editcid']").append(elm);
+                });
+                $('select').niceSelect("update");
+            }
+        });
+
+        $.ajax({
+            url: "https://localhost:44332/Size/GetSizeList",
+            method: "GET",
+            success: data => {
+                let returnedData = data["data"];
+                returnedData.map(x => {
+                    let elm = "<option value='" + x["ma_sizesp"] + "'>" + x["ten_sizesp"] + "</option>";
+                    $("select[name='sid']").append(elm);
+                    $("select[name='editsid']").append(elm);
+                });
+                $('select').niceSelect("update");
+            }
+        });
+    });
+
+    function reloadTable() {
+        $("#product-board").DataTable().ajax.reload(null, false);
+    }
+
+    function clearData() {
+        $("input").val("");
+    }
+
+    function isEmpty(inp) {
+        for (let i of inp) {
+            if (i === null || i.length < 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function closeModal(id) {
+        $(id).trigger('click');
+    }
+
+    $("#add-action").click(() => {
+        var id = $("input[name='pid']").val();
+        var name = $("input[name='pName']").val();
+        var type = $("select[name='tid'] option:selected").val();
+        var color = $("select[name='cid'] option:selected").val();
+        var size = $("select[name='sid'] option:selected").val();
+        var price = Number($("input[name='price']").val());
+        var gender = $("input[name='type']").val();
+        var sale = $("input[name='saleId']").val();
+        var brand = $("input[name='brand']").val();
+        var stock = Number($("input[name='quantity']").val());
+        var description = $("textarea[name='details']").val();
+        var active = $("select[name='active'] option:selected").val();
+
+        let inp = [id,
+            name,
+            type,
+            color,
+            size,
+            price,
+            gender,
+            brand,
+            stock,
+            description,
+            active,
+        ];
+
+        if (isEmpty(inp) || price < 1 || stock < 0 || active < 1) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            var url = "https://localhost:44332/ProductManagement/Add?id_sanpham=" + id + "&ten_sp=" + name + "&ma_loaisp=" + type + "&ma_mau=" + color + "&ma_size=" + size + "&gia=" + price + "&loai=" + gender
+                + "&id_km=" + sale + "&thuonghieu=" + brand + "&soluongton=" + stock + "&mota=" + description + "&active=" + active;
+            $.ajax({
+                url: url,
+                method: "POST",
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Thêm hóa đơn mới thành công", "success");
+                    clearData();
+                    closeModal("#addModal");
+                },
+                error: function (data) {
+                    swal("Thất bại", "Thêm hóa đơn mới thất bại", "error");
+                }
+            });
+        }
+    });
+
+    function setData(data) {
+        $("input[name='editpid']").val(data.id_sanpham);
+        $("input[name='editpName']").val(data.ten_sp);
+        $("select[name='edittid']").val(data.ma_loaisp);
+        $("select[name='editcid']").val(data.ma_mau);
+        $("select[name='editsid']").val(data.ma_size);
+        $("input[name='editprice']").val(data.gia);
+        $("input[name='edittype']").val(data.loai);
+        $("input[name='editsaleId']").val(data.id_km);
+        $("input[name='editbrand']").val(data.thuonghieu);
+        $("input[name='editquantity']").val(data.soluongton);
+        $("textarea[name='editdetails']").val(data.mota);
+        $("select[name='editactive']").val(data.active);
+        $('select').niceSelect('update');
+    }
+
+    function onEdit(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = s.text();
+
+        $.ajax({
+            url: "/ProductManagement/GetProduct",
+            method: "GET",
+            data: {
+                id: id
+            },
+            success: data => {
+                setData(data);
+            }, error: data => {
+                swal("Thất bại", "Không tìm thấy sản phẩm", "error");
+            }
+        });
+    }
+
+    $("#edit-action").click(() => {
+        var id = $("input[name='editpid']").val();
+        var name = $("input[name='editpName']").val();
+        var type = $("select[name='edittid'] option:selected").val();
+        var color = $("select[name='editcid'] option:selected").val();
+        var size = $("select[name='editsid'] option:selected").val();
+        var price = Number($("input[name='editprice']").val());
+        var gender = $("input[name='edittype']").val();
+        var sale = $("input[name='editsaleId']").val();
+        var brand = $("input[name='editbrand']").val();
+        var stock = Number($("input[name='editquantity']").val());
+        var description = $("textarea[name='editdetails']").val();
+        var active = $("select[name='editactive'] option:selected").val();
+
+        let inp = [id,
+            name,
+            type,
+            color,
+            size,
+            price,
+            gender,
+            brand,
+            stock,
+            description,
+            active,
+        ];
+
+        if (isEmpty(inp) || price < 1 || stock < 0 || active < 1) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            var url = "https://localhost:44332/ProductManagement/UpdateInformation?id_sanpham=" + id + "&ten_sp=" + name + "&ma_loaisp=" + type + "&ma_mau=" + color + "&ma_size=" + size + "&gia=" + price + "&loai=" + gender
+                + "&id_km=" + sale + "&thuonghieu=" + brand + "&soluongton=" + stock + "&mota=" + description + "&active=" + active;
+            $.ajax({
+                url: url,
+                method: "PUT",
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Sửa thông tin sản phẩm thành công", "success");
+                    closeModal("#editModal");
+                },
+                error: function (data) {
+                    if (data.status === 400 || data.status === 500)
+                        swal("Thất bại", "Dữ liệu không hợp lệ vui lòng nhập lại", "error");
+                    else
+                        swal("Thất bại", "Cập nhật thông tin thất bại", "error");
+                }
+            })
+        }
+    });
+
+    function onDelete(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = s.text();
+        $("input[name='deleteId']").val(id);
+    }
+
+    $("#delete-action").click(() => {
+        var id = $("input[name='deleteId']").val();
+
+        $.ajax({
+            url: "/ProductManagement/Delete",
+            method: "DELETE",
+            data: {
+                id: id
+            },
+            success: data => {
+                reloadTable();
+                swal("Thành công", "Xóa thành công", "success");
+                closeModal("#deleteModal");
+            },
+            error: (data) => {
+                swal("Thất bại", "Xóa thất bại", "error");
+            }
+        });
+    });
+</script>

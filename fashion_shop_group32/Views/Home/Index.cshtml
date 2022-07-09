@@ -1,7 +1,13 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
-
+@if (Session["UserId"] != null)
+{
+    if (Session["Role"].ToString().Equals("0"))
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+}
 <section id="aa-slider">
     <div class="aa-slider-area">
         <div id="sequence" class="seq">
@@ -166,47 +172,49 @@
                                     <ul class="aa-product-catg">
                                         @foreach (var item in Model.list1)
                                         {
-                                            <!-- start single product item -->
-                                        <li>
-                                            <figure>
-                                                <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img src="~/Content/img/man/polo-shirt-1.png" alt="polo shirt img"></a>
-                                                <a class="aa-add-card-btn" href="/Product/ProductDetails?id=@item.id_sanpham"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
-                                                <figcaption>
-                                                    <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham">@item.ten_sp</a></h4>
-                                                    @if (item.id_km == "")
-                                                    {
 
-                                                        <span class="aa-product-price">@item.gia</span>}
-                                                    else
-                                                    {
-                                                        <span class="aa-product-price">@(item.gia*(1-item.rateDiscount))</span><span class="aa-product-price"><del>@item.gia</del></span>
+                                            <!-- start single product item -->
+                                            <li>
+                                                <figure>
+                                                    <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img src="~/Content/img/man/polo-shirt-1.png" alt="polo shirt img"></a>
+                                                    <!--them vao Action Link De dua san pham qua cart (Hiep)-->
+                                                    <a class="aa-add-card-btn" href="@Url.Action( "AddToCart", "Cart", new { product_id = item.id_sanpham }, null)"><span class="fa fa-shopping-cart"></span></a>
+                                                    <figcaption>
+                                                        <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham">@item.ten_sp</a></h4>
+                                                        @if (item.id_km == "")
+                                                        {
+
+                                                            <span class="aa-product-price">@item.gia</span>}
+                                                        else
+                                                        {
+                                                            <span class="aa-product-price">@(item.gia*(1-item.rateDiscount))</span><span class="aa-product-price"><del>@item.gia</del></span>
                                                         }
                                                     </figcaption>
-                                            </figure>
-                                            <div class="aa-product-hvr-content">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-                                                <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                                            </div>
-                                            @if (item.id_km != "")
-                                            {
-                                                <!-- product badge -->
-                                                <span class="aa-badge aa-sale" href="#">SALE!</span>
-                                            }
-                                            else if (item.active == "2")
-                                            {
-                                                <!-- product badge -->
-                                                <span class="aa-badge aa-sold-out" href="#">Sold Out!</span>
-                                            }
-                                            else if (item.soluongton <5)
-                                            {
-                                                <!-- product badge -->
-                                                <span class="aa-badge aa-hot" href="#">HOT!</span>
-                                            }
-                                        </li>
-                                            }
-                                        
-                                        </ul>
+                                                </figure>
+                                                <div class="aa-product-hvr-content">
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
+                                                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                                                </div>
+                                                @if (item.id_km != "")
+                                                {
+                                                    <!-- product badge -->
+                                                    <span class="aa-badge aa-sale" href="#">SALE!</span>
+                                                }
+                                                else if (item.active == "2")
+                                                {
+                                                    <!-- product badge -->
+                                                    <span class="aa-badge aa-sold-out" href="#">Sold Out!</span>
+                                                }
+                                                else if (item.soluongton < 5)
+                                                {
+                                                    <!-- product badge -->
+                                                    <span class="aa-badge aa-hot" href="#">HOT!</span>
+                                                }
+                                            </li>
+                                        }
+
+                                    </ul>
                                     <a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / men product category -->
@@ -865,7 +873,7 @@
                             <!-- start latest product category -->
                             <div class="tab-pane fade" id="latest">
                                 <ul class="aa-product-catg aa-latest-slider">
-                                   
+
                                     @foreach (var item in Model.list4)
                                     {
                                         <!-- start single product item -->

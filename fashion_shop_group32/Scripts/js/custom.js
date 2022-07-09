@@ -50,13 +50,16 @@ jQuery(function($){
   /*  3. PRODUCT VIEW SLIDER 
   /* ----------------------------------------------------------- */    
 
-    jQuery('#demo-1 .simpleLens-thumbnails-container img').simpleGallery({
-        loading_image: 'demo/images/loading.gif'
-    });
+    //jQuery('#demo-1 .simpleLens-thumbnails-container img').simpleGallery({
+    //    loading_image: 'demo/images/loading.gif'
+    //});
 
-    jQuery('#demo-1 .simpleLens-big-image').simpleLens({
-        loading_image: 'demo/images/loading.gif'
-    });
+    //jQuery('#demo-1 .simpleLens-big-image').simpleLens({
+    //    loading_image: 'demo/images/loading.gif'
+    //});
+
+    /* display image */
+    
 
   /* ----------------------------------------------------------- */
   /*  4. POPULAR PRODUCT SLIDER (SLICK SLIDER)
@@ -355,24 +358,23 @@ jQuery(function($){
       ]
     }); 
 
-    alert("work");
 
     /* ----------------------------------------------------------- */
     /*  14. 
     /* ----------------------------------------------------------- */
-    function removeColor() {
-        jQuery(".color").each(function () {
-            if (jQuery(this).hasClass("selected")) {
-                jQuery(this).removeClass("selected");
-            }
-        });
-    }
-    jQuery(".color").on("click",function (e) {
-        e.preventDefault(e);
-        alert("asdadad")
-        removeColor();
-        jQuery(this).addClass("selected")
-    });
+    //function removeColor() {
+    //    jQuery(".color").each(function () {
+    //        if (jQuery(this).hasClass("selected")) {
+    //            jQuery(this).removeClass("selected");
+    //        }
+    //    });
+    //}
+    //jQuery(".color").on("click",function (e) {
+    //    e.preventDefault(e);
+    //    alert("asdadad")
+    //    removeColor();
+    //    jQuery(this).addClass("selected")
+    //});
 
     //function removeSize() {
     //    jQuery(".size").each(function () {

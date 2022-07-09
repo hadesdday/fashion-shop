@@ -1,0 +1,370 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["title"] = "Quản lý khách hàng";
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <h2>Quản lý khách hàng</h2>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <button id="addBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Thêm khách hàng</button>
+
+                <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Thêm khách hàng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Tên khách hàng</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="cName">
+                                </div>
+
+                                <label>Địa chỉ</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="address">
+                                </div>
+
+                                <label>Số điện thoại</label>
+                                <div class="input-group mb-3">
+                                    <input type="tel" class="form-control" name="phoneNum">
+                                </div>
+
+                                <label>Email</label>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" name="email">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="add-action">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Sửa thông tin khách hàng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label>Mã khách hàng</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editId" disabled>
+                                </div>
+
+                                <label>Tên khách hàng</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editcName">
+                                </div>
+
+                                <label>Địa chỉ</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editaddress">
+                                </div>
+
+                                <label>Số điện thoại</label>
+                                <div class="input-group mb-3">
+                                    <input type="tel" class="form-control" name="editphoneNum">
+                                </div>
+
+                                <label>Email</label>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" name="editemail">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="edit-action">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Xóa khách hàng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="font-size:28px;">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="deleteId" disabled hidden>
+                                <h6>Bạn có chắc chắn muốn xóa dòng này ?</h6>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-primary" id="delete-action">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /# row -->
+            <section id="main-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="bootstrap-data-table-panel">
+                                <div class="table-responsive">
+                                    <table id="customer-table"
+                                           class="table table-striped table-bordered" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="18%">Mã khách hàng</th>
+                                                <th width="18%">Tên khách hàng</th>
+                                                <th width="18%">Địa chỉ</th>
+                                                <th width="18%">Số điện thoại</th>
+                                                <th width="18%">Email</th>
+                                                <th width="10%">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer">
+                            <p>
+                                2021 © Admin Dashboard. - Functions Developed By <a href="https://github.com/hadesdday" target="_blank">
+                                    Nguyen
+                                    Van Hieu
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#customer-table").DataTable({
+            "responsive": true,
+            "dom": "lBfrtip",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            "buttons": ["copy", "csv", "excel", "pdf", "print"],
+            "language": {
+                "url": "/Scripts/admin/js/lib/data-table/vi.json"
+            },
+            "ajax": {
+                "url": "https://localhost:44332/Customer/GetCustomerList",
+                "dataSrc": "data"
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "width": "18%",
+                },
+                {
+                    "targets": 1,
+                    "width": "18%",
+                },
+                {
+                    "targets": 2,
+                    "width": "18%",
+                },
+                {
+                    "targets": 3,
+                    "width": "18%",
+                },
+                {
+                    "targets": 4,
+                    "width": "18%",
+                },
+                {
+                    "targets": 5,
+                    "searchable": false,
+                    "width": "10%",
+                    "render": function (data, type, row) {
+                        var editElm = '<a class="btn rounded bg-warning mr-2" id="editBtn" ' + "onclick='onEdit(this)' data-toggle='modal' data-target='#editModal'>"
+                            + "<i class='ti-pencil text-white'></i></a>";
+                        var delElm = '<a class="btn rounded bg-danger delAct" id="deleteAction" onclick="onDelete(this)" data-toggle="modal" data-target="#deleteModal">' +
+                            "<i class='ti-trash text-white'></i></a>";
+                        var actions = editElm + delElm;
+                        return actions;
+                    }
+                },
+            ],
+            "columns": [
+                { "data": "id_khachhang" },
+                { "data": "ten_kh" },
+                { "data": "diachi" },
+                { "data": "sodt" },
+                { "data": "email" },
+            ],
+        });
+    });
+
+    function reloadTable() {
+        $("#customer-table").DataTable().ajax.reload(null, false);
+    }
+
+    function clearData() {
+        $("input").val("");
+    }
+
+    function isEmpty(inp) {
+        for (let i of inp) {
+            if (i === null || i.length < 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function closeModal(id) {
+        $(id).trigger('click');
+    }
+
+    $("#add-action").click(() => {
+        var name = $("input[name='cName']").val();
+        var address = $("input[name='address']").val();
+        var phoneNum = $("input[name='phoneNum']").val();
+        var email = $("input[name='email']").val();
+
+        let inp = [name, address, phoneNum, email];
+
+        if (isEmpty(inp)) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            $.ajax({
+                url: "/Customer/Add",
+                method: "POST",
+                data: {
+                    ten_kh: name,
+                    diachi: address,
+                    sodt: phoneNum,
+                    email: email
+                },
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Thêm khách hàng mới thành công", "success");
+                    clearData();
+                    closeModal("#addModal");
+                },
+                error: function (data) {
+                    swal("Thất bại", "Thêm khách hàng mới thất bại", "error");
+                }
+            });
+        }
+    });
+
+    function setData(data) {
+        $("input[name='editId']").val(data.id_khachhang);
+        $("input[name='editcName']").val(data.ten_kh);
+        $("input[name='editaddress']").val(data.diachi);
+        $("input[name='editphoneNum']").val(data.sodt);
+        $("input[name='editemail']").val(data.email);
+    }
+
+    function onEdit(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = Number(s.text());
+
+        $.ajax({
+            url: "/Customer/GetCustomer",
+            method: "GET",
+            data: {
+                id: id
+            },
+            success: data => {
+                setData(data);
+            }, error: data => {
+                swal("Thất bại", "Không tìm thấy khách hàng", "error");
+            }
+        });
+    }
+
+    $("#edit-action").click(() => {
+        var id = $("input[name='editId']").val();
+        var name = $("input[name='editcName']").val();
+        var address = $("input[name='editaddress']").val();
+        var phoneNum = $("input[name='editphoneNum']").val();
+        var email = $("input[name='editemail']").val();
+
+        let inp = [id, name, address, phoneNum, email];
+
+        if (isEmpty(inp)) {
+            swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
+        } else {
+            $.ajax({
+                url: "/Customer/UpdateInformation",
+                method: "PUT",
+                data: {
+                    id_khachhang: id,
+                    ten_kh: name,
+                    diachi: address,
+                    sodt: phoneNum,
+                    email: email
+                },
+                success: function (data) {
+                    reloadTable();
+                    swal("Thành công", "Sửa thông tin khách hàng thành công", "success");
+                    closeModal("#editModal");
+                },
+                error: function (data) {
+                    if (data.status === 400 || data.status === 500)
+                        swal("Thất bại", "Dữ liệu không hợp lệ vui lòng nhập lại", "error");
+                    else
+                        swal("Thất bại", "Cập nhật thông tin thất bại", "error");
+                }
+            })
+        }
+    });
+
+    function onDelete(elm) {
+        var s = $(elm).parents("tr").children().first();
+        var id = Number(s.text());
+        $("input[name='deleteId']").val(id);
+    }
+
+    $("#delete-action").click(() => {
+        var id = $("input[name='deleteId']").val();
+
+        $.ajax({
+            url: "/Customer/Delete",
+            method: "DELETE",
+            data: {
+                id: id
+            },
+            success: data => {
+                reloadTable();
+                swal("Thành công", "Xóa thành công", "success");
+                closeModal("#deleteModal");
+            },
+            error: (data) => {
+                swal("Thất bại", "Xóa thất bại", "error");
+            }
+        });
+    });
+</script>
