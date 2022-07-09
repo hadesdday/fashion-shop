@@ -1,5 +1,9 @@
 ﻿using fashion_shop_group32.Models;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace fashion_shop_group32.Controllers
@@ -54,11 +58,25 @@ namespace fashion_shop_group32.Controllers
         public ActionResult ProductDetails(string id, string name)
         {
             ViewModelIndex2 viewModel = new ViewModelIndex2();
-            viewModel.product = new MockProduct().GetProductsByID(id);
+            Product p= new MockProduct().GetProductsByID(id);
+            viewModel.product = p;
             viewModel.list1 = new MockProduct().GetColorsByNameProduct(name);
             viewModel.list2 = new MockProduct().GetSizesByNameProduct(name);
+            viewModel.list3 = new MockProduct().GetRelatedProducts(p.ma_loaisp, p.loai);
             return View(viewModel);
             //return View("ProductDetails");
+        }
+        public JsonResult SetViewBagColor(string color)
+        {
+            ViewBag.color = color;
+
+            return Json(new { Result = color }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SetViewBagSize(string size)
+        {
+            ViewBag.size = size;
+            return Json(new { Result = size }, JsonRequestBehavior.AllowGet);
         }
     }
 }
