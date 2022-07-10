@@ -16,8 +16,8 @@ namespace fashion_shop_group32
             );
             routes.MapRoute(
                  "ProductList",
-                 "{controller}/{action}/{s1}/{s2}/{s3}/{s4}/{s5}",
-                 new { controller = "Product", action = "ProductList", s1 = UrlParameter.Optional, s2 = UrlParameter.Optional, s3 = UrlParameter.Optional, s4 = UrlParameter.Optional, s5 = UrlParameter.Optional }
+                 "{controller}/{action}/{s1}/{s2}/{s3}/{s4}/{s5}/{s6}/{s7}",
+                 new { controller = "Product", action = "ProductList", s1 = UrlParameter.Optional, s2 = UrlParameter.Optional, s3 = UrlParameter.Optional, s4 = UrlParameter.Optional, s5 = UrlParameter.Optional, s6 = UrlParameter.Optional, s7 = UrlParameter.Optional }
             );
             routes.MapRoute(
                  "ProductList3",
