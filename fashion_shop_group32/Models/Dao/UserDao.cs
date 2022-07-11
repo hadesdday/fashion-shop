@@ -233,6 +233,47 @@ string id = builder.ToString();
             return true;
             
         }
+        public static Customer getSelectedCus(int idCus)
+        {
+            List<Customer> listCus = new List<Customer>();
+            string sql = "select * from khachhang where id_khachhang=@id_khachhang";
+            MySqlConnection connect = KetNoi.GetDBConnection();
+            connect.Open();
+            MySqlCommand command = new MySqlCommand();
+            command.Connection = connect;
+            command.CommandText = sql;
+            command.Parameters.AddWithValue("@id_khachhang", idCus);
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    listCus.Add(new Customer(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),
+                        reader.GetString(3), reader.GetString(4),
+                        reader.GetDateTime(5), reader.GetDateTime(6)));
+                }
+                reader.Close();
+            }
+            if (listCus.Count != 1) return null;
+            Customer cus = listCus[0];
+            //if (!cus.userName.Equals(username) || verify(user.password, password) == false) return null;
+            return cus;
+        }
+        public static Boolean updateCustomer(int id_kh,string namecus, string address, string phone, string email)
+        {
+            DateTime updateDate = DateTime.Now;
+            MySqlConnection connectCus = KetNoi.GetDBConnection();
+            connectCus.Open();
+            string sqlCus = "update khachhang set ten_kh=@ten_kh,diachi=@diachi,sodt=@sodt,email=@email,updatedat=@updatedat where id_khachhang = @id_khachhang";
+            MySqlCommand cmd = new MySqlCommand(sqlCus, connectCus);
+            cmd.Parameters.AddWithValue("@id_khachhang", id_kh);
+            cmd.Parameters.AddWithValue("@ten_kh", namecus);
+            cmd.Parameters.AddWithValue("@diachi", address);
+            cmd.Parameters.AddWithValue("@sodt", phone);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@updatedat", updateDate);
+            int rows = cmd.ExecuteNonQuery();
+            return rows == 1;
+        }
         static void Main(string[] args)
         {
             //register("chanhhiep", "123456", "chanhhuep2907@gmail.com");

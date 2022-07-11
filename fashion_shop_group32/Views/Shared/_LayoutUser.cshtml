@@ -89,7 +89,7 @@
                                     <li class="hidden-xs"><a href="/Wishlist">Wishlist</a></li>
                                     <li class="hidden-xs"><a href="/Cart">My Cart</a></li>
                                     <li class="hidden-xs"><a href="/Checkout">Checkout</a></li>
-                                    <li><a href="/Account" data-target="#login-modal">Hello @Session["UserName"].ToString()</a></li>
+                                    <li><a href="@Url.Action("UserInfomation","Account",null)" data-target="#login-modal">Hello @Session["UserName"].ToString()</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -117,38 +117,56 @@
                             <!-- / logo  -->
                             <!-- cart box -->
                             @{
+                                int numberItem;
                                 List<CartDao> carts = (List<CartDao>)Session["cart"];
-                                int numberItem = carts.Count();
+                                if (carts == null)
+                                {
+                                    numberItem = 0;
+                                }
+                                else
+                                {
+                                    numberItem = carts.Count();
+                                }
                             }
 
 
-                            <div class="aa-cartbox">
+                        <div class="aa-cartbox">
 
-                                <a class="aa-cart-link" href="/Cart">
-                                    <span class="fa fa-shopping-basket"></span>
-                                    <span class="aa-cart-title">SHOPPING CART</span>
-                                    <span class="aa-cart-notify">@numberItem</span>
-                                </a>
-                                <!--
+                            <a class="aa-cart-link" href="/Cart">
+                                <span class="fa fa-shopping-basket"></span>
+                                <span class="aa-cart-title">SHOPPING CART</span>
+                                <span class="aa-cart-notify">@numberItem</span>
+                            </a>
+                            @if (Session["cart"] == null)
+                            {
                                 <div class="aa-cartbox-summary">
-                                  
-                                        <ul>
-                                            <li>
-                                                <a class="aa-cartbox-img" href="#"><img src="hinh" alt="img"></a>
-                                                <div class="aa-cartbox-info">
-                                                    <h4><a href="#">tensp</a></h4>
-                                                    <p>soluong x gia</p>
-                                                </div>
-                                                <a class="aa-remove-product" href="action to delete mothod"><span class="fa fa-times"></span></a>
-                                            </li>
 
-                                        </ul>
-                                    
-                                       
                                     <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
                                 </div>
-                                 -->
-                            </div>
+                            }
+                            @if (Session["cart"] != null)
+                            {
+
+                                <div class="aa-cartbox-summary">
+
+                                    <ul>
+                                        @foreach (CartDao item in (List<CartDao>)Session["cart"])
+                                        {
+                                            <li>
+                                                <a class="aa-cartbox-img" href="#"><img src="@item.Pro.imageMain" alt="img"></a>
+                                                <div class="aa-cartbox-info">
+                                                    <h4><a href="#">@item.Pro.ten_sp</a></h4>
+                                                    <p>@item.Pro.quantitySold x @item.Pro.gia</p>
+                                                </div>
+                                                <a class="aa-remove-product" href="@Url.Action( "DeleteCart", "Cart", new { product_id = item.Pro.id_sanpham }, null)"><span class="fa fa-times"></span></a>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
+                                </div>
+
+                            }
+                        </div>
 
                             <!-- / cart box -->
                             <!-- search box -->

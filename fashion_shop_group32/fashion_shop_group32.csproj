@@ -190,8 +190,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Dao\CartDao.cs" />
     <Compile Include="Models\Dao\CartItem.cs" />
+    <Compile Include="Models\Dao\CheckOutDao.cs" />
+    <Compile Include="Models\Dao\PaymentMethod.cs" />
     <Compile Include="Models\Dao\UserDao.cs" />
     <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\MockProduct.cs" />
@@ -372,6 +375,8 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\Account\UserInfomation.cshtml" />
+    <Content Include="Views\Account\EditInfoCus.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
