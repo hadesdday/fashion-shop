@@ -36,7 +36,7 @@
                                         <div class="simpleLens-container">
                                             <div class="simpleLens-big-image-container">
                                                 <a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image">
-                                                    <img src="~/Content/@Model.product.imgs[0]" class="simpleLens-big-image">
+                                                    @*<img src="~/Content/@Model.product.imgs[0]" class="simpleLens-big-image">*@
                                                 </a>
                                             </div>
                                         </div>
@@ -72,7 +72,7 @@
                                     <div class="aa-color-tag">
                                         @foreach (var color in Model.list1)
                                         {
-                                            <a href="javascript:" class="aa-color-@color color" color="@color" color="@color"></a>
+                                            <a href="javascript:" class="aa-color-@color color" color="@color"></a>
                                         }
                                     </div>
                                     <div class="aa-prod-quantity">

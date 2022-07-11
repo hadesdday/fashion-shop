@@ -22,7 +22,7 @@ namespace fashion_shop_group32.Models
         public int quantitySold { get; set; } = 1;
         public string imageMain { get; set; }
         public List<string> imgs { get; set; }
-        public Product(string id_sanpham, string ten_sp, string ma_loaisp, string ma_mau, string ma_size, double gia, string loai, string id_km, string thuonghieu, int soluongton, string mota, string active)
+        public Product(string id_sanpham, string ten_sp, string ma_loaisp, double gia, string loai, string id_km, string thuonghieu, int soluongton, string mota, string active)
         {
             this.id_sanpham = id_sanpham;
             this.ten_sp = ten_sp;
@@ -32,8 +32,6 @@ namespace fashion_shop_group32.Models
             this.thuonghieu = thuonghieu;
             this.soluongton = soluongton;
             this.active = active;
-            this.ma_mau = ma_mau;
-            this.ma_size = ma_size;
             this.mota = mota;
             this.loai = loai;
         }

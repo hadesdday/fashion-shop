@@ -13,7 +13,7 @@ namespace Databases
 
             int port = 3306;
 
-            string database = ".net";
+            string database = ".net1";
 
             string username = "root";
 

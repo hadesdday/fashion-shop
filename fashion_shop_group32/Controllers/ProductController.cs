@@ -78,8 +78,8 @@ namespace fashion_shop_group32.Controllers
             ViewModelIndex2 viewModel = new ViewModelIndex2();
             Product p= new MockProduct().GetProductsByID(id);
             viewModel.product = p;
-            viewModel.list1 = new MockProduct().GetColorsByNameProduct(name);
-            viewModel.list2 = new MockProduct().GetSizesByNameProduct(name);
+            viewModel.list1 = new MockProduct().GetColorsByIDProduct(id);
+            viewModel.list2 = new MockProduct().GetSizesByIDProduct(id);
             viewModel.list3 = new MockProduct().GetRelatedProducts(p.ma_loaisp, p.loai);
             return View(viewModel);
             //return View("ProductDetails");
