@@ -137,32 +137,44 @@
                                     <span class="aa-cart-title">SHOPPING CART</span>
                                     <span class="aa-cart-notify">@numberItem</span>
                                 </a>
-                                <!--
-                                <div class="aa-cartbox-summary">
+                                @if (Session["cart"] == null)
+                                {
+                                    <div class="aa-cartbox-summary">
+
+                                        <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
+                                    </div>
+                                }
+                                @if (Session["cart"] != null)
+                                {
+
+                                    <div class="aa-cartbox-summary">
 
                                         <ul>
-                                            <li>
-                                                <a class="aa-cartbox-img" href="#"><img src="hinh" alt="img"></a>
-                                                <div class="aa-cartbox-info">
-                                                    <h4><a href="#">tensp</a></h4>
-                                                    <p>soluong x gia</p>
-                                                </div>
-                                                <a class="aa-remove-product" href="action to delete mothod"><span class="fa fa-times"></span></a>
-                                            </li>
-
+                                            @foreach (CartDao item in (List<CartDao>)Session["cart"])
+                                            {
+                                                <li>
+                                                    <a class="aa-cartbox-img" href="#"><img src="@item.Pro.imageMain" alt="img"></a>
+                                                    <div class="aa-cartbox-info">
+                                                        <h4><a href="#">@item.Pro.ten_sp</a></h4>
+                                                        <p>@item.Pro.quantitySold x @item.Pro.gia</p>
+                                                    </div>
+                                                    <a class="aa-remove-product" href="@Url.Action( "DeleteCart", "Cart", new { product_id = item.Pro.id_sanpham }, null)"><span class="fa fa-times"></span></a>
+                                                </li>
+                                            }
                                         </ul>
+                                        <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
+                                    </div>
+
+                                }
 
 
-                                    <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
-                                </div>
-                                 -->
                             </div>
 
                             <!-- / cart box -->
                             <!-- search box -->
                             <div class="aa-search-box">
-                                <form action="">
-                                    <input type="text" name="" id="" placeholder="Search here ex. 'man' ">
+                                <form action="/Product/ProductList">
+                                    <input type="text" name="keyword" id="" placeholder="Search here ex. 'man' ">
                                     <button type="submit"><span class="fa fa-search"></span></button>
                                 </form>
                             </div>
@@ -197,101 +209,41 @@
                                 <a href="#">Men <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/Product/ProductList?cat=casual&&loai=men&&gia=&&size=&&mau=">Casual</a></li>
-                                    <li><a href="#">Sports</a></li>
-                                    <li><a href="#">Formal</a></li>
-                                    <li><a href="#">Standard</a></li>
-                                    <li><a href="#">T-Shirts</a></li>
-                                    <li><a href="#">Shirts</a></li>
-                                    <li><a href="#">Jeans</a></li>
-                                    <li><a href="#">Trousers</a></li>
-                                    <li>
-                                        <a href="#">And more.. <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Sleep Wear</a></li>
-                                            <li><a href="#">Sandals</a></li>
-                                            <li><a href="#">Loafers</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="/Product/ProductList?cat=sport&&loai=men&&gia=&&size=&&mau=">Sports</a></li>
+                                    <li><a href="/Product/ProductList?cat=formal&&loai=men&&gia=&&size=&&mau=">Formal</a></li>
+                                    <li><a href="/Product/ProductList?cat=standard&&loai=men&&gia=&&size=&&mau=">Standard</a></li>
+                                    <li><a href="/Product/ProductList?cat=t-shirt&&loai=men&&gia=&&size=&&mau=">T-Shirts</a></li>
+                                    <li><a href="/Product/ProductList?cat=shirt&&loai=men&&gia=&&size=&&mau=">Shirts</a></li>
+                                    <li><a href="/Product/ProductList?cat=jean&&loai=men&&gia=&&size=&&mau=">Jeans</a></li>
+                                    <li><a href="/Product/ProductList?cat=trouser&&loai=men&&gia=&&size=&&mau=">Trousers</a></li>                             
                                 </ul>
                             </li>
                             <li>
                                 <a href="#">Women <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Kurta & Kurti</a></li>
-                                    <li><a href="#">Trousers</a></li>
-                                    <li><a href="#">Casual</a></li>
-                                    <li><a href="#">Sports</a></li>
-                                    <li><a href="#">Formal</a></li>
-                                    <li><a href="#">Sarees</a></li>
-                                    <li><a href="#">Shoes</a></li>
-                                    <li>
-                                        <a href="#">And more.. <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Sleep Wear</a></li>
-                                            <li><a href="#">Sandals</a></li>
-                                            <li><a href="#">Loafers</a></li>
-                                            <li>
-                                                <a href="#">And more.. <span class="caret"></span></a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="#">Rings</a></li>
-                                                    <li><a href="#">Earrings</a></li>
-                                                    <li><a href="#">Jewellery Sets</a></li>
-                                                    <li><a href="#">Lockets</a></li>
-                                                    <li class="disabled"><a class="disabled" href="#">Disabled item</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                    <li><a href="#">Polo T-Shirts</a></li>
-                                                    <li><a href="#">SKirts</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Tops</a></li>
-                                                    <li><a href="#">Make Up</a></li>
-                                                    <li><a href="#">Hair Care</a></li>
-                                                    <li><a href="#">Perfumes</a></li>
-                                                    <li><a href="#">Skin Care</a></li>
-                                                    <li><a href="#">Hand Bags</a></li>
-                                                    <li><a href="#">Single Bags</a></li>
-                                                    <li><a href="#">Travel Bags</a></li>
-                                                    <li><a href="#">Wallets & Belts</a></li>
-                                                    <li><a href="#">Sunglases</a></li>
-                                                    <li><a href="#">Nail</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="/Product/ProductList?cat=trouser&&loai=women&&gia=&&size=&&mau=">Trousers</a></li>
+                                    <li><a href="/Product/ProductList?cat=casual&&loai=women&&gia=&&size=&&mau=">Casual</a></li>
+                                    <li><a href="/Product/ProductList?cat=sport&&loai=women&&gia=&&size=&&mau=">Sports</a></li>
+                                    <li><a href="/Product/ProductList?cat=formal&&loai=women&&gia=&&size=&&mau=">Formal</a></li>
+                                    <li><a href="/Product/ProductList?cat=shoe&&loai=women&&gia=&&size=&&mau=">Shoes</a></li>
+                                 
                                 </ul>
                             </li>
                             <li>
                                 <a href="#">Kids <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Casual</a></li>
-                                    <li><a href="#">Sports</a></li>
-                                    <li><a href="#">Formal</a></li>
-                                    <li><a href="#">Standard</a></li>
-                                    <li><a href="#">T-Shirts</a></li>
-                                    <li><a href="#">Shirts</a></li>
-                                    <li><a href="#">Jeans</a></li>
-                                    <li><a href="#">Trousers</a></li>
-                                    <li>
-                                        <a href="#">And more.. <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Sleep Wear</a></li>
-                                            <li><a href="#">Sandals</a></li>
-                                            <li><a href="#">Loafers</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="/Product/ProductList?cat=casual&&loai=women&&gia=&&size=&&mau=">Casual</a></li>
+                                    <li><a href="/Product/ProductList?cat=sport&&loai=women&&gia=&&size=&&mau=">Sports</a></li>
+                                    <li><a href="/Product/ProductList?cat=formal&&loai=women&&gia=&&size=&&mau=">Formal</a></li>
+                                    <li><a href="/Product/ProductList?cat=standard&&loai=women&&gia=&&size=&&mau=">Standard</a></li>
+                                    <li><a href="/Product/ProductList?cat=t-shirt&&loai=women&&gia=&&size=&&mau=">T-Shirts</a></li>
+                                    <li><a href="/Product/ProductList?cat=shirt&&loai=women&&gia=&&size=&&mau=">Shirts</a></li>
+                                    <li><a href="/Product/ProductList?cat=jean&&loai=women&&gia=&&size=&&mau=">Jeans</a></li>
+                                    <li><a href="/Product/ProductList?cat=trouser&&loai=women&&gia=&&size=&&mau=">Trousers</a></li>
+                              
                                 </ul>
                             </li>
-                            <li><a href="#">Sports</a></li>
-                            <li>
-                                <a href="#">Digital <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Camera</a></li>
-                                    <li><a href="#">Mobile</a></li>
-                                    <li><a href="#">Tablet</a></li>
-                                    <li><a href="#">Laptop</a></li>
-                                    <li><a href="#">Accesories</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Furniture</a></li>
+                          
                             <li>
                                 <a href="/Blog">Blog <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -463,5 +415,6 @@
     <script type="text/javascript" src="~/Scripts/js/nouislider.js"></script>
     <!-- Custom js -->
     <script src="~/Scripts/js/custom.js"></script>
+  
 </body>
 </html>

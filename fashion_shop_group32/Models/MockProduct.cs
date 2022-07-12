@@ -63,7 +63,7 @@ namespace fashion_shop_group32.Models
         }
         public IEnumerable<Product> GetProductsByCategoryAndLoai(string cat, string loai)
         {
-
+            
             MySqlConnection conn = KetNoi.GetDBConnection();
             conn.Open();
             MySqlCommand newCmd = conn.CreateCommand();
@@ -93,7 +93,7 @@ namespace fashion_shop_group32.Models
             return _productList;
         }
 
-        public int NumberProductinList(string cat, string loai, string mau, string size, string gia, string keyword)
+       public int NumberProductinList(string cat, string loai, string mau, string size, string gia, string keyword)
         {
             int count = 0;
             string filterNew = "";
@@ -105,6 +105,7 @@ namespace fashion_shop_group32.Models
             if (size != null && size != "")
             {
                 filterQuery += ("and d.ma_sizesp='" + size + "' ");
+<<<<<<< HEAD
 
             }
             if (gia != null && gia != "")
@@ -127,6 +128,8 @@ namespace fashion_shop_group32.Models
                 }
                 filterQuery = "and" + s;
             }
+=======
+>>>>>>> main
 
             System.Diagnostics.Debug.WriteLine(filterQuery);
             MySqlConnection conn = KetNoi.GetDBConnection();
@@ -135,7 +138,7 @@ namespace fashion_shop_group32.Models
             if (keyword == null || keyword == "")
             {
                 System.Diagnostics.Debug.WriteLine("dont search");
-                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,e.ma_mau,e.ma_size,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau=c.ma_mausp and e.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ma_loaisp =@maloaisp and a.loai=@loai " + filterQuery;
+                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,e.ma_mau,e.ma_size,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau=c.ma_mausp and e.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ma_loaisp =@maloaisp and a.loai=@loai " + filterQuery ;
                 MySqlParameter maloaisp = new MySqlParameter("@maloaisp", MySqlDbType.String);
                 maloaisp.Value = cat;
                 MySqlParameter loaisp = new MySqlParameter("@loai", MySqlDbType.String);
@@ -147,7 +150,7 @@ namespace fashion_shop_group32.Models
             else
             {
                 System.Diagnostics.Debug.WriteLine("search");
-                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,e.ma_mau,e.ma_size,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau=c.ma_mausp and e.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ten_sp like '%" + keyword + "%' " + filterQuery;
+                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,e.ma_mau,e.ma_size,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau=c.ma_mausp and e.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ten_sp like '%" + keyword + "%' " + filterQuery ;
                 newCmd.CommandText = queryString;
 
 
@@ -159,7 +162,7 @@ namespace fashion_shop_group32.Models
                 { // Đọc từng dòng kết quả cho đến hết
                     while (reader.Read())
                     {
-
+                      
                         if (!isContain(reader[1].ToString()))
                             count++;
                     }
@@ -173,8 +176,8 @@ namespace fashion_shop_group32.Models
                 numpage++;
             return numpage;
         }
-        public IEnumerable<Product> GetProductsByCategoryAndLoaiAndFilter(string cat, string loai, string mau, string size, string gia, string keyword, int page)
-        {
+        public IEnumerable<Product> GetProductsByCategoryAndLoaiAndFilter(string cat, string loai, string mau, string size, string gia,string keyword,int page)
+        { 
             int pagenum;
             pagenum = page;
             int begin = (pagenum - 1) * 9;
@@ -209,13 +212,12 @@ namespace fashion_shop_group32.Models
                 }
                 filterQuery = "and" + s;
             }
-
+            
             System.Diagnostics.Debug.WriteLine(filterQuery);
             MySqlConnection conn = KetNoi.GetDBConnection();
             conn.Open();
             MySqlCommand newCmd = conn.CreateCommand();
-            if (keyword == null || keyword == "")
-            {
+            if (keyword==null || keyword=="") {
                 System.Diagnostics.Debug.WriteLine("dont search");
 
                 string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau=c.ma_mausp and e.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ma_loaisp =@maloaisp and a.loai=@loai " + filterQuery + "  )limit " + begin + ",9";
@@ -225,20 +227,20 @@ namespace fashion_shop_group32.Models
                 loaisp.Value = loai;
                 newCmd.CommandText = queryString;
                 newCmd.Parameters.Add(maloaisp);
-                newCmd.Parameters.Add(loaisp);
+                newCmd.Parameters.Add(loaisp); 
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine("search");
-
+                 
                 //string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,e.ma_mau,e.ma_size,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and a.ma_mau=c.ma_mausp and a.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ten_sp like '%" + keyword+"%' " + filterQuery + "  limit " + begin + ",9";
-                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c, sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau = c.ma_mausp and e.ma_size = d.ma_sizesp and a.id_sanpham = e.id_sanpham and a.ten_sp '%" + keyword + "%' " + filterQuery + "  )limit " + begin + ",9";
+                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c, sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau = c.ma_mausp and e.ma_size = d.ma_sizesp and a.id_sanpham = e.id_sanpham and a.ten_sp '%" + keyword+"%' " + filterQuery + "  )limit " + begin + ",9";
                 newCmd.CommandText = queryString;
-
+                
 
             }
             using (MySqlDataReader reader = newCmd.ExecuteReader())
-            {
+            {              
                 // Kiểm tra có kết quả trả về
                 if (reader.HasRows)
                 { // Đọc từng dòng kết quả cho đến hết

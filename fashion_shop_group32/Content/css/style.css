@@ -2097,6 +2097,7 @@ img {
   padding: 5px 10px;
   transition: all 0.5s ease 0s;
 }
+
 #aa-product-details .aa-product-details-area .aa-product-details-content .aa-product-view-content .aa-prod-quantity {
   margin-top: 10px;
 }
@@ -4147,5 +4148,9 @@ img {
   #aa-header .aa-header-top .aa-header-top-right .aa-head-top-nav-right li a {   
     padding: 5px 2px;
   }
+  
 }
 
+.selected {
+    border: 3px solid red !important
+}

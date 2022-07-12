@@ -27,7 +27,7 @@
             <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
                 <div class="aa-product-catg-content">
                     <div class="aa-product-catg-head">
-
+                        
                         <div class="aa-product-catg-head-right">
                             <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
                             <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
@@ -155,24 +155,24 @@
                                     }
 
                                 </li>
-                                @for (int i = 1; i <= Model.count; i++)
+                                @for (int i=1; i<=Model.count; i++)
                                 {
                                     <li><a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword&&page=@i">@i</a></li>
                                 }
-                                <li>
-                                    @if (ViewBag.page == ViewBag.numpage)
-                                    {
-                                        <a aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>}
-                                    else
-                                    {
-                                        <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword&&page=@(ViewBag.page+1)" aria-label="Previous">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    }
-                                </li>
-                            </ul>
+                            <li>
+                                @if (ViewBag.page == ViewBag.numpage)
+                                {
+                                    <a aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>}
+                                else
+                                {
+                                    <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword&&page=@(ViewBag.page+1)" aria-label="Previous">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                }
+                            </li>
+                                </ul>
                         </nav>
                     </div>
                 </div>
@@ -186,9 +186,9 @@
                         <div class="tag-cloud">
                             <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">Tất cả mức giá</a>
                             <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=<200&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">< 200 ngan</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=200-800&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">200-800</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=800-2000&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">800-2000</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=>2000&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">>2tr</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=200-800&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >200-800</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=800-2000&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >800-2000</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=>2000&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >>2tr</a>
                         </div>
                     </div>
                     <!-- single sidebar -->
@@ -219,11 +219,11 @@
                         <div class="tag-cloud">
                             <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">Tất cả các size</a>
                             <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=s&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">S</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=m&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">M</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=l&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">L</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=x&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">X</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xl&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">XL</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xxl&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">XXL</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=m&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >M</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=l&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >L</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=x&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >X</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xl&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >XL</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xxl&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >XXL</a>
                         </div>
                     </div>
                     <div class="tag-cloud">

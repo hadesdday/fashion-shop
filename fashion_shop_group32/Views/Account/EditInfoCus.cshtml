@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@using fashion_shop_group32.Models;
+@using fashion_shop_group32.Models.Dao;
+<h2>Login</h2>
+
+<section id="aa-catg-head-banner">
+    <img src="~/Content/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+        <div class="container">
+            <div class="aa-catg-head-banner-content">
+                <h2>Account Page</h2>
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li class="active">Account Management</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / catg header banner section -->
+<!-- Cart view section -->
+<!--T có sửa phần view của trang Login nha (Hiệp)-->
+
+
+<section id="aa-myaccount">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-myaccount-area">
+                    <div class="row">
+                        <h4>User Management: User</h4>
+                        <div class="col-md-6">
+                            <div class="aa-myaccount-register">
+                                <h4>Địa Chỉ Giao Hàng</h4>
+                                @{
+                                    Customer cus = (Customer)Session["customer"];
+                                }
+                                @using (Html.BeginForm())
+                                {
+                                    <p style="color:red">@ViewBag.Message</p>
+                                    <br />
+                                    <label for="">Full Name:<span>*</span></label>
+                                    <br />
+                                    <input type="text" placeholder="@cus.NameCus" name="namecus">
+                                    <br />
+                                    <label for="">Email<span>*</span></label>
+                                    <br />
+                                    <input type="email" placeholder="@cus.email" name="email">
+                                    <br />
+                                    <label for="">Phone<span>*</span></label>
+                                    <br />
+                                    <input type="text" placeholder="@cus.Phone" name="phone">
+                                    <br />
+                                    <label for="">Address<span>*</span></label>
+                                    <br />
+                                    <input type="text" placeholder="@cus.Address" name="address">
+                                    <br />
+                                    <button type="submit" class="aa-browse-btn">Save</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
