@@ -576,6 +576,7 @@
     <Compile Include="Controllers\admin\CustomerController.cs" />
     <Compile Include="Controllers\admin\GetStatisticController.cs" />
     <Compile Include="Controllers\admin\ImageController.cs" />
+    <Compile Include="Controllers\admin\OrderDetailsManagementController.cs" />
     <Compile Include="Controllers\admin\OrderManagementController.cs" />
     <Compile Include="Controllers\admin\PaymentMethodController.cs" />
     <Compile Include="Controllers\admin\ProductDetailsManagementController.cs" />
@@ -612,6 +613,7 @@
     <Compile Include="Models\JsonHttpStatusResult.cs" />
     <Compile Include="Models\MockProduct.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetailsEntity.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductDetailsEntity.cs" />
@@ -883,6 +885,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\admin\images\upload\product\" />
     <Folder Include="Content\upload\" />
+    <Folder Include="Views\OrderDetailsManagement\" />
     <Folder Include="Views\ProductDetails\" />
   </ItemGroup>
   <ItemGroup>
@@ -967,6 +970,7 @@
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\ProductDetailsManagement.cshtml" />
+    <Content Include="Views\Admin\OrderDetailsManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
