@@ -11,14 +11,14 @@ namespace fashion_shop_group32.Controllers.admin
 {
     public class CustomerController : Controller
     {
-        public JsonResult Add(Customer c)
+        public JsonResult Add(CustomerEntity c)
         {
             using (var context = new AdminDbContext())
             {
                 try
                 {
                     context.Database.EnsureCreated();
-                    var customer = new Customer
+                    var customer = new CustomerEntity
                     {
                         ten_kh = c.ten_kh,
                         diachi = c.diachi,
@@ -43,11 +43,11 @@ namespace fashion_shop_group32.Controllers.admin
 
         public JsonResult GetCustomerList()
         {
-            List<Customer> customerList = new List<Customer>();
+            List<CustomerEntity> customerList = new List<CustomerEntity>();
 
             using (var ctx = new AdminDbContext())
             {
-                customerList = ctx.khachhang.ToList<Customer>();
+                customerList = ctx.khachhang.ToList<CustomerEntity>();
             }
 
             if (customerList.Count == 0)
@@ -61,10 +61,10 @@ namespace fashion_shop_group32.Controllers.admin
 
         public JsonResult GetCustomer(int id)
         {
-            Customer s = null;
+            CustomerEntity s = null;
             using (var ctx = new AdminDbContext())
             {
-                s = ctx.khachhang.Where(t => t.id_khachhang == id).FirstOrDefault<Customer>();
+                s = ctx.khachhang.Where(t => t.id_khachhang == id).FirstOrDefault<CustomerEntity>();
             }
 
             if (s == null)
@@ -74,13 +74,13 @@ namespace fashion_shop_group32.Controllers.admin
             return Json(s, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdateInformation(Customer t)
+        public JsonResult UpdateInformation(CustomerEntity t)
         {
             if (!ModelState.IsValid) return new JsonHttpStatusResult("invalid data", HttpStatusCode.BadRequest);
 
             using (var ctx = new AdminDbContext())
             {
-                var current = ctx.khachhang.Where(z => t.id_khachhang == z.id_khachhang).FirstOrDefault<Customer>();
+                var current = ctx.khachhang.Where(z => t.id_khachhang == z.id_khachhang).FirstOrDefault<CustomerEntity>();
                 if (current != null)
                 {
                     current.ten_kh = t.ten_kh;
@@ -101,7 +101,7 @@ namespace fashion_shop_group32.Controllers.admin
         {
             using (var ctx = new AdminDbContext())
             {
-                var current = ctx.khachhang.Where(t => t.id_khachhang == id).FirstOrDefault<Customer>();
+                var current = ctx.khachhang.Where(t => t.id_khachhang == id).FirstOrDefault<CustomerEntity>();
                 if (current != null)
                 {
                     ctx.Entry(current).State = EntityState.Deleted;

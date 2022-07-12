@@ -93,7 +93,7 @@
                                     <div class="aa-prod-view-bottom">
                                         <!--Dong nay t them vi no chua link qua cart-->
 
-                                        <a class="aa-add-to-cart-btn" href="#">@Html.ActionLink("AddToCart", "AddToCart", "Cart", new { product_id = Model.product.id_sanpham }, null)</a>
+                                        <a class="aa-add-to-cart-btn" href="@Url.Action("AddToCart", "Cart", new { product_id = Model.product.id_sanpham },null)">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>

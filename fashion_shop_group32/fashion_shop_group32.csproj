@@ -600,8 +600,11 @@
     </Compile>
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerEntity.cs" />
     <Compile Include="Models\Dao\CartDao.cs" />
     <Compile Include="Models\Dao\CartItem.cs" />
+    <Compile Include="Models\Dao\CheckOutDao.cs" />
+    <Compile Include="Models\Dao\PaymentMethod.cs" />
     <Compile Include="Models\Dao\UserDao.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\IProduct.cs" />
@@ -960,6 +963,8 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Account\EditInfoCus.cshtml" />
+    <Content Include="Views\Account\UserInfomation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

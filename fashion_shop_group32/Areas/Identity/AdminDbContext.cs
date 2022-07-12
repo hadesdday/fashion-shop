@@ -20,7 +20,7 @@ namespace fashion_shop_group32.Context
                 entity.Property(e => e.ten_sizesp).IsRequired();
             });
 
-            modelBuilder.Entity<Customer>(entity =>
+            modelBuilder.Entity<CustomerEntity>(entity =>
             {
                 entity.HasKey(e => e.id_khachhang);
                 entity.Property(e => e.ten_kh).IsRequired();
@@ -105,7 +105,7 @@ namespace fashion_shop_group32.Context
 
         public DbSet<Size> Size { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Customer> khachhang { get; set; }
+        public DbSet<CustomerEntity> khachhang { get; set; }
         public DbSet<Color> mausanpham { get; set; }
         public DbSet<ProductType> loaisanpham { get; set; }
         public DbSet<PaymentMethod> thanhtoan { get; set; }
