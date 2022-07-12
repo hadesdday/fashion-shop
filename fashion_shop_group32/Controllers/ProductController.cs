@@ -32,7 +32,7 @@ namespace fashion_shop_group32.Controllers
         }
 
         [ActionName("ProductList")]
-        public ActionResult ProductList(string cat, string loai, string mau, string size, string gia, string keyword,string page)
+        public ActionResult ProductList(string cat, string loai, string mau, string size, string gia, string keyword, string page)
         {
             int numpage;
             if (page == "" || page == null)
@@ -46,7 +46,7 @@ namespace fashion_shop_group32.Controllers
             ViewBag.keyword = keyword;
             ViewBag.page = numpage;
             System.Diagnostics.Debug.WriteLine("ProductList3.");
-            var model = _product.GetProductsByCategoryAndLoaiAndFilter(cat, loai, mau, size, gia,keyword, numpage);
+            var model = _product.GetProductsByCategoryAndLoaiAndFilter(cat, loai, mau, size, gia, keyword, numpage);
             ViewModelIndex3 viewModel = new ViewModelIndex3();
             viewModel.count = new MockProduct().NumberProductinList(cat, loai, mau, size, gia, keyword);
             viewModel.list1 = model;
@@ -76,7 +76,7 @@ namespace fashion_shop_group32.Controllers
         public ActionResult ProductDetails(string id, string name)
         {
             ViewModelIndex2 viewModel = new ViewModelIndex2();
-            Product p= new MockProduct().GetProductsByID(id);
+            Product p = new MockProduct().GetProductsByID(id);
             viewModel.product = p;
             viewModel.list1 = new MockProduct().GetColorsByIDProduct(id);
             viewModel.list2 = new MockProduct().GetSizesByIDProduct(id);

@@ -23,8 +23,6 @@ namespace fashion_shop_group32.Controllers.admin
                         id_sanpham = p.id_sanpham,
                         ten_sp = p.ten_sp,
                         ma_loaisp = p.ma_loaisp,
-                        ma_mau = p.ma_mau,
-                        ma_size = p.ma_size,
                         gia = p.gia,
                         loai = p.loai,
                         id_km = p.id_km,
@@ -91,8 +89,6 @@ namespace fashion_shop_group32.Controllers.admin
                 {
                     current.ten_sp = t.ten_sp;
                     current.ma_loaisp = t.ma_loaisp;
-                    current.ma_mau = t.ma_mau;
-                    current.ma_size = t.ma_size;
                     current.gia = t.gia;
                     current.loai = t.loai;
                     current.id_km = t.id_km;

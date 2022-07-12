@@ -32,11 +32,6 @@
                                     <input type="file" name="image" id="image" />
                                     <button type="button" id="upload-image">Upload file</button>
                                 </form>
-
-                                <label>Mã sản phẩm</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="pid">
-                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -60,10 +55,19 @@
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" name="editid" disabled>
                                 </div>
-                                <label>Mã sản phẩm</label>
+
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="editpid">
+                                    <img src="" alt="404" id="other-image" width="50" height="50" />
                                 </div>
+
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="editimgUrl" hidden>
+                                </div>
+
+                                <form action="/Image/UploadImage" method="post" enctype="multipart/form-data" id="change-form">
+                                    <input type="file" name="image" id="update-img" />
+                                    <button type="button" id="change-image">Upload file</button>
+                                </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -107,9 +111,8 @@
                                            class="table table-striped table-bordered" width="100%">
                                         <thead>
                                             <tr>
-                                                <th width="30%">Mã hình ảnh</th>
-                                                <th width="30%">Hình ảnh</th>
-                                                <th width="30%">Mã sản phẩm</th>
+                                                <th width="50%">Mã hình ảnh</th>
+                                                <th width="50%">Hình ảnh</th>
                                                 <th width="10%">Hành động</th>
                                             </tr>
                                         </thead>
@@ -160,11 +163,11 @@
             "columnDefs": [
                 {
                     "targets": 0,
-                    "width": "30%",
+                    "width": "50%",
                 },
                 {
                     "targets": 1,
-                    "width": "30%",
+                    "width": "50%",
                     "render": function (data, type, row) {
                         var elm = "<img src='" + data + "' alt='404' width='50px' height='50px'/>"
                         return elm;
@@ -172,10 +175,6 @@
                 },
                 {
                     "targets": 2,
-                    "width": "30%",
-                },
-                {
-                    "targets": 3,
                     "searchable": false,
                     "width": "10%",
                     "render": function (data, type, row) {
@@ -190,8 +189,7 @@
             ],
             "columns": [
                 { "data": "id_anh" },
-                { "data": "link_anh" },
-                { "data": "id_sanpham" }
+                { "data": "link_anh" }
             ],
         });
     });
@@ -203,6 +201,29 @@
     function closeModal(id) {
         $(id).trigger('click');
     }
+
+    $("#change-image").click(() => {
+        var form = document.getElementById("change-form");
+        if (document.getElementById("update-img").files.length == 0) {
+            toastr.error('Hình ảnh chưa được upload', 'Thất bại');
+        } else {
+            $.ajax({
+                url: "https://localhost:44332/Image/Upload",
+                type: 'POST',
+                data: new FormData(form),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $("#other-image").attr("src", data['path']);
+                    $("input[name='editimgUrl']").val(data['path']);
+                    toastr.success('Upload hình ảnh thành công', 'Thành công');
+                },
+                error: function (data) {
+                    toastr.error('Upload hình ảnh thất bại', 'Thất bại')
+                }
+            });
+        }
+    });
 
     $("#upload-image").click(() => {
         var form = document.getElementById("upload-form");
@@ -228,22 +249,19 @@
 
     $("#add-action").click(() => {
         var url = $("input[name='imgUrl']").val();
-        var pid = $("input[name='pid']").val();
 
-        if (url.length < 1 || pid.length < 1) {
+        if (url.length < 1) {
             swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
         } else {
             $.ajax({
                 url: "/Image/Add",
                 method: "POST",
                 data: {
-                    link_anh: url,
-                    id_sanpham: pid
+                    link_anh: url
                 },
                 success: function (data) {
                     reloadTable();
                     swal("Thành công", "Thêm hình ảnh mới thành công", "success");
-                    $("input[name='pid']").val("");
                     $("input[name='imgUrl']").val("");
 
                     closeModal("#addModal");
@@ -260,7 +278,8 @@
 
     function setData(data) {
         $("input[name='editid']").val(data.id_anh);
-        $("input[name='editpid']").val(data.id_sanpham);
+        $("input[name='editimgUrl']").val(data.link_anh);
+        $("#other-image").attr("src", data.link_anh);
     }
 
     function onEdit(elm) {
@@ -283,9 +302,9 @@
 
     $("#edit-action").click(() => {
         var id = $("input[name='editid']").val();
-        var pid = $("input[name='editpid']").val();
+        var newUrl = $("input[name='editimgUrl']").val();
 
-        if (id.length < 1 || pid.length < 1) {
+        if (id.length < 1) {
             swal("Thất bại", "Vui lòng nhập dữ liệu ", "error");
         } else {
             $.ajax({
@@ -293,7 +312,7 @@
                 method: "PUT",
                 data: {
                     id_anh: id,
-                    id_sanpham: pid
+                    link_anh: newUrl
                 },
                 success: function (data) {
                     reloadTable();

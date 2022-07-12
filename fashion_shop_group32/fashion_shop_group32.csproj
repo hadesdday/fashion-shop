@@ -578,6 +578,7 @@
     <Compile Include="Controllers\admin\ImageController.cs" />
     <Compile Include="Controllers\admin\OrderManagementController.cs" />
     <Compile Include="Controllers\admin\PaymentMethodController.cs" />
+    <Compile Include="Controllers\admin\ProductDetailsManagementController.cs" />
     <Compile Include="Controllers\admin\ProductManagementController.cs" />
     <Compile Include="Controllers\admin\ProductTypeController.cs" />
     <Compile Include="Controllers\admin\ReviewController.cs" />
@@ -613,6 +614,7 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductDetailsEntity.cs" />
     <Compile Include="Models\ProductEntity.cs" />
     <Compile Include="Models\ProductType.cs" />
     <Compile Include="Models\Review.cs" />
@@ -881,6 +883,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\admin\images\upload\product\" />
     <Folder Include="Content\upload\" />
+    <Folder Include="Views\ProductDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -963,8 +966,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
-    <Content Include="Views\Account\EditInfoCus.cshtml" />
-    <Content Include="Views\Account\UserInfomation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
