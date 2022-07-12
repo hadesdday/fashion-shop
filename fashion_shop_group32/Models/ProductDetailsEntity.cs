@@ -9,6 +9,10 @@ namespace fashion_shop_group32.Models
 {
     public class ProductDetailsEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id", TypeName = "int")]
+        public int id { get; set; }
         [Required(ErrorMessage = "- Enter product id")]
         [Column("id_sanpham", TypeName = "varchar(50)")]
         public string id_sanpham { get; set; }

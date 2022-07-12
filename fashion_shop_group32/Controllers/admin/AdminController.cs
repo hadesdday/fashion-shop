@@ -41,6 +41,11 @@ namespace fashion_shop_group32.Controllers.admin
             if (!IsAdmin()) return RedirectToAction("Login");
             return View("OrderManagement");
         }
+        public ActionResult ProductDetails()
+        {
+            if (!IsAdmin()) return RedirectToAction("Login");
+            return View("ProductDetailsManagement");
+        }
         public ActionResult Product()
         {
             if (!IsAdmin()) return RedirectToAction("Login");
@@ -140,7 +145,7 @@ namespace fashion_shop_group32.Controllers.admin
 
         public ActionResult Logout()
         {
-            Session.Abandon();
+            Session["superadmin"] = null;
             return RedirectToAction("Login");
         }
     }

@@ -1,12 +1,10 @@
 ﻿using fashion_shop_group32.Context;
 using fashion_shop_group32.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace fashion_shop_group32.Controllers.admin
@@ -61,12 +59,12 @@ namespace fashion_shop_group32.Controllers.admin
             return jsonArray;
         }
 
-        public JsonResult GetProductDetails(ProductDetailsEntity p)
+        public JsonResult GetProductDetails(int id)
         {
             ProductDetailsEntity details = null;
             using (var ctx = new AdminDbContext())
             {
-                details = ctx.chitietsanpham.Where(t => (t.id_sanpham.Equals(p.id_sanpham) && t.ma_size.Equals(p.ma_size) && t.id_anh.Equals(p.id_anh))).FirstOrDefault<ProductDetailsEntity>();
+                details = ctx.chitietsanpham.Where(t => (t.id == id)).FirstOrDefault<ProductDetailsEntity>();
             }
 
             if (details == null)
@@ -76,14 +74,13 @@ namespace fashion_shop_group32.Controllers.admin
             return Json(details, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdateInformation(ProductDetailsEntity old, ProductDetailsEntity p)
+        public JsonResult UpdateInformation(ProductDetailsEntity p)
         {
             using (var ctx = new AdminDbContext())
             {
-                var current = ctx.chitietsanpham.Where(t => (t.id_sanpham.Equals(old.id_sanpham) && t.ma_size.Equals(old.ma_size) && t.id_anh.Equals(old.id_anh))).FirstOrDefault<ProductDetailsEntity>();
+                var current = ctx.chitietsanpham.Where(t => (t.id == p.id)).FirstOrDefault<ProductDetailsEntity>();
                 if (current != null)
                 {
-                    current.id_sanpham = p.id_sanpham;
                     current.ma_mau = p.ma_mau;
                     current.ma_size = p.ma_size;
                     current.id_anh = p.id_anh;
@@ -97,14 +94,14 @@ namespace fashion_shop_group32.Controllers.admin
             return new JsonHttpStatusResult("success update", HttpStatusCode.OK);
         }
 
-        public JsonResult Delete(ProductDetailsEntity p)
+        public JsonResult Delete(int id)
         {
             using (var ctx = new AdminDbContext())
             {
-                var current = ctx.chitietsanpham.Where(t => (t.id_sanpham.Equals(p.id_sanpham) && t.ma_size.Equals(p.ma_size) && t.id_anh.Equals(p.id_anh))).FirstOrDefault<ProductDetailsEntity>();
+                var current = ctx.chitietsanpham.Where(t => (t.id == id)).FirstOrDefault<ProductDetailsEntity>();
                 if (current != null)
                 {
-                    ctx.Entry(current).State = (Microsoft.EntityFrameworkCore.EntityState)EntityState.Deleted;
+                    ctx.Entry(current).State = EntityState.Deleted;
                     ctx.SaveChanges();
                 }
                 else
