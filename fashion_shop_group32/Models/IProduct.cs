@@ -13,8 +13,9 @@ namespace fashion_shop_group32.Models
         IEnumerable<Product> GetMostSoldProducts();
         Product GetProductsByID(string id);
         Product GetProductsByName(string name);
-        IEnumerable<Product> GetProductsByCategoryAndLoaiAndFilter(string cat, string loai, string mau, string size, string gia);
-        IEnumerable<string> GetColorsByNameProduct(string name);
-        IEnumerable<string> GetSizesByNameProduct(string name);
+        IEnumerable<Product> GetProductsByCategoryAndLoaiAndFilter(string cat, string loai, string mau, string size, string gia, string keyword, int page);
+        IEnumerable<string> GetColorsByIDProduct(string id);
+        IEnumerable<string> GetSizesByIDProduct(string id);
+        IEnumerable<Product> GetProductsBySearch(string keywword);
     }
 }

@@ -85,8 +85,6 @@ namespace fashion_shop_group32.Context
                 entity.HasKey(e => e.id_sanpham);
                 entity.Property(e => e.ten_sp).IsRequired();
                 entity.Property(e => e.ma_loaisp).IsRequired();
-                entity.Property(e => e.ma_mau).IsRequired();
-                entity.Property(e => e.ma_size).IsRequired();
                 entity.Property(e => e.gia).IsRequired();
                 entity.Property(e => e.loai).IsRequired();
                 entity.Property(e => e.id_km);
@@ -99,7 +97,14 @@ namespace fashion_shop_group32.Context
             {
                 entity.HasKey(e => e.id_anh);
                 entity.Property(e => e.link_anh).IsRequired();
-                entity.Property(e => e.id_sanpham);
+            });
+            modelBuilder.Entity<ProductDetailsEntity>(entity =>
+            {
+                entity.HasNoKey();
+                entity.Property(e => e.id_sanpham).IsRequired();
+                entity.Property(e => e.ma_mau);
+                entity.Property(e => e.ma_size);
+                entity.Property(e => e.id_anh);
             });
         }
 
@@ -114,5 +119,6 @@ namespace fashion_shop_group32.Context
         public DbSet<Order> hoadon { get; set; }
         public DbSet<ProductEntity> sanpham { get; set; }
         public DbSet<Image> hinhanh { get; set; }
+        public DbSet<ProductDetailsEntity> chitietsanpham { get; set; }
     }
 }

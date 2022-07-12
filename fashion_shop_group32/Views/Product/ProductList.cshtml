@@ -27,25 +27,7 @@
             <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
                 <div class="aa-product-catg-content">
                     <div class="aa-product-catg-head">
-                        <div class="aa-product-catg-head-left">
-                            <form action="" class="aa-sort-form">
-                                <label for="">Sort by</label>
-                                <select name="">
-                                    <option value="1" selected="Default">Default</option>
-                                    <option value="2">Name</option>
-                                    <option value="3">Price</option>
-                                    <option value="4">Date</option>
-                                </select>
-                            </form>
-                            <form action="" class="aa-show-form">
-                                <label for="">Show</label>
-                                <select name="">
-                                    <option value="1" selected="12">12</option>
-                                    <option value="2">24</option>
-                                    <option value="3">36</option>
-                                </select>
-                            </form>
-                        </div>
+
                         <div class="aa-product-catg-head-right">
                             <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
                             <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
@@ -53,7 +35,7 @@
                     </div>
                     <div class="aa-product-catg-body">
                         <ul class="aa-product-catg">
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.list1)
                             {
                                 <!-- start single product item -->
                                 <li>
@@ -63,7 +45,7 @@
                                         <figcaption>
                                             <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp">@item.ten_sp</a></h4>
                                             <span class="aa-product-price">@item.gia</span>
-                                            <p class="aa-product-descrip">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam accusamus facere iusto, autem soluta amet sapiente ratione inventore nesciunt a, maxime quasi consectetur, rerum illum.</p>
+                                            <p class="aa-product-descrip">@item.mota</p>
                                         </figcaption>
                                     </figure>
                                     <div class="aa-product-hvr-content">
@@ -161,19 +143,34 @@
                         <nav>
                             <ul class="pagination">
                                 <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
+                                    @if (ViewBag.page == 1)
+                                    {<a aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>}
+                                    else
+                                    {
+                                        <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword&&page=@(ViewBag.page-1)" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    }
+
                                 </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
+                                @for (int i = 1; i <= Model.count; i++)
+                                {
+                                    <li><a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword&&page=@i">@i</a></li>
+                                }
                                 <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
+                                    @if (ViewBag.page == ViewBag.numpage)
+                                    {
+                                        <a aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>}
+                                    else
+                                    {
+                                        <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword&&page=@(ViewBag.page+1)" aria-label="Previous">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    }
                                 </li>
                             </ul>
                         </nav>
@@ -187,11 +184,11 @@
                         <h3>Shop By Price</h3>
                         <!-- price range -->
                         <div class="tag-cloud">
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=&&size=@ViewBag.size&&mau=@ViewBag.mau">Tất cả mức giá</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=<200&&size=@ViewBag.size&&mau=@ViewBag.mau">< 200 ngan</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=200-800&&size=@ViewBag.size&&mau=@ViewBag.mau" >200-800</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=800-2000&&size=@ViewBag.size&&mau=@ViewBag.mau" >800-2000</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=>2000&&size=@ViewBag.size&&mau=@ViewBag.mau" >>2tr</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">Tất cả mức giá</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=<200&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">< 200 ngan</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=200-800&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">200-800</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=800-2000&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">800-2000</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=>2000&&size=@ViewBag.size&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">>2tr</a>
                         </div>
                     </div>
                     <!-- single sidebar -->
@@ -202,18 +199,16 @@
                         </div>
                         <div class="aa-color-tag">
 
-                            <a class="aa-color-green" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=&&size=&&mau=black"></a>
-                            <a class="aa-color-yellow" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=&&size=&&mau=white"></a>
-                            <a class="aa-color-pink" href=""></a>
-                            <a class="aa-color-purple" href=""></a>
-                            <a class="aa-color-blue" href=""></a>
-                            <a class="aa-color-orange" href=""></a>
-                            <a class="aa-color-gray" href=""></a>
-                            <a class="aa-color-black" href=""></a>
-                            <a class="aa-color-white" href=""></a>
-                            <a class="aa-color-cyan" href=""></a>
-                            <a class="aa-color-olive" href=""></a>
-                            <a class="aa-color-orchid" href=""></a>
+                            <a class="aa-color-black" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=black&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-white" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=white&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-pink" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=pink&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-purple" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=purple&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-blue" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=blue&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-orange" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=orange&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-gray" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=gray&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-cyan" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=cyan&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-olive" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=olive&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-orchid" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=orchid&&keyword=@ViewBag.keyword"></a>
                         </div>
                     </div>
 
@@ -222,13 +217,13 @@
                         <h3>Shop By Size</h3>
                         <!-- price range -->
                         <div class="tag-cloud">
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=&&mau=@ViewBag.mau">Tất cả các size</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=s&&mau=@ViewBag.mau">S</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=m&&mau=@ViewBag.mau" >M</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=l&&mau=@ViewBag.mau" >L</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=x&&mau=@ViewBag.mau" >X</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xl&&mau=@ViewBag.mau" >XL</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xxl&&mau=@ViewBag.mau" >XXL</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">Tất cả các size</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=s&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">S</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=m&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">M</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=l&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">L</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=x&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">X</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xl&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">XL</a>
+                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xxl&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">XXL</a>
                         </div>
                     </div>
                     <div class="tag-cloud">

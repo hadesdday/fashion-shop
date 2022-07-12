@@ -22,12 +22,6 @@ namespace fashion_shop_group32.Models
         public double gia { get; set; }
         [Column("id_km", TypeName = "varchar(50)")]
         public string id_km { get; set; }
-        [Required(ErrorMessage = "- Enter color type")]
-        [Column("ma_mau", TypeName = "varchar(50)")]
-        public string ma_mau { get; set; }
-        [Required(ErrorMessage = "- Enter size type")]
-        [Column("ma_size", TypeName = "varchar(50)")]
-        public string ma_size { get; set; }
         [Required(ErrorMessage = "- Enter brand name")]
         [Column("thuonghieu", TypeName = "varchar(50)")]
         public string thuonghieu { get; set; }

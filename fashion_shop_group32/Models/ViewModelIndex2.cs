@@ -7,5 +7,6 @@ namespace fashion_shop_group32.Models
         public Product product { get; set; }
         public IEnumerable<string> list1 { get; set; }
         public IEnumerable<string> list2 { get; set; }
+        public IEnumerable<Product> list3 { get; set; }
     }
 }
