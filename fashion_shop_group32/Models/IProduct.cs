@@ -6,8 +6,8 @@ namespace fashion_shop_group32.Models
     {
         Product GetProduct(string id);
         IEnumerable<Product> GetAllProducts();
-        IEnumerable<Product> GetProductsByCategory(string cat);
-        IEnumerable<Product> GetProductsByCategoryAndLoai(string cat, string loai);
+        //IEnumerable<Product> GetProductsByCategory(string cat);
+        //IEnumerable<Product> GetProductsByCategoryAndLoai(string cat, string loai);
         IEnumerable<Product> GetLatestProducts();
         IEnumerable<Product> GetRandomProducts();
         IEnumerable<Product> GetMostSoldProducts();
