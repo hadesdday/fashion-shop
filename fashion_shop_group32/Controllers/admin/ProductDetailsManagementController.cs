@@ -1,48 +1,33 @@
 ﻿using fashion_shop_group32.Context;
 using fashion_shop_group32.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace fashion_shop_group32.Controllers.admin
 {
-    public class ImageController : Controller
+    public class ProductDetailsManagementController : Controller
     {
-        public JsonResult Upload()
-        {
-            var image = Request.Files["image"];
-            if (image != null && image.ContentLength > 0)
-            {
-                string filename = image.FileName;
-                if (System.IO.File.Exists(Server.MapPath("~/Content/upload/") + image.FileName))
-                {
-                    Random rd = new Random();
-                    int rand = rd.Next(1, 10000);
-                    filename = rand + "-" + image.FileName;
-                }
-                string des = Server.MapPath("~/Content/upload/") + filename;
-                image.SaveAs(des);
-                string serverPath = "/Content/upload/" + filename;
-                return new JsonHttpStatusResult(new { path = serverPath }, HttpStatusCode.OK);
-            }
-            return new JsonHttpStatusResult("invalid data", HttpStatusCode.InternalServerError);
-        }
-
-        public JsonResult Add(Image img)
+        public JsonResult Add(ProductDetailsEntity d)
         {
             using (var context = new AdminDbContext())
             {
                 try
                 {
                     context.Database.EnsureCreated();
-                    var image = new Image
+                    var details = new ProductDetailsEntity
                     {
-                        link_anh = img.link_anh
+                        id_sanpham = d.id_sanpham,
+                        ma_mau = d.ma_mau,
+                        ma_size = d.ma_size,
+                        id_anh = d.id_anh
                     };
-                    context.hinhanh.Add(image);
+                    context.chitietsanpham.Add(details);
                     context.SaveChanges();
                 }
                 catch (DbUpdateException ex)
@@ -52,52 +37,56 @@ namespace fashion_shop_group32.Controllers.admin
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-
                     return new JsonHttpStatusResult("invalid data", HttpStatusCode.InternalServerError);
                 }
             }
             return new JsonHttpStatusResult("success", HttpStatusCode.OK);
         }
-        public JsonResult GetImageList()
+
+        public JsonResult GetProductDetailsList()
         {
-            List<Image> imageList = new List<Image>();
+            List<ProductDetailsEntity> productDetailsList = new List<ProductDetailsEntity>();
 
             using (var ctx = new AdminDbContext())
             {
-                imageList = ctx.hinhanh.ToList<Image>();
+                productDetailsList = ctx.chitietsanpham.ToList<ProductDetailsEntity>();
             }
 
-            if (imageList.Count == 0)
+            if (productDetailsList.Count == 0)
             {
                 return new JsonHttpStatusResult("error", HttpStatusCode.InternalServerError);
             }
 
-            var jsonArray = Json(new { data = imageList }, JsonRequestBehavior.AllowGet);
+            var jsonArray = Json(new { data = productDetailsList }, JsonRequestBehavior.AllowGet);
             return jsonArray;
         }
-        public JsonResult GetImage(int id)
+
+        public JsonResult GetProductDetails(ProductDetailsEntity p)
         {
-            Image s = null;
+            ProductDetailsEntity details = null;
             using (var ctx = new AdminDbContext())
             {
-                s = ctx.hinhanh.Where(t => t.id_anh == id).FirstOrDefault<Image>();
+                details = ctx.chitietsanpham.Where(t => (t.id_sanpham.Equals(p.id_sanpham) && t.ma_size.Equals(p.ma_size) && t.id_anh.Equals(p.id_anh))).FirstOrDefault<ProductDetailsEntity>();
             }
 
-            if (s == null)
+            if (details == null)
             {
                 return new JsonHttpStatusResult("not found any record", HttpStatusCode.InternalServerError);
             }
-            return Json(s, JsonRequestBehavior.AllowGet);
+            return Json(details, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdateInformation(Image i)
+        public JsonResult UpdateInformation(ProductDetailsEntity old, ProductDetailsEntity p)
         {
             using (var ctx = new AdminDbContext())
             {
-                var current = ctx.hinhanh.Where(z => z.id_anh == i.id_anh).FirstOrDefault<Image>();
+                var current = ctx.chitietsanpham.Where(t => (t.id_sanpham.Equals(old.id_sanpham) && t.ma_size.Equals(old.ma_size) && t.id_anh.Equals(old.id_anh))).FirstOrDefault<ProductDetailsEntity>();
                 if (current != null)
                 {
-                    current.link_anh = i.link_anh;
+                    current.id_sanpham = p.id_sanpham;
+                    current.ma_mau = p.ma_mau;
+                    current.ma_size = p.ma_size;
+                    current.id_anh = p.id_anh;
                     ctx.SaveChanges();
                 }
                 else
@@ -108,14 +97,14 @@ namespace fashion_shop_group32.Controllers.admin
             return new JsonHttpStatusResult("success update", HttpStatusCode.OK);
         }
 
-        public JsonResult Delete(int id)
+        public JsonResult Delete(ProductDetailsEntity p)
         {
             using (var ctx = new AdminDbContext())
             {
-                var current = ctx.hinhanh.Where(z => z.id_anh == id).FirstOrDefault<Image>();
+                var current = ctx.chitietsanpham.Where(t => (t.id_sanpham.Equals(p.id_sanpham) && t.ma_size.Equals(p.ma_size) && t.id_anh.Equals(p.id_anh))).FirstOrDefault<ProductDetailsEntity>();
                 if (current != null)
                 {
-                    ctx.Entry(current).State = EntityState.Deleted;
+                    ctx.Entry(current).State = (Microsoft.EntityFrameworkCore.EntityState)EntityState.Deleted;
                     ctx.SaveChanges();
                 }
                 else
