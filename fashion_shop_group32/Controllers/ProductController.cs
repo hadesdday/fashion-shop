@@ -32,7 +32,7 @@ namespace fashion_shop_group32.Controllers
         }
 
         [ActionName("ProductList")]
-        public ActionResult ProductList(string cat, string loai, string mau, string size, string gia)
+        public ActionResult ProductList(string cat, string loai, string mau, string size, string gia, string keyword, string page)
         {
             int numpage;
             if (page == "" || page == null)
@@ -46,8 +46,13 @@ namespace fashion_shop_group32.Controllers
             ViewBag.keyword = keyword;
             ViewBag.page = numpage;
             System.Diagnostics.Debug.WriteLine("ProductList3.");
-            var model = _product.GetProductsByCategoryAndLoaiAndFilter(cat, loai, mau, size, gia);
-            return View(model);
+            var model = _product.GetProductsByCategoryAndLoaiAndFilter(cat, loai, mau, size, gia, keyword, numpage);
+            ViewModelIndex3 viewModel = new ViewModelIndex3();
+            viewModel.count = new MockProduct().NumberProductinList(cat, loai, mau, size, gia, keyword);
+            viewModel.list1 = model;
+            System.Diagnostics.Debug.WriteLine(viewModel.count);
+            ViewBag.numpage = viewModel.count;
+            return View(viewModel);
         }
 
         //[ActionName("ProductList1")]
@@ -71,9 +76,11 @@ namespace fashion_shop_group32.Controllers
         public ActionResult ProductDetails(string id, string name)
         {
             ViewModelIndex2 viewModel = new ViewModelIndex2();
-            viewModel.product = new MockProduct().GetProductsByID(id);
-            viewModel.list1 = new MockProduct().GetColorsByNameProduct(name);
-            viewModel.list2 = new MockProduct().GetSizesByNameProduct(name);
+            Product p = new MockProduct().GetProductsByID(id);
+            viewModel.product = p;
+            viewModel.list1 = new MockProduct().GetColorsByIDProduct(id);
+            viewModel.list2 = new MockProduct().GetSizesByIDProduct(id);
+            viewModel.list3 = new MockProduct().GetRelatedProducts(p.ma_loaisp, p.loai);
             return View(viewModel);
             //return View("ProductDetails");
         }
