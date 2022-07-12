@@ -41,6 +41,11 @@ namespace fashion_shop_group32.Controllers.admin
             if (!IsAdmin()) return RedirectToAction("Login");
             return View("OrderManagement");
         }
+        public ActionResult OrderDetails()
+        {
+            if (!IsAdmin()) return RedirectToAction("Login");
+            return View("OrderDetailsManagement");
+        }
         public ActionResult ProductDetails()
         {
             if (!IsAdmin()) return RedirectToAction("Login");

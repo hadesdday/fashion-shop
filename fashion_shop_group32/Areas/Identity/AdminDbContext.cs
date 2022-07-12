@@ -106,6 +106,15 @@ namespace fashion_shop_group32.Context
                 entity.Property(e => e.ma_size);
                 entity.Property(e => e.id_anh);
             });
+            modelBuilder.Entity<OrderDetailsEntity>(entity =>
+            {
+                entity.HasKey(e => e.id);
+                entity.Property(e => e.id_hoadon).IsRequired();
+                entity.Property(e => e.id_sanpham).IsRequired();
+                entity.Property(e => e.soluong).IsRequired();
+                entity.Property(e => e.ma_mau);
+                entity.Property(e => e.ma_size);
+            });
         }
 
         public DbSet<Size> Size { get; set; }
@@ -120,5 +129,6 @@ namespace fashion_shop_group32.Context
         public DbSet<ProductEntity> sanpham { get; set; }
         public DbSet<Image> hinhanh { get; set; }
         public DbSet<ProductDetailsEntity> chitietsanpham { get; set; }
+        public DbSet<OrderDetailsEntity> chitiethoadon { get; set; }
     }
 }
