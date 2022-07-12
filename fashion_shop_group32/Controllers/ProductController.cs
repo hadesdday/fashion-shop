@@ -20,16 +20,6 @@ namespace fashion_shop_group32.Controllers
         {
             return View("ProductList");
         }
-        [ActionName("ProductList3")]
-        public ActionResult ProductList(string cat, string loai)
-        {
-            ViewBag.loai = loai;
-            ViewBag.cat = cat;
-            ViewBag.filter = "";
-            Console.WriteLine("ProductList2.");
-            var model = _product.GetProductsByCategoryAndLoai(cat, loai);
-            return View(model);
-        }
 
         [ActionName("ProductList")]
         public ActionResult ProductList(string cat, string loai, string mau, string size, string gia, string keyword, string page)
@@ -55,22 +45,6 @@ namespace fashion_shop_group32.Controllers
             return View(viewModel);
         }
 
-        //[ActionName("ProductList1")]
-        //public ActionResult ProductList(string cat)
-        //{
-        //    ViewBag.cat = cat;
-        //    System.Diagnostics.Debug.WriteLine("ProductList1.");
-        //    var model = _product.GetProductsByCategory(cat);
-        //    return View(model);
-        //}
-        [ActionName("ProductList1")]
-        public ActionResult ProductList(string keyword)
-        {
-            ViewBag.keyword = keyword;
-            System.Diagnostics.Debug.WriteLine("ProductList1.");
-            var model = _product.GetProductsBySearch(keyword);
-            return View(model);
-        }
 
 
         public ActionResult ProductDetails(string id, string name)
