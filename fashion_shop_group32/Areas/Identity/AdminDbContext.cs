@@ -100,7 +100,7 @@ namespace fashion_shop_group32.Context
             });
             modelBuilder.Entity<ProductDetailsEntity>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.id);
                 entity.Property(e => e.id_sanpham).IsRequired();
                 entity.Property(e => e.ma_mau);
                 entity.Property(e => e.ma_size);
