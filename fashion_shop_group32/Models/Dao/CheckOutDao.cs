@@ -138,17 +138,17 @@ namespace fashion_shop_group32.Models.Dao
             }
             return rowsBill == 1 && rowsBillDetail == 1 ;
         }
-        public static string getCoupon(string idCoupon)
+        public static string getCoupon(string couponId)
         {
             List<string> listCouponId = new List<string>();
-            string sql = "select id_mgg from magiamgia where id_magg = @id_magg";
+            string sql = "select id_magg from magiamgia where id_magg=@id_magg";
             MySqlCommand command = new MySqlCommand();
             MySqlConnection connect = KetNoi.GetDBConnection();
             connect.Open();
             command.Connection = connect;
             command.CommandText = sql;
             command.Prepare();
-            command.Parameters.AddWithValue("@id_magg", idCoupon);
+            command.Parameters.AddWithValue("@id_magg", couponId);
             using (DbDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -156,9 +156,11 @@ namespace fashion_shop_group32.Models.Dao
                     listCouponId.Add(reader.GetString(0));
                 }
                 reader.Close();
+                //Console.WriteLine(usersList[0]);
                 if (listCouponId.Count != 1) return null;
                 string coupon = listCouponId[0];
-                if(!coupon.Equals(idCoupon))return null;
+                
+                //if (!user.userName.Equals(username) || verify(user.password, password) == false) return null;
                 return coupon;
             }
         }

@@ -21,8 +21,15 @@ namespace fashion_shop_group32.Controllers
         public ActionResult Payment( string pttt,string ten_kh, string diachi, string sodt, string email)
         {
             List<CartDao> carts = (List<CartDao>)Session["cart"];
-            //string mgg = Session["Coupon"].ToString();
-            string mgg = "ma01";
+            string mgg ;
+            if (Session["coupon"] != null)
+            {
+                mgg = (string)Session["coupon"];
+            }
+            else
+            {
+                mgg = "ma01";
+            }
             string paymentMt = "";
             PaymentMethod paymentMethod = checkPaymentMethod(pttt);
             if (paymentMethod != null)
@@ -43,17 +50,17 @@ namespace fashion_shop_group32.Controllers
         }
         public ActionResult Coupon(string couponId)
         {
-            string couponName = checkCoupon(couponId);
-            if (couponName != null)
+            if (checkCoupon(couponId) != null)
             {
-                Session["coupon"]=couponName;
+                Session["coupon"] = couponId;
+                ViewBag.CouponMessage = "suscess aplly coupon";
             }
             else
             {
-                Session["coupon"] = "khong";
-                ViewBag.CouponMessage = "coupon dose exit";
+                Session["coupon"] = couponId;
+                ViewBag.CouponMessage = "coupon does exit";
             }
-            return View();
+            return View("CheckoutHome");
         }
         public double getMoneyOfCart()
         {
