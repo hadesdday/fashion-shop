@@ -210,6 +210,7 @@ namespace fashion_shop_group32.Models
             idsp.Value = id;
             newCmd.CommandText = queryString;
             newCmd.Parameters.Add(idsp);
+            Product p = null;
             using (MySqlDataReader reader = newCmd.ExecuteReader())
             {
                 // Kiểm tra có kết quả trả về
@@ -217,10 +218,26 @@ namespace fashion_shop_group32.Models
                 { // Đọc từng dòng kết quả cho đến hết
                     while (reader.Read())
                     {
-                        _productList.Add(new Product(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader.GetDouble(3), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader.GetInt32(7), reader[8].ToString(), reader[9].ToString()));
+                        p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), reader.GetString("id_km"), reader.GetString("thuonghieu"), reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
+                        _productList.Add(p);
                     }
                 }
                 else Console.WriteLine("No rows found.");
+            }
+
+            newCmd = conn.CreateCommand();
+            queryString = "select ma_mau,ma_size from chitietsanpham where id_sanpham = @id_sanpham";
+            MySqlParameter masp = new MySqlParameter("@id_sanpham", MySqlDbType.String);
+            masp.Value = id;
+            newCmd.CommandText = queryString;
+            newCmd.Parameters.Add(masp);
+            using (MySqlDataReader reader = newCmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    p.ma_mau = reader.GetString(0);
+                    p.ma_size = reader.GetString(1);
+                }
             }
 
             List<string> imgs = new List<string>();
@@ -240,6 +257,7 @@ namespace fashion_shop_group32.Models
                 }
                 else Console.WriteLine("No rows found.");
             }
+        
             //Dòng code t fix là từ chỗ này(Hiệp>3)
             if (_productList.Count != 1) return null;
             //nó bị lỗi ArgumentOutOfRangeException

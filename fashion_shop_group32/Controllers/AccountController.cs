@@ -52,7 +52,7 @@ namespace fashion_shop_group32.Controllers
                 //set session
                 Session["UserName"] = usr.username.ToString();
                 Session["Role"] = usr.role.ToString();
-                Session["Idkh"] = usr.id_khachhang.ToString();
+                Session["Idkh"] = usr.id_khachhang;
                 return RedirectToAction("LoggedIn");
             }
             else
@@ -76,9 +76,9 @@ namespace fashion_shop_group32.Controllers
         public ActionResult UserInfomation()
         {
 
-            if (checkCus(Int32.Parse((string)Session["Idkh"])) != null)
+            if (checkCus(Int32.Parse(Session["Idkh"].ToString())) != null)
             {
-                Session["customer"] = checkCus(Int32.Parse((string)Session["Idkh"]));
+                Session["customer"] = checkCus(Int32.Parse(Session["Idkh"].ToString()));
             }
             else
             {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Fashion Shop</title>
+    <title>@ViewBag.Title - Shop quần áo nông lâm</title>
     @*@Styles.Render("~/Content/css")*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Bootstrap -->
@@ -48,44 +48,15 @@
                         <div class="aa-header-top-area">
                             <!-- start header top left -->
                             <div class="aa-header-top-left">
-                                <!-- start language -->
-                                <div class="aa-language">
-                                    <div class="dropdown">
-                                        <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <img src="~/Content/img/flag/english.jpg" alt="english flag">ENGLISH
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="#"><img src="~/Content/img/flag/french.jpg" alt="">FRENCH</a></li>
-                                            <li><a href="#"><img src="~/Content/img/flag/english.jpg" alt="">ENGLISH</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- / language -->
-                                <!-- start currency -->
-                                <div class="aa-currency">
-                                    <div class="dropdown">
-                                        <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <i class="fa fa-usd"></i>USD
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="#"><i class="fa fa-euro"></i>EURO</a></li>
-                                            <li><a href="#"><i class="fa fa-jpy"></i>YEN</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- / currency -->
-                                <!-- start cellphone -->
                                 <div class="cellphone hidden-xs">
-                                    <p><span class="fa fa-phone"></span>00-62-658-658</p>
+                                    <p><span class="fa fa-phone"></span>0987654321</p>
                                 </div>
                                 <!-- / cellphone -->
                             </div>
                             <!-- / header top left -->
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right">
-                                    <li><a href="/Account">My Account</a></li>
+                                    <li><a href="/Account   ">My Account</a></li>
                                     <li class="hidden-xs"><a href="/Wishlist">Wishlist</a></li>
                                     <li class="hidden-xs"><a href="/Cart">My Cart</a></li>
                                     <li class="hidden-xs"><a href="/Checkout">Checkout</a></li>
@@ -140,7 +111,6 @@
                                 @if (Session["cart"] == null)
                                 {
                                     <div class="aa-cartbox-summary">
-
                                         <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
                                     </div>
                                 }
@@ -153,7 +123,7 @@
                                             @foreach (CartDao item in (List<CartDao>)Session["cart"])
                                             {
                                                 <li>
-                                                    <a class="aa-cartbox-img" href="#"><img src="@item.Pro.imageMain" alt="img"></a>
+                                                    <a class="aa-cartbox-img" href="#"><img src="@item.Pro.imgs[0]" alt="img" width="50" height="50"></a>
                                                     <div class="aa-cartbox-info">
                                                         <h4><a href="#">@item.Pro.ten_sp</a></h4>
                                                         <p>@item.Pro.quantitySold x @item.Pro.gia</p>
