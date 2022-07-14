@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
-@if (Session["UserId"] != null)
+@if (Session["UserName"] != null)
 {
     if (Session["Role"].ToString().Equals("0"))
     {

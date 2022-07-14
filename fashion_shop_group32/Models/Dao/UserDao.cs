@@ -67,16 +67,14 @@ namespace fashion_shop_group32.Models.Dao
             {
                 while (reader.Read())
                 {
-                    usersList.Add(new Users(reader.GetString(0), reader.GetString(1), reader.GetString(2),
-                        reader.GetString(3), reader.GetString(4), reader.GetString(5),
-                        reader.GetInt32(6), reader.GetInt32(7), reader.GetDateTime(8), reader.GetDateTime(9)));
+                    usersList.Add(new Users(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5), reader.GetInt32(6)));
                 }
                 reader.Close();
                 //Console.WriteLine(usersList[0]);
                 if (usersList.Count != 1) return null;
                 Users user = usersList[0];
                 Console.WriteLine("success login");
-                if (!user.userName.Equals(username) || verify(user.password, password) == false) return null;
+                if (!user.username.Equals(username) || verify(user.password, password) == false) return null;
                 return user;
             }
         }
@@ -139,15 +137,14 @@ string id = builder.ToString();
             int newIdKh = (int)cmd.LastInsertedId;
             //connectCus.Close();
             //ket noi toi database table
-            string sql = "insert into user(id_user,username,token,password,role,email,id_khachhang,active,createdat,updatedat) " +
-                "values(@id_user,@username,@token,@password,@role,@email,@id_khachhang,@active,@createdat,@updatedat)";
+            string sql = "insert into user(username,token,password,role,email,id_khachhang,active,createdat,updatedat) " +
+                "values(@username,@token,@password,@role,@email,@id_khachhang,@active,@createdat,@updatedat)";
             MySqlCommand command = new MySqlCommand();
             MySqlConnection connect = KetNoi.GetDBConnection();
             connect.Open();
             command.Connection = connect;
             command.CommandText = sql;
             //int newIdKh = (int)cmd.Parameters["@id_khachhang"].Value+1;
-            command.Parameters.AddWithValue("@id_user", id);
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@token", token);
             command.Parameters.AddWithValue("@password", hashPassword(password));
@@ -176,9 +173,7 @@ string id = builder.ToString();
             {
                 while (reader.Read())
                 {
-                    listUser.Add(new Users(reader.GetString(0), reader.GetString(1), reader.GetString(2),
-                        reader.GetString(3), reader.GetString(4), reader.GetString(5),
-                        reader.GetInt32(6), reader.GetInt32(7), reader.GetDateTime(8), reader.GetDateTime(9)));
+                    listUser.Add(new Users(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5), reader.GetInt32(6)));
                 }
                 reader.Close();
             }
@@ -231,7 +226,6 @@ string id = builder.ToString();
                 }
             }
             return true;
-
         }
         public static Customer getSelectedCus(int idCus)
         {

@@ -43,8 +43,13 @@
                                             <div id="collapseOne" class="panel-collapse collapse in">
                                                 <div class="panel-body">
 
-                                                    <input type="text" placeholder="Coupon Code" class="aa-coupon-code" name="couponId">
-                                                    <input type="submit" value="Apply Coupon" class="aa-browse-btn">
+
+                                                    <input type="text" id="coupon_code" placeholder="Coupon Code" class="aa-coupon-code" name="couponId" />
+                                                    <p>zz:@ViewBag.CouponMessage</p>
+
+                                                    <input type="button" onclick="location.href='@Url.Action("Coupon", "Checkout")?couponId=' + $('#coupon_code').val()" value="Apply Coupon" class="aa-browse-btn" />
+
+
 
                                                 </div>
                                             </div>
@@ -325,4 +330,5 @@
         </div>
     </div>
 </section>
+
 <!-- / Cart view section -->
