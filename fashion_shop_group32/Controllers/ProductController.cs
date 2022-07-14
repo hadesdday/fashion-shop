@@ -1,8 +1,11 @@
-﻿using fashion_shop_group32.Models;
+﻿using fashion_shop_group32.Context;
+using fashion_shop_group32.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -50,12 +53,23 @@ namespace fashion_shop_group32.Controllers
 
         public ActionResult ProductDetails(string id, string name)
         {
+
             ViewModelIndex2 viewModel = new ViewModelIndex2();
             Product p = new MockProduct().GetProductsByID(id);
             viewModel.product = p;
             viewModel.list1 = new MockProduct().GetColorsByIDProduct(id);
             viewModel.list2 = new MockProduct().GetSizesByIDProduct(id);
             viewModel.list3 = new MockProduct().GetRelatedProducts(p.ma_loaisp, p.loai);
+
+            int commentQuantity = new MockProduct().GetReviewsCount(id);
+            IEnumerable<Review> fourFirstComments = new MockProduct().GetReviews(id, 0, 5);
+            viewModel.fourFirstComments = fourFirstComments;
+            viewModel.commentQuantity = commentQuantity;
+            if (commentQuantity > 4)
+            {
+                IEnumerable<Review> remainComments = new MockProduct().GetReviews(id, 5, commentQuantity);
+                viewModel.remainComments = remainComments;
+            }
             return View(viewModel);
             //return View("ProductDetails");
         }
@@ -70,6 +84,28 @@ namespace fashion_shop_group32.Controllers
         {
             ViewBag.size = size;
             return Json(new { Result = size }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult PostComment(Review review)
+        {
+            using (var context = new AdminDbContext())
+            {
+                try
+                {
+                    context.Database.EnsureCreated();
+                    context.review.Add(review);
+                    context.SaveChanges();
+                }
+                catch (DbUpdateException ex)
+                {
+                    return new JsonHttpStatusResult("Gửi đánh giá thất bại !", HttpStatusCode.Conflict);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return new JsonHttpStatusResult("Vui lòng kiểm tra lại nội dung đánh giá của bạn !", HttpStatusCode.InternalServerError);
+                }
+            }
+            return new JsonHttpStatusResult("Đánh giá của bạn đã được gửi đi !", HttpStatusCode.OK);
         }
     }
 }

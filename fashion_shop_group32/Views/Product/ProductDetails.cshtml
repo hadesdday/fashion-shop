@@ -1,10 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "Product Details";
+    ViewBag.Title = Model.product.ten_sp + " cheap , factory new | NLU";
 }
-@{
 
-}
+<div id="overlay">
+    <div id="overlay__elm">
+        <div class="dashed-loading"></div>
+    </div>
+</div>
+
 <section id="aa-catg-head-banner">
     <img src="~/Content/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
     <div class="aa-catg-head-banner-area">
@@ -36,10 +40,7 @@
                                         <div class="simpleLens-container">
                                             <div class="simpleLens-big-image-container">
                                                 <a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image">
-                                                 
-                                                    
-                                                    <img src="\@Model.product.imageMain]" class="simpleLens-big-image">
-         
+                                                    <img src="\@Model.product.imgs[0]" class="simpleLens-big-image">
                                                 </a>
                                             </div>
                                         </div>
@@ -117,75 +118,98 @@
                             </div>
                             <div class="tab-pane fade " id="review">
                                 <div class="aa-product-review-area">
-                                    <h4>2 Reviews for T-Shirt</h4>
-                                    <ul class="aa-review-nav">
-                                        <li>
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <a href="#">
-                                                        <img class="media-object" src="~/Content/img/testimonial-img-3.jpg" alt="girl image">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                                                    <div class="aa-product-rating">
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star-o"></span>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <a href="#">
-                                                        <img class="media-object" src="~/Content/img/testimonial-img-3.jpg" alt="girl image">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                                                    <div class="aa-product-rating">
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                        <span class="fa fa-star-o"></span>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <h4>Add a review</h4>
-                                    <div class="aa-your-rating">
-                                        <p>Your Rating</p>
-                                        <a href="#"><span class="fa fa-star-o"></span></a>
-                                        <a href="#"><span class="fa fa-star-o"></span></a>
-                                        <a href="#"><span class="fa fa-star-o"></span></a>
-                                        <a href="#"><span class="fa fa-star-o"></span></a>
-                                        <a href="#"><span class="fa fa-star-o"></span></a>
-                                    </div>
-                                    <!-- review form -->
-                                    <form action="" class="aa-review-form">
-                                        <div class="form-group">
-                                            <label for="message">Your Review</label>
-                                            <textarea class="form-control" rows="3" id="message"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder="Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
-                                        </div>
+                                    <h4><span id="cmt__quantity">@Model.commentQuantity</span> đánh giá trong sản phẩm @Model.product.ten_sp</h4>
 
-                                        <button type="submit" class="btn btn-default aa-review-submit">Submit</button>
-                                    </form>
+                                    @foreach (var comment in Model.fourFirstComments)
+                                    {
+                                        <ul class="aa-review-nav">
+                                            <li>
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <a href="#">
+                                                            <img class="media-object" src="~/Content/img/testimonial-img-3.jpg" alt="girl image">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading"><strong>@comment.username</strong> - <span>@comment.date</span></h4>
+                                                        <div class="aa-product-rating">
+                                                            @for (var i = 1; i <= comment.sosao; i++)
+                                                            {
+                                                                <span class="fa fa-star"></span>
+                                                            }
+                                                            @for (var j = 1; j <= 5 - comment.sosao; j++)
+                                                            {
+                                                                <span class="fa fa-star-o"></span>
+                                                            }
+                                                        </div>
+                                                        <p>@comment.noidung</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    }
+
+                                    @if (Model.remainComments.Count > 0)
+                                    {
+                                        <p id="view__more">Xem thêm <span id="remain__count">@Model.remainComments.Count</span> bình luận</p>
+                                        <div class="d-none remain__comments">
+                                            @foreach (var comment in Model.remainComments)
+                                            {
+                                                <ul class="aa-review-nav">
+                                                    <li>
+                                                        <div class="media">
+                                                            <div class="media-left">
+                                                                <a href="#">
+                                                                    <img class="media-object" src="~/Content/img/testimonial-img-3.jpg" alt="girl image">
+                                                                </a>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h4 class="media-heading"><strong>@comment.username</strong> - <span>@comment.date</span></h4>
+                                                                <div class="aa-product-rating">
+                                                                    @for (var i = 1; i <= comment.sosao; i++)
+                                                                    {
+                                                                        <span class="fa fa-star"></span>
+                                                                    }
+                                                                    @for (var j = 1; j <= 5 - comment.sosao; j++)
+                                                                    {
+                                                                        <span class="fa fa-star-o"></span>
+                                                                    }
+                                                                </div>
+                                                                <p>@comment.noidung</p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            }
+                                        </div>
+                                    }
+
+                                    @if (Session["UserName"] != null)
+                                    {
+                                        <h4>Thêm đánh giá</h4>
+                                        <div class="aa-your-rating">
+                                            <p>Đánh giá của bạn</p>
+                                            <a><span class="fa fa-star-o rating" rating="1"></span></a>
+                                            <a><span class="fa fa-star-o rating" rating="2"></span></a>
+                                            <a><span class="fa fa-star-o rating" rating="3"></span></a>
+                                            <a><span class="fa fa-star-o rating" rating="4"></span></a>
+                                            <a><span class="fa fa-star-o rating" rating="5"></span></a>
+                                        </div>
+                                        <form action="/Product/PostComment" class="aa-review-form" id="post__review__form" method="POST">
+                                            <input type="text" name="rating" hidden />
+                                            <input type="text" name="username" hidden value="@Session["UserName"]" />
+                                            <input type="text" name="productId" hidden value="@Model.product.id_sanpham" />
+                                            <div class="form-group">
+                                                <label for="message">Nội dung</label>
+                                                <textarea class="form-control" rows="3" id="message" name="content"></textarea>
+                                            </div>
+                                            <button type="button" class="btn btn-default aa-review-submit" id="submit-review">Submit</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-default aa-review-submit"><a href="/Account/Login">Please login to write your review</a></button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -239,89 +263,89 @@
                             }
 
                         </ul>
-                     @*quick view modal*@ 
-                    <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <div class="row">
-                     Modal view slider 
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="aa-product-view-slider">
-                            <div class="simpleLens-gallery-container" id="demo-1">
-                                <div class="simpleLens-container">
-                                    <div class="simpleLens-big-image-container">
-                                        <a class="simpleLens-lens-image" data-lens-image="img/view-slider/large/polo-shirt-1.png">
-                                            <img src="~/Content/img/view-slider/medium/polo-shirt-1.png" class="simpleLens-big-image">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="simpleLens-thumbnails-container">
-                                    <a href="#" class="simpleLens-thumbnail-wrapper"
-                                       data-lens-image="img/view-slider/large/polo-shirt-1.png"
-                                       data-big-image="img/view-slider/medium/polo-shirt-1.png">
-                                        <img src="~/Content/img/view-slider/thumbnail/polo-shirt-1.png">
-                                    </a>
-                                    <a href="#" class="simpleLens-thumbnail-wrapper"
-                                       data-lens-image="img/view-slider/large/polo-shirt-3.png"
-                                       data-big-image="img/view-slider/medium/polo-shirt-3.png">
-                                        <img src="~/Content/img/view-slider/thumbnail/polo-shirt-3.png">
-                                    </a>
+                        @*quick view modal*@
+                        <div class="modal fade" id="quick-view-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <div class="row">
+                                            Modal view slider
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="aa-product-view-slider">
+                                                    <div class="simpleLens-gallery-container" id="demo-1">
+                                                        <div class="simpleLens-container">
+                                                            <div class="simpleLens-big-image-container">
+                                                                <a class="simpleLens-lens-image" data-lens-image="img/view-slider/large/polo-shirt-1.png">
+                                                                    <img src="~/Content/img/view-slider/medium/polo-shirt-1.png" class="simpleLens-big-image">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="simpleLens-thumbnails-container">
+                                                            <a href="#" class="simpleLens-thumbnail-wrapper"
+                                                               data-lens-image="img/view-slider/large/polo-shirt-1.png"
+                                                               data-big-image="img/view-slider/medium/polo-shirt-1.png">
+                                                                <img src="~/Content/img/view-slider/thumbnail/polo-shirt-1.png">
+                                                            </a>
+                                                            <a href="#" class="simpleLens-thumbnail-wrapper"
+                                                               data-lens-image="img/view-slider/large/polo-shirt-3.png"
+                                                               data-big-image="img/view-slider/medium/polo-shirt-3.png">
+                                                                <img src="~/Content/img/view-slider/thumbnail/polo-shirt-3.png">
+                                                            </a>
 
-                                    <a href="#" class="simpleLens-thumbnail-wrapper"
-                                       data-lens-image="img/view-slider/large/polo-shirt-4.png"
-                                       data-big-image="img/view-slider/medium/polo-shirt-4.png">
-                                        <img src="~/Content/img/view-slider/thumbnail/polo-shirt-4.png">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                     Modal view content 
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="aa-product-view-content">
-                                        <h3>T-Shirt</h3>
-                                        <div class="aa-price-block">
-                                            <span class="aa-product-view-price">$34.99</span>
-                                            <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
-                                        <h4>Size</h4>
-                                        <div class="aa-prod-view-size">
-                                            <a href="#">S</a>
-                                            <a href="#">M</a>
-                                            <a href="#">L</a>
-                                            <a href="#">XL</a>
-                                        </div>
-                                        <div class="aa-prod-quantity">
-                                            <form action="">
-                                                <select name="" id="">
-                                                    <option value="0" selected="1">1</option>
-                                                    <option value="1">2</option>
-                                                    <option value="2">3</option>
-                                                    <option value="3">4</option>
-                                                    <option value="4">5</option>
-                                                    <option value="5">6</option>
-                                                </select>
-                                            </form>
-                                            <p class="aa-prod-category">
-                                                Category: <a href="#">Polo T-Shirt</a>
-                                            </p>
-                                        </div>
-                                        <div class="aa-prod-view-bottom">
-                                            <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
-                                            <a href="#" class="aa-add-to-cart-btn">View Details</a>
+                                                            <a href="#" class="simpleLens-thumbnail-wrapper"
+                                                               data-lens-image="img/view-slider/large/polo-shirt-4.png"
+                                                               data-big-image="img/view-slider/medium/polo-shirt-4.png">
+                                                                <img src="~/Content/img/view-slider/thumbnail/polo-shirt-4.png">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            Modal view content
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="aa-product-view-content">
+                                                    <h3>T-Shirt</h3>
+                                                    <div class="aa-price-block">
+                                                        <span class="aa-product-view-price">$34.99</span>
+                                                        <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
+                                                    </div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
+                                                    <h4>Size</h4>
+                                                    <div class="aa-prod-view-size">
+                                                        <a href="#">S</a>
+                                                        <a href="#">M</a>
+                                                        <a href="#">L</a>
+                                                        <a href="#">XL</a>
+                                                    </div>
+                                                    <div class="aa-prod-quantity">
+                                                        <form action="">
+                                                            <select name="" id="">
+                                                                <option value="0" selected="1">1</option>
+                                                                <option value="1">2</option>
+                                                                <option value="2">3</option>
+                                                                <option value="3">4</option>
+                                                                <option value="4">5</option>
+                                                                <option value="5">6</option>
+                                                            </select>
+                                                        </form>
+                                                        <p class="aa-prod-category">
+                                                            Category: <a href="#">Polo T-Shirt</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="aa-prod-view-bottom">
+                                                        <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                                        <a href="#" class="aa-add-to-cart-btn">View Details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                /.modal-content
+                            </div> /.modal-dialog
                         </div>
-                    </div>
-                     /.modal-content 
-                    </div> /.modal-dialog 
-                    </div>
-                     @*/ quick view modal*@ 
+                        @*/ quick view modal*@
                     </div>
                 </div>
             </div>
@@ -397,6 +421,76 @@
 <script>
     jQuery('.simpleLens-thumbnails-container a img').on('click', function () {
         jQuery(".simpleLens-big-image").attr("src", jQuery(this).attr("src"));
+    });
+</script>
+
+<script>
+    jQuery(".rating").on("mouseenter", function () {
+        var rating = Number(jQuery(this).attr("rating"));
+        jQuery("input[name='rating']").val(rating);
+        for (let i = 0; i <= rating; i++) {
+            jQuery(".rating").eq(i).removeClass("fa-star-o");
+            jQuery(".rating").eq(i).addClass("fa-star");
+        }
+        for (let i = rating; i <= 4; i++) {
+            jQuery(".rating").eq(i).removeClass("fa-star");
+            jQuery(".rating").eq(i).addClass("fa-star-o");
+        }
+    });
+
+    jQuery("#submit-review").on("click", function () {
+        var productId = jQuery("input[name='productId']").val();
+        var username = jQuery("input[name='username']").val();
+        var rating = Number(jQuery("input[name='rating']").val());
+        var content = jQuery("textarea[name='content']").val();
+
+        $("#overlay").css("display", "block");
+
+        setTimeout(function () {
+            $.ajax({
+                url: jQuery("#post__review__form").attr("action"),
+                method: jQuery("#post__review__form").attr("method"),
+                data: {
+                    id_sanpham: productId,
+                    username: username,
+                    sosao: rating,
+                    noidung: content
+                }, success: data => {
+                    $("#overlay").css("display", "none");
+                    swal("Thành công", data, "success");
+                    var today = new Date().toLocaleString('vi-VN');
+                    var starElm = '<span class="fa fa-star"></span>';
+                    var nonStarElm = '<span class="fa fa-star-o"></span>';
+
+                    var starIcon = "";
+
+                    for (let i = 1; i <= rating; i++) {
+                        starIcon += starElm;
+                    }
+
+                    for (let j = 1; j <= 5 - rating; j++) {
+                        starIcon += nonStarElm;
+                    }
+
+                    var commentElm = '<ul class="aa-review-nav"><li><div class="media"><div class="media-left"><a href="#"><img class="media-object" src="/Content/img/testimonial-img-3.jpg" alt="girl image"></a></div > <div class="media-body"><h4 class="media-heading"><strong>'
+                        + username + '</strong> - <span>' + today + '</span ></h4><div class="aa-product-rating">' + starIcon + '</div><p>' + content + '</p></div></div></li></ul>';
+                    jQuery(".aa-review-nav").first().before(commentElm);
+                    var remainCount = Number(jQuery("#remain__count").text());
+                    jQuery("#remain__count").text(remainCount + 1);
+                    var totalCount = Number(jQuery("#cmt__quantity").text());
+                    jQuery("#remain__count").text(totalCount + 1);
+                }, error: data => {
+                    $("#overlay").css("display", "none");
+                    swal("Thất bại", data, "error");
+                }
+            });
+        }, 2000);
+
+    });
+
+    jQuery("#view__more").on('click', function () {
+        jQuery(".remain__comments").removeClass("d-none");
+        jQuery("#view__more").remove();
     });
 </script>
 <!-- / product category -->

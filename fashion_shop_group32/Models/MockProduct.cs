@@ -30,7 +30,7 @@ namespace fashion_shop_group32.Models
             return false;
         }
 
-       public int NumberProductinList(string cat, string loai, string mau, string size, string gia, string keyword)
+        public int NumberProductinList(string cat, string loai, string mau, string size, string gia, string keyword)
         {
             int count = 0;
             string filterNew = "";
@@ -169,7 +169,7 @@ namespace fashion_shop_group32.Models
                 System.Diagnostics.Debug.WriteLine("search");
 
                 //string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,e.ma_mau,e.ma_size,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and a.ma_mau=c.ma_mausp and a.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ten_sp like '%" + keyword+"%' " + filterQuery + "  limit " + begin + ",9";
-                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c, sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau = c.ma_mausp and e.ma_size = d.ma_sizesp and a.id_sanpham = e.id_sanpham and a.ten_sp like \'%" + keyword+"%\' "  + filterQuery + "  )limit " + begin + ",9";
+                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c, sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau = c.ma_mausp and e.ma_size = d.ma_sizesp and a.id_sanpham = e.id_sanpham and a.ten_sp like \'%" + keyword + "%\' " + filterQuery + "  )limit " + begin + ",9";
                 newCmd.CommandText = queryString;
 
 
@@ -238,6 +238,7 @@ namespace fashion_shop_group32.Models
             idsp.Value = id;
             newCmd.CommandText = queryString;
             newCmd.Parameters.Add(idsp);
+            Product p = null;
             using (MySqlDataReader reader = newCmd.ExecuteReader())
             {
                 // Kiểm tra có kết quả trả về
@@ -245,7 +246,8 @@ namespace fashion_shop_group32.Models
                 { // Đọc từng dòng kết quả cho đến hết
                     while (reader.Read())
                     {
-                        _productList.Add(new Product(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader.GetDouble(3), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader.GetInt32(7), reader[8].ToString(), reader[9].ToString()));
+                        p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), reader.GetString("id_km"), reader.GetString("thuonghieu"), reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
+                        _productList.Add(p);
                     }
                 }
                 else Console.WriteLine("No rows found.");
@@ -570,6 +572,69 @@ namespace fashion_shop_group32.Models
             conn.Close();
 
             return _productList;
+        }
+        public int GetReviewsCount(string pid)
+        {
+            MySqlConnection conn = KetNoi.GetDBConnection();
+            conn.Open();
+            MySqlCommand newCmd = conn.CreateCommand();
+            string query = "select count(*) from review where id_sanpham = @idsp";
+            MySqlParameter key = new MySqlParameter("@idsp", MySqlDbType.String);
+            key.Value = pid;
+            newCmd.CommandText = query;
+            newCmd.Parameters.Add(key);
+            int count = 0;
+            using (MySqlDataReader reader = newCmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        count = reader.GetInt32(0);
+                    }
+                }
+                else Console.WriteLine("No rows found.");
+            }
+            conn.Close();
+            return count;
+        }
+
+        public IEnumerable<Review> GetReviews(string pid, int limit, int amount)
+        {
+            MySqlConnection conn = KetNoi.GetDBConnection();
+            List<Review> _listComments = new List<Review>();
+            conn.Open();
+            MySqlCommand newCmd = conn.CreateCommand();
+            string query = "select * from review where id_sanpham = @idsp limit @limit,@amount";
+            MySqlParameter key = new MySqlParameter("@idsp", MySqlDbType.String);
+            MySqlParameter limited = new MySqlParameter("@limit", MySqlDbType.Int32);
+            MySqlParameter amounts = new MySqlParameter("@amount", MySqlDbType.Int32);
+            key.Value = pid;
+            limited.Value = limit;
+            amounts.Value = amount;
+            newCmd.CommandText = query;
+            newCmd.Parameters.Add(key);
+            newCmd.Parameters.Add(limited);
+            newCmd.Parameters.Add(amounts);
+            using (MySqlDataReader reader = newCmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Review r = new Review();
+                        r.id_sanpham = reader.GetString("id_sanpham");
+                        r.username = reader.GetString("username");
+                        r.sosao = reader.GetInt32("sosao");
+                        r.noidung = reader.GetString("noidung");
+                        r.date = reader.GetDateTime("createdat").ToString();
+                        _listComments.Add(r);
+                    }
+                }
+                else Console.WriteLine("No rows found.");
+            }
+            conn.Close();
+            return _listComments;
         }
     }
 }

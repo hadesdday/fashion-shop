@@ -32,8 +32,6 @@ namespace fashion_shop_group32.Models.Dao
         {
             //innitial
             int trangthai = 1;
-            DateTime createDate = DateTime.Now;
-            DateTime updateDate = DateTime.Now;
             int rowsBillDetail = 0;
 
             //save khach hang
@@ -41,22 +39,20 @@ namespace fashion_shop_group32.Models.Dao
 
             MySqlConnection connectCus = KetNoi.GetDBConnection();
             connectCus.Open();
-            string sqlCus = "insert into khachhang(id_khachhang,ten_kh,diachi,sodt,email,createdat,updatedat) " +
-               "values(@id_khachhang,@ten_kh,@diachi,@sodt,@email,@createdat,@updatedat)";
+            string sqlCus = "insert into khachhang(id_khachhang,ten_kh,diachi,sodt,email) " +
+               "values(@id_khachhang,@ten_kh,@diachi,@sodt,@email)";
             MySqlCommand cmd = new MySqlCommand(sqlCus, connectCus);
-            int id_kh = (int)cmd.LastInsertedId;
+            int id_kh = (int)cmd.LastInsertedId;    
             cmd.Parameters.AddWithValue("@id_khachhang", id_kh);
             cmd.Parameters.AddWithValue("@ten_kh", ten_kh);
             cmd.Parameters.AddWithValue("@diachi", diachi);
             cmd.Parameters.AddWithValue("@sodt", sodt);
             cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@createdat", createDate);
-            cmd.Parameters.AddWithValue("@updatedat", updateDate);
             int rowsCustomer = cmd.ExecuteNonQuery();
             //save bill
             int newIdkh = (int)cmd.LastInsertedId;
-            String sqlSaveBill = "insert into hoadon(id_hoadon,id_khachhang,id_magg,mapttt,trigia,trangthai,createdat,updatedat) " +
-               "values(@id_hoadon,@id_khachhang,@id_magg,@mapttt,@trigia,@trangthai,@createdat,@updatedat)";
+            String sqlSaveBill = "insert into hoadon(id_hoadon,id_khachhang,id_magg,mapttt,trigia,trangthai) " +
+               "values(@id_hoadon,@id_khachhang,@id_magg,@mapttt,@trigia,@trangthai)";
             MySqlConnection connectBill = KetNoi.GetDBConnection();
             connectBill.Open();
             MySqlCommand commandBill = new MySqlCommand(sqlSaveBill, connectBill);
@@ -67,14 +63,12 @@ namespace fashion_shop_group32.Models.Dao
             commandBill.Parameters.AddWithValue("@mapttt", pttt);
             commandBill.Parameters.AddWithValue("@trigia", trigia);
             commandBill.Parameters.AddWithValue("@trangthai", trangthai);
-            commandBill.Parameters.AddWithValue("@createdat", createDate);
-            commandBill.Parameters.AddWithValue("@updatedat", updateDate);
             int rowsBill = commandBill.ExecuteNonQuery();
 
             //save BillDetail
             int newId_bill = (int)commandBill.LastInsertedId;
-            String sqlSaveBillDetail = "insert into chitiethoadon(id_hoadon,id_sanpham,soluong,createdat,updatedat) " +
-                "values(@id_hoadon,@id_sanpham,@soluong,@createdat,@updatedat)";
+            String sqlSaveBillDetail = "insert into chitiethoadon(id_hoadon,id_sanpham,soluong,ma_mau,ma_size) " +
+                "values(@id_hoadon,@id_sanpham,@soluong,@ma_mau,@ma_size)";
             MySqlConnection connectBillDetail = KetNoi.GetDBConnection();
             connectBillDetail.Open();
             foreach (CartDao item in listBuy)
@@ -84,8 +78,8 @@ namespace fashion_shop_group32.Models.Dao
                 commandBillDetail.Parameters.AddWithValue("@id_hoadon", newId_bill);
                 commandBillDetail.Parameters.AddWithValue("@id_sanpham", item.Pro.id_sanpham);
                 commandBillDetail.Parameters.AddWithValue("@soluong", item.Pro.quantitySold);
-                commandBillDetail.Parameters.AddWithValue("@createdat", createDate);
-                commandBillDetail.Parameters.AddWithValue("@updatedat", updateDate);
+                commandBillDetail.Parameters.AddWithValue("@ma_mau", item.Pro.ma_mau);
+                commandBillDetail.Parameters.AddWithValue("@ma_size", item.Pro.ma_size);
                 rowsBillDetail = commandBillDetail.ExecuteNonQuery();
             }
             return rowsBill == 1 && rowsBillDetail == 1 && rowsCustomer == 1;
@@ -94,17 +88,12 @@ namespace fashion_shop_group32.Models.Dao
         {
             //innitial
             int trangthai = 1;
-            DateTime createDate = DateTime.Now;
-            DateTime updateDate = DateTime.Now;
-
             int rowsBillDetail = 0;
-
-
 
             //save bill
 
-            String sqlSaveBill = "insert into hoadon(id_hoadon,id_khachhang,id_magg,mapttt,trigia,trangthai,createdat,updatedat) " +
-               "values(@id_hoadon,@id_khachhang,@id_magg,@mapttt,@trigia,@trangthai,@createdat,@updatedat)";
+            String sqlSaveBill = "insert into hoadon(id_hoadon,id_khachHang,id_magg,mapttt,trigia,trangthai) " +
+               "values(@id_hoadon,@id_khachhang,@id_magg,@mapttt,@trigia,@trangthai)";
             MySqlConnection connectBill = KetNoi.GetDBConnection();
             connectBill.Open();
             MySqlCommand commandBill = new MySqlCommand(sqlSaveBill, connectBill);
@@ -115,14 +104,12 @@ namespace fashion_shop_group32.Models.Dao
             commandBill.Parameters.AddWithValue("@mapttt", pttt);
             commandBill.Parameters.AddWithValue("@trigia", trigia);
             commandBill.Parameters.AddWithValue("@trangthai", trangthai);
-            commandBill.Parameters.AddWithValue("@createdat", createDate);
-            commandBill.Parameters.AddWithValue("@updatedat", updateDate);
             int rowsBill = commandBill.ExecuteNonQuery();
 
             //save BillDetail
             int newId_bill = (int)commandBill.LastInsertedId;
-            String sqlSaveBillDetail = "insert into chitiethoadon(id_hoadon,id_sanpham,soluong,createdat,updatedat) " +
-                "values(@id_hoadon,@id_sanpham,@soluong,@createdat,@updatedat)";
+            String sqlSaveBillDetail = "insert into chitiethoadon(id_hoadon,id_sanpham,soluong,ma_mau,ma_size) " +
+                "values(@id_hoadon,@id_sanpham,@soluong,@ma_mau,@ma_size)";
             MySqlConnection connectBillDetail = KetNoi.GetDBConnection();
             connectBillDetail.Open();
             foreach (CartDao item in listBuy)
@@ -132,23 +119,23 @@ namespace fashion_shop_group32.Models.Dao
                 commandBillDetail.Parameters.AddWithValue("@id_hoadon", newId_bill);
                 commandBillDetail.Parameters.AddWithValue("@id_sanpham", item.Pro.id_sanpham);
                 commandBillDetail.Parameters.AddWithValue("@soluong", item.Pro.quantitySold);
-                commandBillDetail.Parameters.AddWithValue("@createdat", createDate);
-                commandBillDetail.Parameters.AddWithValue("@updatedat", updateDate);
+                commandBillDetail.Parameters.AddWithValue("@ma_mau", item.Pro.ma_mau);
+                commandBillDetail.Parameters.AddWithValue("@ma_size", item.Pro.ma_size);
                 rowsBillDetail = commandBillDetail.ExecuteNonQuery();
             }
             return rowsBill == 1 && rowsBillDetail == 1;
         }
-        public static string getCoupon(string idCoupon)
+        public static string getCoupon(string couponId)
         {
             List<string> listCouponId = new List<string>();
-            string sql = "select id_mgg from magiamgia where id_magg = @id_magg";
+            string sql = "select id_magg from magiamgia where id_magg=@id_magg";
             MySqlCommand command = new MySqlCommand();
             MySqlConnection connect = KetNoi.GetDBConnection();
             connect.Open();
             command.Connection = connect;
             command.CommandText = sql;
             command.Prepare();
-            command.Parameters.AddWithValue("@id_magg", idCoupon);
+            command.Parameters.AddWithValue("@id_magg", couponId);
             using (DbDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -156,9 +143,11 @@ namespace fashion_shop_group32.Models.Dao
                     listCouponId.Add(reader.GetString(0));
                 }
                 reader.Close();
+                //Console.WriteLine(usersList[0]);
                 if (listCouponId.Count != 1) return null;
                 string coupon = listCouponId[0];
-                if (!coupon.Equals(idCoupon)) return null;
+
+                //if (!user.userName.Equals(username) || verify(user.password, password) == false) return null;
                 return coupon;
             }
         }

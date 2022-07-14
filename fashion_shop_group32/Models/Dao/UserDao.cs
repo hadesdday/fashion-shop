@@ -31,30 +31,6 @@ namespace fashion_shop_group32.Models.Dao
         public static Users checkLogin(String username, String password)
         {
             List<Users> usersList = new List<Users>();
-            /*try
-            {
-                Connection conn = DBConnect.getInstance().getConn();
-                PreparedStatement statement = conn.prepareStatement("select * from user where name = ?");
-                statement.setString(1, username);
-                rs = statement.executeQuery();
-                while (rs.next())
-                {
-                    usersList.add(new Users(rs.getString("id"), rs.getString("name"), rs.getString("password"), rs.getString("email"), rs.getInt("phone"), rs.getString("address"), rs.getInt("role")));
-                }
-                rs.close();
-                System.out.println(usersList.get(0));
-                if (usersList.size() != 1) return null;
-                Users user = usersList.get(0);
-                System.out.println("success prepare");
-                if (!user.getUserName().equals(username) || !user.getPassword().equals(hashPassword(password))) return null;
-                System.out.println("success");
-                return user;
-            }
-            catch (SQLException e)
-            {
-                e.printStackTrace();
-                return null;
-            }*/
             string sql = "select * from user where username = @username";
             MySqlCommand command = new MySqlCommand();
             MySqlConnection connect = KetNoi.GetDBConnection();
@@ -67,16 +43,13 @@ namespace fashion_shop_group32.Models.Dao
             {
                 while (reader.Read())
                 {
-                    usersList.Add(new Users(reader.GetString(0), reader.GetString(1), reader.GetString(2),
-                        reader.GetString(3), reader.GetString(4), reader.GetString(5),
-                        reader.GetInt32(6), reader.GetInt32(7), reader.GetDateTime(8), reader.GetDateTime(9)));
+                    usersList.Add(new Users(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5), reader.GetInt32(6)));
                 }
                 reader.Close();
-                //Console.WriteLine(usersList[0]);
                 if (usersList.Count != 1) return null;
                 Users user = usersList[0];
                 Console.WriteLine("success login");
-                if (!user.userName.Equals(username) || verify(user.password, password) == false) return null;
+                if (!user.username.Equals(username) || verify(user.password, password) == false) return null;
                 return user;
             }
         }
@@ -117,14 +90,11 @@ string id = builder.ToString();
             //Random rd = new Random();
             //int id_kh = rd.Next(10000000, 100000000);
             int active = 1;
-            DateTime createDate = DateTime.Now;
-            DateTime updateDate = DateTime.Now;
-            //ket noi toi database table khach hang
 
             MySqlConnection connectCus = KetNoi.GetDBConnection();
             connectCus.Open();
-            string sqlCus = "insert into khachhang(id_khachhang,ten_kh,diachi,sodt,email,createdat,updatedat) " +
-               "values(@id_khachhang,@ten_kh,@diachi,@sodt,@email,@createdat,@updatedat)";
+            string sqlCus = "insert into khachhang(id_khachhang,ten_kh,diachi,sodt,email) " +
+               "values(@id_khachhang,@ten_kh,@diachi,@sodt,@email)";
             MySqlCommand cmd = new MySqlCommand(sqlCus, connectCus);
             int id_kh = (int)cmd.LastInsertedId;
             cmd.Parameters.AddWithValue("@id_khachhang", id_kh);
@@ -132,22 +102,19 @@ string id = builder.ToString();
             cmd.Parameters.AddWithValue("@diachi", diachi);
             cmd.Parameters.AddWithValue("@sodt", sodt);
             cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@createdat", createDate);
-            cmd.Parameters.AddWithValue("@updatedat", updateDate);
             int rowsCustomer = cmd.ExecuteNonQuery();
             //int newIdKh = (int)cmd.Parameters["@id_khachhang"].Value;
             int newIdKh = (int)cmd.LastInsertedId;
             //connectCus.Close();
             //ket noi toi database table
-            string sql = "insert into user(id_user,username,token,password,role,email,id_khachhang,active,createdat,updatedat) " +
-                "values(@id_user,@username,@token,@password,@role,@email,@id_khachhang,@active,@createdat,@updatedat)";
+            string sql = "insert into user(username,token,password,role,email,id_khachhang,active) " +
+                "values(@username,@token,@password,@role,@email,@id_khachhang,@active)";
             MySqlCommand command = new MySqlCommand();
             MySqlConnection connect = KetNoi.GetDBConnection();
             connect.Open();
             command.Connection = connect;
             command.CommandText = sql;
             //int newIdKh = (int)cmd.Parameters["@id_khachhang"].Value+1;
-            command.Parameters.AddWithValue("@id_user", id);
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@token", token);
             command.Parameters.AddWithValue("@password", hashPassword(password));
@@ -155,8 +122,6 @@ string id = builder.ToString();
             command.Parameters.AddWithValue("@email", email);
             command.Parameters.AddWithValue("@id_khachhang", newIdKh);
             command.Parameters.AddWithValue("@active", active);
-            command.Parameters.AddWithValue("@createdat", createDate);
-            command.Parameters.AddWithValue("@updatedat", updateDate);
 
             int rows = command.ExecuteNonQuery();
             connectCus.Close();
@@ -176,9 +141,7 @@ string id = builder.ToString();
             {
                 while (reader.Read())
                 {
-                    listUser.Add(new Users(reader.GetString(0), reader.GetString(1), reader.GetString(2),
-                        reader.GetString(3), reader.GetString(4), reader.GetString(5),
-                        reader.GetInt32(6), reader.GetInt32(7), reader.GetDateTime(8), reader.GetDateTime(9)));
+                    listUser.Add(new Users(reader.GetString(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5), reader.GetInt32(6)));
                 }
                 reader.Close();
             }
@@ -231,7 +194,6 @@ string id = builder.ToString();
                 }
             }
             return true;
-
         }
         public static Customer getSelectedCus(int idCus)
         {
@@ -255,28 +217,21 @@ string id = builder.ToString();
             }
             if (listCus.Count != 1) return null;
             Customer cus = listCus[0];
-            //if (!cus.userName.Equals(username) || verify(user.password, password) == false) return null;
             return cus;
         }
         public static Boolean updateCustomer(int id_kh, string namecus, string address, string phone, string email)
         {
-            DateTime updateDate = DateTime.Now;
             MySqlConnection connectCus = KetNoi.GetDBConnection();
             connectCus.Open();
-            string sqlCus = "update khachhang set ten_kh=@ten_kh,diachi=@diachi,sodt=@sodt,email=@email,updatedat=@updatedat where id_khachhang = @id_khachhang";
+            string sqlCus = "update khachhang set ten_kh=@ten_kh,diachi=@diachi,sodt=@sodt,email=@email where id_khachhang = @id_khachhang";
             MySqlCommand cmd = new MySqlCommand(sqlCus, connectCus);
             cmd.Parameters.AddWithValue("@id_khachhang", id_kh);
             cmd.Parameters.AddWithValue("@ten_kh", namecus);
             cmd.Parameters.AddWithValue("@diachi", address);
             cmd.Parameters.AddWithValue("@sodt", phone);
             cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@updatedat", updateDate);
             int rows = cmd.ExecuteNonQuery();
             return rows == 1;
-        }
-        static void Main(string[] args)
-        {
-            //register("chanhhiep", "123456", "chanhhuep2907@gmail.com");
         }
     }
 }
