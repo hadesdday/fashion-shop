@@ -24,5 +24,7 @@ namespace fashion_shop_group32.Models
         [Required(ErrorMessage = "- Enter comment content")]
         [Column("noidung", TypeName = "text")]
         public string noidung { get; set; }
+        [NotMapped]
+        public string date { get; set; }
     }
 }

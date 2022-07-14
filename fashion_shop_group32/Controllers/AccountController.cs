@@ -50,10 +50,9 @@ namespace fashion_shop_group32.Controllers
             if (usr != null)
             {
                 //set session
-                Session["UserId"] = usr.idUser.ToString();
-                Session["UserName"] = usr.userName.ToString();
+                Session["UserName"] = usr.username.ToString();
                 Session["Role"] = usr.role.ToString();
-                Session["Idkh"] = usr.idKhachHang.ToString();
+                Session["Idkh"] = usr.id_khachhang.ToString();
                 return RedirectToAction("LoggedIn");
             }
             else
@@ -65,7 +64,7 @@ namespace fashion_shop_group32.Controllers
 
         public ActionResult LoggedIn()
         {
-            if (Session["UserId"] != null)
+            if (Session["UserName"] != null)
             {
                 return Redirect("/Home/Index");
             }

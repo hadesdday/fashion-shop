@@ -5,30 +5,27 @@ namespace fashion_shop_group32.Models
 {
     public class Users
     {
-        public string idUser { get; set; }
-        public string userName { get; set; }
-        public string tokken { get; set; }
+        public Users()
+        {
+        }
+
+        public string username { get; set; }
         public string password { get; set; }
         public string role { get; set; }
         public string email { get; set; }
-        public int idKhachHang { get; set; }
+        public int id_khachhang { get; set; }
         public int active { get; set; }
-        public DateTime createDate { get; set; }
-        public DateTime updateDate { get; set; }
+        public string token { get; set; }
 
-        public Users(string idUser, string userName, string tokken, string password, string role, string email, int idKhachHang, int active, Date createDate, Date updateDate)
+        public Users(string username, string token, string password, string role, string email, int id_khachhang, int active)
         {
-            this.idUser = idUser;
-            this.userName = userName;
-            this.tokken = tokken;
+            this.username = username;
             this.password = password;
             this.role = role;
             this.email = email;
-            this.idKhachHang = idKhachHang;
+            this.id_khachhang = id_khachhang;
             this.active = active;
-            this.createDate = createDate;
-            this.updateDate = updateDate;
+            this.token = token;
         }
-
     }
 }
