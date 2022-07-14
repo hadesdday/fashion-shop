@@ -142,25 +142,26 @@
 
                                     @*@if (Session["UserName"] != null)
                                         {*@
-                                    <h4>Add a review</h4>
+                                    <h4>Thêm đánh giá</h4>
                                     <div class="aa-your-rating">
-                                        <p>Your Rating</p>
-                                        <a><span class="fa fa-star-o rating"></span></a>
-                                        <a><span class="fa fa-star-o rating"></span></a>
-                                        <a><span class="fa fa-star-o rating"></span></a>
-                                        <a><span class="fa fa-star-o rating"></span></a>
-                                        <a><span class="fa fa-star-o rating"></span></a>
+                                        <p>Đánh giá của bạn</p>
+                                        <a><span class="fa fa-star-o rating" rating="1"></span></a>
+                                        <a><span class="fa fa-star-o rating" rating="2"></span></a>
+                                        <a><span class="fa fa-star-o rating" rating="3"></span></a>
+                                        <a><span class="fa fa-star-o rating" rating="4"></span></a>
+                                        <a><span class="fa fa-star-o rating" rating="5"></span></a>
                                     </div>
-                                    <form action="" class="aa-review-form">
+                                    <form action="/Product/PostComment" class="aa-review-form" id="post__review__form" method="POST">
+                                        <input type="text" name="rating" hidden />
+                                        @*<input type="text" name="username" hidden value="@Session["UserName"]" />
+                                            <input type="text" name="productId" hidden value="@Model.product.id_sanpham" />*@
+                                        <input type="text" name="username" hidden value="admin" />
+                                        <input type="text" name="productId" hidden value="sp001" />
                                         <div class="form-group">
-                                            <label for="message">Your Review</label>
-                                            <textarea class="form-control" rows="3" id="message"></textarea>
+                                            <label for="message">Nội dung</label>
+                                            <textarea class="form-control" rows="3" id="message" name="content"></textarea>
                                         </div>
-                                        <input type="text" name="rating" value="" hidden />
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="name" placeholder="Name" name="username" value="@Session["UserName"]">
-                                        </div>
-                                        <button type="submit" class="btn btn-default aa-review-submit" id="submit-review">Submit</button>
+                                        <button type="button" class="btn btn-default aa-review-submit" id="submit-review">Submit</button>
                                     </form>
                                     @*}
                                         else
@@ -380,9 +381,40 @@
         jQuery(".simpleLens-big-image").attr("src", jQuery(this).attr("src"));
     });
 </script>
-<script>
-    $(() => {
 
+<script>
+    jQuery(".rating").on("mouseenter", function () {
+        var rating = Number(jQuery(this).attr("rating"));
+        jQuery("input[name='rating']").val(rating);
+        for (let i = 0; i <= rating; i++) {
+            jQuery(".rating").eq(i).removeClass("fa-star-o");
+            jQuery(".rating").eq(i).addClass("fa-star");
+        }
+        for (let i = rating; i <= 4; i++) {
+            jQuery(".rating").eq(i).removeClass("fa-star");
+            jQuery(".rating").eq(i).addClass("fa-star-o");
+        }
+    });
+
+    jQuery("#submit-review").on("click", function () {
+        var productId = jQuery("input[name='productId']").val();
+        var username = jQuery("input[name='username']").val();
+        var rating = Number(jQuery("input[name='rating']").val());
+        var content = jQuery("textarea[name='content']").val();
+        $.ajax({
+            url: jQuery("#post__review__form").attr("action"),
+            method: jQuery("#post__review__form").attr("method"),
+            data: {
+                id_sanpham: productId,
+                username: username,
+                sosao: rating,
+                noidung: content
+            }, success: data => {
+                swal("Thành công", data, "success");
+            }, error: data => {
+                swal("Thất bại", data, "error");
+            }
+        });
     });
 </script>
 <!-- / product category -->
