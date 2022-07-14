@@ -32,17 +32,6 @@ namespace fashion_shop_group32.Controllers
         {
             MockProduct mockProduct = new MockProduct();
             Product product = mockProduct.GetProductsByID(product_id);
-            /*
-            if (product != null)
-            {
-                CartItem cart = (CartItem)Session["Cart"];
-                if(cart == null)
-                {
-                    cart = CartItem.getInstance();
-                }
-                cart.Put(product);
-            }
-            */
             if (Session["cart"] == null)
             {
                 List<CartDao> carts = new List<CartDao>();
