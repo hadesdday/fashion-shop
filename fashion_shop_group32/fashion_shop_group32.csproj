@@ -377,6 +377,7 @@
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Account\UserInfomation.cshtml" />
     <Content Include="Views\Account\EditInfoCus.cshtml" />
+    <Content Include="Views\Account\changePassword.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
