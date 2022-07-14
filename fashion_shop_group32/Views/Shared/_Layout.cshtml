@@ -56,11 +56,8 @@
                             <!-- / header top left -->
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right">
-                                    <li><a href="/Account   ">My Account</a></li>
-                                    <li class="hidden-xs"><a href="/Wishlist">Wishlist</a></li>
-                                    <li class="hidden-xs"><a href="/Cart">My Cart</a></li>
-                                    <li class="hidden-xs"><a href="/Checkout">Checkout</a></li>
-                                    <li><a href="/Account" data-target="#login-modal">Login</a></li>
+                                    <li class="hidden-xs"><a href="/Cart">Giỏ hàng</a></li>
+                                    <li><a href="/Account" data-target="#login-modal">Đăng nhập</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -80,7 +77,7 @@
                                 <!-- Text based logo -->
                                 <a href="/">
                                     <span class="fa fa-shopping-cart"></span>
-                                    <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
+                                    <p>net<strong>NLU</strong> <span>Quần áo nông lâm</span></p>
                                 </a>
                                 <!-- img based logo -->
                                 <!-- <a href="/"><img src="~/Content/img/logo.jpg" alt="logo img"></a> -->
@@ -105,7 +102,7 @@
 
                                 <a class="aa-cart-link" href="/Cart">
                                     <span class="fa fa-shopping-basket"></span>
-                                    <span class="aa-cart-title">SHOPPING CART</span>
+                                    <span class="aa-cart-title">GIỎ HÀNG</span>
                                     <span class="aa-cart-notify">@numberItem</span>
                                 </a>
                                 @if (Session["cart"] == null)
@@ -228,24 +225,6 @@
         </div>
     </section>
     @RenderBody()
-    <section id="aa-subscribe">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="aa-subscribe-area">
-                        <h3>Subscribe our newsletter </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, velit!</p>
-                        <form action="" class="aa-subscribe-form">
-                            <input type="email" name="" id="" placeholder="Enter your Email">
-                            <input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- / Subscribe section -->
-    <!-- footer -->
     <footer id="aa-footer">
         <!-- footer bottom -->
         <div class="aa-footer-top">
@@ -258,26 +237,12 @@
                                     <div class="aa-footer-widget">
                                         <h3>Main Menu</h3>
                                         <ul class="aa-footer-nav">
-                                            <li><a href="#">Home</a></li>
-                                            <li><a href="#">Our Services</a></li>
+                                            <li><a href="/">Trang chủ</a></li>
+                                            <li><a href="/Product/ProductList?cat=casual&&loai=men&&gia=&&size=&&mau=">Casual</a></li>
                                             <li><a href="#">Our Products</a></li>
                                             <li><a href="#">About Us</a></li>
                                             <li><a href="#">Contact Us</a></li>
                                         </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="aa-footer-widget">
-                                        <div class="aa-footer-widget">
-                                            <h3>Knowledge Base</h3>
-                                            <ul class="aa-footer-nav">
-                                                <li><a href="#">Delivery</a></li>
-                                                <li><a href="#">Returns</a></li>
-                                                <li><a href="#">Services</a></li>
-                                                <li><a href="#">Discount</a></li>
-                                                <li><a href="#">Special Offer</a></li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-6">
@@ -299,9 +264,9 @@
                                         <div class="aa-footer-widget">
                                             <h3>Contact Us</h3>
                                             <address>
-                                                <p> 25 Astor Pl, NY 10003, USA</p>
-                                                <p><span class="fa fa-phone"></span>+1 212-982-4589</p>
-                                                <p><span class="fa fa-envelope"></span>dailyshop@gmail.com</p>
+                                                <p> Khu Phố 6 ,Phường Linh Trung , Thành Phố Thủ Đức</p>
+                                                <p><span class="fa fa-phone"></span>0987654321</p>
+                                                <p><span class="fa fa-envelope"></span>group32@gmail.com</p>
                                             </address>
                                             <div class="aa-footer-social">
                                                 <a href="#"><span class="fa fa-facebook"></span></a>
@@ -337,34 +302,6 @@
             </div>
         </div>
     </footer>
-
-    <!--
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>Login or Register</h4>
-                    <form class="aa-login-form" action="">
-                        <label for="">Username or Email address<span>*</span></label>
-                        <input type="text" placeholder="Username or email">
-                        <label for="">Password<span>*</span></label>
-                        <input type="password" placeholder="Password">
-                        <button class="aa-browse-btn" type="submit">Login</button>
-                        <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
-                        <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
-                        <div class="aa-register-now">
-                            Don't have an account?<a href="/Account">Register now!</a>
-                        </div>
-                    </form>
-                </div>
-            </div>//.modal-content/
-    </div>//.modal-dialog /
-    </div>
-    -->
-    @*  @RenderSection("scripts", requi
-        @Scripts.Render("~/bundles/js")red: false)*@
-    <!-- jQuery library -->
 
     <script src="~/Scripts/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
