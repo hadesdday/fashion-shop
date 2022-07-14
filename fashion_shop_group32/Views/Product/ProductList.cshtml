@@ -40,7 +40,7 @@
                                 <!-- start single product item -->
                                 <li>
                                     <figure pid="@item.id_sanpham" pname="@item.ten_sp">
-                                        <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp"><img src="~/Content/img/women/girl-3.png" alt="polo shirt img"></a>
+                                        <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp"><img class="imgmain" src="/@item.imageMain" alt="polo shirt img"></a>
                                         <a class="aa-add-card-btn" href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                                         <figcaption>
                                             <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp">@item.ten_sp</a></h4>
@@ -206,9 +206,9 @@
                             <a class="aa-color-blue" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=blue&&keyword=@ViewBag.keyword"></a>
                             <a class="aa-color-orange" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=orange&&keyword=@ViewBag.keyword"></a>
                             <a class="aa-color-gray" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=gray&&keyword=@ViewBag.keyword"></a>
-                            <a class="aa-color-cyan" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=cyan&&keyword=@ViewBag.keyword"></a>
-                            <a class="aa-color-olive" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=olive&&keyword=@ViewBag.keyword"></a>
-                            <a class="aa-color-orchid" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=orchid&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-light" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=light&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-red" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=red&&keyword=@ViewBag.keyword"></a>
+                            <a class="aa-color-brown" href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=@ViewBag.size&&mau=brown&&keyword=@ViewBag.keyword"></a>
                         </div>
                     </div>
 
@@ -221,9 +221,8 @@
                             <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=s&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword">S</a>
                             <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=m&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >M</a>
                             <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=l&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >L</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=x&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >X</a>
                             <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xl&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >XL</a>
-                            <a href="/Product/ProductList?cat=@ViewBag.cat&&loai=@ViewBag.loai&&gia=@ViewBag.gia&&size=xxl&&mau=@ViewBag.mau&&keyword=@ViewBag.keyword" >XXL</a>
+                            
                         </div>
                     </div>
                     <div class="tag-cloud">
