@@ -4154,3 +4154,7 @@ img {
 .selected {
     border: 3px solid red !important
 }
+.imgmain{
+    height:300px;
+    width:250px;
+}

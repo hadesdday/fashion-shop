@@ -36,16 +36,21 @@
                                         <div class="simpleLens-container">
                                             <div class="simpleLens-big-image-container">
                                                 <a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image">
-                                                    <img src="~@Model.product.imgs[0]" class="simpleLens-big-image">
+                                                 
+                                                    
+                                                    <img src="\@Model.product.imageMain]" class="simpleLens-big-image">
+         
                                                 </a>
                                             </div>
                                         </div>
 
+
+
                                         <div class="simpleLens-thumbnails-container">
                                             @foreach (var img in Model.product.imgs)
                                             {
-                                                <a data-big-image="@img" data-lens-image="@img" class="simpleLens-thumbnail-wrapper" >
-                                                    <img style="width:45px;height:45px;" src="~@img">
+                                                <a data-big-image="\@img" data-lens-image="\@img" class="simpleLens-thumbnail-wrapper">
+                                                    <img style="width:45px;height:45px;" src="\@img">
                                                 </a>
                                             }
                                         </div>

@@ -37,6 +37,7 @@ namespace fashion_shop_group32.Controllers
             ViewBag.page = numpage;
             System.Diagnostics.Debug.WriteLine("ProductList3.");
             var model = _product.GetProductsByCategoryAndLoaiAndFilter(cat, loai, mau, size, gia, keyword, numpage);
+            
             ViewModelIndex3 viewModel = new ViewModelIndex3();
             viewModel.count = new MockProduct().NumberProductinList(cat, loai, mau, size, gia, keyword);
             viewModel.list1 = model;
