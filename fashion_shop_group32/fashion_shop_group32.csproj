@@ -740,6 +740,7 @@
     <Content Include="Content\img\banner7.jpg" />
     <Content Include="Content\img\banner8.jpg" />
     <Content Include="Content\img\banner9.jpg" />
+    <Content Include="Content\img\cart-banner.jpg" />
     <Content Include="Content\img\client-brand-css3.png" />
     <Content Include="Content\img\client-brand-html5.png" />
     <Content Include="Content\img\client-brand-java.png" />
@@ -747,6 +748,7 @@
     <Content Include="Content\img\client-brand-jquery.png" />
     <Content Include="Content\img\client-brand-wordpress.png" />
     <Content Include="Content\img\close-icon.png" />
+    <Content Include="Content\img\contact-banner.jpg" />
     <Content Include="Content\img\electronics\electronic-1.png" />
     <Content Include="Content\img\electronics\electronic-2.png" />
     <Content Include="Content\img\electronics\electronic-3.png" />
@@ -765,6 +767,7 @@
     <Content Include="Content\img\flag\english.jpg" />
     <Content Include="Content\img\flag\french.jpg" />
     <Content Include="Content\img\icon.png" />
+    <Content Include="Content\img\login-banner.jpg" />
     <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\man-small-1.jpg" />
     <Content Include="Content\img\man\noi-com-dien-cuckoo-1-8-lit-cp-0661.png" />
@@ -780,6 +783,7 @@
     <Content Include="Content\img\man\polo-shirt-6.png" />
     <Content Include="Content\img\man\t-shirt-1.png" />
     <Content Include="Content\img\paypal.jpg" />
+    <Content Include="Content\img\product-banner.jpg" />
     <Content Include="Content\img\promo-banner-1.jpg" />
     <Content Include="Content\img\promo-banner-2.jpg" />
     <Content Include="Content\img\promo-banner-3.jpg" />
