@@ -201,7 +201,7 @@ namespace fashion_shop_group32.Models
                 else Console.WriteLine("No rows found.");
             }
             conn.Close();
-            foreach(Product p in _productList)
+            foreach (Product p in _productList)
             {
                 p.imageMain = getImageMain(p.id_sanpham);
             }
@@ -209,11 +209,11 @@ namespace fashion_shop_group32.Models
         }
         public string getImageMain(String id)
         {
-            string imglink="";
+            string imglink = "";
             MySqlConnection conn = KetNoi.GetDBConnection();
             conn.Open();
             MySqlCommand newCmd = conn.CreateCommand();
-            
+
             string queryString = "select a.link_anh from hinhanh a,chitietsanpham b  where a.id_anh=b.id_anh and b.id_sanpham=@idsp";
             MySqlParameter idsp = new MySqlParameter("@idsp", MySqlDbType.String);
             idsp.Value = id;
@@ -225,7 +225,7 @@ namespace fashion_shop_group32.Models
                 if (reader.HasRows)
                 { // Đọc từng dòng kết quả cho đến hết
                     reader.Read();
-                    imglink = reader[0].ToString();             
+                    imglink = reader[0].ToString();
                 }
                 else Console.WriteLine("No rows found.");
             }
@@ -286,7 +286,7 @@ namespace fashion_shop_group32.Models
                     {
                         System.Diagnostics.Debug.WriteLine("hasrow");
                         string imglink = reader[0].ToString();
-                        if(!imgs.Contains(imglink))
+                        if (!imgs.Contains(imglink))
                             imgs.Add(imglink);
                     }
                 }

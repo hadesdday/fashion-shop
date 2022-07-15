@@ -1,5 +1,4 @@
 ﻿using Databases;
-using fashion_shop_group32.Models;
 using MySqlConnector;
 using System;
 using System.Collections;
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web.Security;
 
 namespace fashion_shop_group32.Models.Dao
 {
