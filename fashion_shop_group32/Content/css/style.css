@@ -4761,7 +4761,13 @@ img {
         color: #ff6666;
         text-decoration: underline;
     }
-.imgmain{
-    width:250px;
-    height:300px;
+
+.imgmain {
+    width: 250px;
+    height: 300px;
+}
+
+.header-banner {
+    width: 100% !important;
+    height: 300px !important;
 }
