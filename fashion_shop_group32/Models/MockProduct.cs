@@ -190,11 +190,10 @@ namespace fashion_shop_group32.Models
                             p.ma_size = size;
                         }
                         //System.Diagnostics.Debug.WriteLine(reader[10]);
-                        //if (reader[10] != null && reader[10]!="")
-                        //{
-                        //    p.rateDiscount = reader.GetDouble(10);
-                        //}
-                        
+                        if (!reader.IsDBNull(10))
+                        {
+                            p.rateDiscount = reader.GetDouble(10);
+                        }
                         if (!isContain(reader[1].ToString()))
                             _productList.Add(p);
                     }
