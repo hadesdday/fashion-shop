@@ -1,8 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Liên hệ";
 }
 
+
+<div id="overlay">
+    <div id="overlay__elm">
+        <div class="dashed-loading"></div>
+    </div>
+</div>
 
 <!-- catg header banner section -->
 <section id="aa-catg-head-banner">
@@ -10,10 +16,10 @@
     <div class="aa-catg-head-banner-area">
         <div class="container">
             <div class="aa-catg-head-banner-content">
-                <h2>Contact</h2>
+                <h2>Liên hệ</h2>
                 <ol class="breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li class="active">Contact</li>
+                    <li class="active">Liên hệ</li>
                 </ol>
             </div>
         </div>
@@ -27,8 +33,8 @@
             <div class="col-md-12">
                 <div class="aa-contact-area">
                     <div class="aa-contact-top">
-                        <h2>We are wating to assist you..</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, quos.</p>
+                        <h2>Chúng tôi muốn lắng nghe ý kiến của bạn</h2>
+                        <p>Hãy bày tỏ ý kiến của bạn dưới đây</p>
                     </div>
                     <!-- contact map -->
                     <div class="aa-contact-map">
@@ -39,47 +45,45 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="aa-contact-address-left">
-                                    <form class="comments-form contact-form" action="">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <input type="text" placeholder="Your Name" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <input type="email" placeholder="Email" class="form-control">
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Your Name" class="form-control" name="name">
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <input type="text" placeholder="Subject" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <input type="text" placeholder="Company" class="form-control">
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="email" placeholder="Email" class="form-control" name="email">
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Phone" class="form-control" name="phone">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Subject" class="form-control" name="subject">
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="3" placeholder="Message"></textarea>
-                                        </div>
-                                        <button class="aa-secondary-btn">Send</button>
-                                    </form>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="6" placeholder="Message" name="message"></textarea>
+                                    </div>
+                                    <button class="aa-secondary-btn" id="submit-problem">Send</button>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="aa-contact-address-right">
                                     <address>
-                                        <h4>DailyShop</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum modi dolor facilis! Nihil error, eius.</p>
-                                        <p><span class="fa fa-home"></span>Huntsville, AL 35813, USA</p>
-                                        <p><span class="fa fa-phone"></span>+ 021.343.7575</p>
-                                        <p><span class="fa fa-envelope"></span>Email: support@dailyshop.com</p>
+                                        <h4>Group32</h4>
+                                        <p>Shop quần áo nông lâm giá tốt , chất lượng cao</p>
+                                        <p><span class="fa fa-home"></span>Khu Phố 6 , Phường Linh Trung , Thành Phố Thủ Đức</p>
+                                        <p><span class="fa fa-phone"></span>0987654321</p>
+                                        <p><span class="fa fa-envelope"></span>Email: group32@gmail.com</p>
                                     </address>
                                 </div>
                             </div>
@@ -90,3 +94,37 @@
         </div>
     </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    jQuery(() => {
+        $("#submit-problem").click(() => {
+            var name = $("input[name='name']").val();
+            var email = $("input[name='email']").val();
+            var subject = $("input[name='subject']").val();
+            var message = $("textarea[name='message']").val();
+            var phone = $("input[name='phone']").val();
+            $("#overlay").css("display", "block");
+
+            $.ajax({
+                url: "/Contact/SubmitProblem",
+                method: "POST",
+                data: {
+                    from: email,
+                    subject: subject,
+                    content: message,
+                    name: name,
+                    phone: phone
+                },
+                success: data => {
+                    $("#overlay").css("display", "none");
+                    swal("Thành công", "Gửi yêu cầu thành công", "success");
+                }, error: data => {
+                    $("#overlay").css("display", "none");
+                    swal("Thất bại", "Gửi yêu cầu thất bại", "error");
+                }
+            });
+        });
+
+    });
+</script>
