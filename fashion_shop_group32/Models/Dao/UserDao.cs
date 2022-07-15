@@ -89,7 +89,7 @@ string id = builder.ToString();
             string role = "0";
             //Random rd = new Random();
             //int id_kh = rd.Next(10000000, 100000000);
-            int active = 1;
+            int active = 0;
 
             MySqlConnection connectCus = KetNoi.GetDBConnection();
             connectCus.Open();
@@ -127,6 +127,64 @@ string id = builder.ToString();
             connectCus.Close();
 
             return rows == 1 && rowsCustomer == 1;
+        }
+
+        public static Boolean updateUserPassword(String userId, String password)
+        {
+            string sql = "update user set password=@password where id_user=@id_user";
+            MySqlCommand command = new MySqlCommand();
+            MySqlConnection connect = KetNoi.GetDBConnection();
+            connect.Open();
+            command.Connection = connect;
+            command.CommandText = sql;
+            command.Parameters.AddWithValue("@id_user", userId);
+            command.Parameters.AddWithValue("@password", hashPassword(password));
+
+            int rows = command.ExecuteNonQuery();
+            return rows == 1;
+        }
+        public static Boolean checkOldPassword(string password, string dbpasword)
+        {
+            return verify(password, dbpasword);
+        }
+        public static Boolean activeUser(string token)
+        {
+            int active = 1;
+            string sql = "update user set active=@active where token=@token";
+            MySqlCommand command = new MySqlCommand();
+            MySqlConnection connect = KetNoi.GetDBConnection();
+            connect.Open();
+            command.Connection = connect;
+            command.CommandText = sql;
+            command.Parameters.AddWithValue("@active", active);
+            command.Parameters.AddWithValue("@token", token);
+
+            int rows = command.ExecuteNonQuery();
+            return rows == 1;
+        }
+        public static String getToken(String email)
+        {
+            List<string> tokenList = new List<string>();
+            string sql = "select token from user where email=@email";
+            MySqlCommand command = new MySqlCommand();
+            MySqlConnection connect = KetNoi.GetDBConnection();
+            connect.Open();
+            command.Connection = connect;
+            command.CommandText = sql;
+            command.Prepare();
+            command.Parameters.AddWithValue("@email", email);
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    tokenList.Add(reader.GetString(0));
+                }
+                reader.Close();
+                if (tokenList.Count != 1) return null;
+                string token = tokenList[0];
+
+                return token;
+            }
         }
         public static ArrayList getSellectUser()
         {

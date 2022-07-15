@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
@@ -32,12 +31,24 @@
             <div class="col-md-12">
                 <div class="aa-myaccount-area">
                     <div class="row">
-                        <h4>User Management: </h4>
+                        <h4>Thông tin tài khoản: </h4>
+                        <div class="col-md-6">
+                            <div class="aa-myaccount-login">
+                                <h4>Thông tin người dùng</h4>
+                                <form action="" class="aa-login-form">
+                                    <label for="">UserName:@Session["UserName"]<span>*</span></label>
+                                    <br />
+                                    <label for="">Password:*******<span>*</span></label>
+                                    <br />
+                                    <a href="/Account/ChangePassword" class="aa-primary-btn">Thay Mật Khẩu</a>
+                                </form>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="aa-myaccount-register">
                                 <h4>Địa Chỉ Giao Hàng</h4>
                                 @{
-                                    Customer cus = (Customer)Session["customer"];
+                                Customer cus = (Customer)Session["customer"];
                                 }
                                 <form action="" class="aa-login-form">
                                     <label for="">Tên khách Hàng:@cus.NameCus<span>*</span></label>

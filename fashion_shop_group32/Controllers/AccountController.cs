@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
@@ -30,6 +32,8 @@ namespace fashion_shop_group32.Controllers
             if (doRegister(username, password, confirmPassword, email, ten_kh, diachi, sodt))
             {
                 ViewBag.Message = username + "sucess register";
+                //Session["email"] = email;
+                sendMail(email);
                 return RedirectToAction("Login");
             }
             else
@@ -49,11 +53,19 @@ namespace fashion_shop_group32.Controllers
             Users usr = checkLogin(username, password);
             if (usr != null)
             {
-                //set session
-                Session["UserName"] = usr.username.ToString();
-                Session["Role"] = usr.role.ToString();
-                Session["Idkh"] = usr.id_khachhang;
-                return RedirectToAction("LoggedIn");
+                if (usr.active == 0)
+                {
+                    ViewBag.Message = ("Your Account already not active");
+                    return View();
+                }
+                else
+                {
+                    Session["UserName"] = usr.username.ToString();
+                    Session["Role"] = usr.role.ToString();
+                    Session["Idkh"] = usr.id_khachhang;
+                    Session["pass"] = usr.password.ToString();
+                    return RedirectToAction("LoggedIn");
+                }
             }
             else
             {
@@ -120,10 +132,93 @@ namespace fashion_shop_group32.Controllers
             }
             return true;
         }
+
+        public ActionResult changePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult changePassword(string Oldpassword, string newPassword, string confirmPassword)
+        {
+            string userId = (string)Session["userId"];
+            string dbPassword = (string)Session["pass"];
+            if (checkOldPassword(Oldpassword, dbPassword))
+            {
+                if (doEditPassword(userId, newPassword, confirmPassword))
+                {
+                    return RedirectToAction("UserInfomation");
+                }
+                ViewBag.Message = "something is wrong";
+                return View();
+            }
+            else
+            {
+                ViewBag.Message = "please check your password";
+                return View();
+            }
+
+        }
         public Boolean doEditCus(int id_kh, string namecus, string address, string phone, string email)
         {
             return Models.Dao.UserDao.updateCustomer(id_kh, namecus, address, phone, email);
         }
+        public Boolean checkOldPassword(String password, String dbPassword)
+        {
+            return Models.Dao.UserDao.verify(dbPassword, password);
+        }
+        public Boolean doEditPassword(string userId, string password, string confirmPassword)
+        {
+            if (password.Equals(confirmPassword))
+            {
+                return Models.Dao.UserDao.updateUserPassword(userId, password);
+            }
+            return true;
+        }
+        public ActionResult activeUser(String Token)
+        {
+            if (active(Token))
+            {
+                return RedirectToAction("Login");
+            }
+            return RedirectToAction("Register");
+        }
+        public void sendMail(String emailTo)
+        {
 
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+
+            smtpClient.Credentials = new NetworkCredential("chanhhiep2907@gmail.com", "jproyjputuwyutvv");
+            //smtpClient.UseDefaultCredentials = true; // uncomment if you don't want to use the network credentials
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = true;
+            MailMessage mail = new MailMessage();
+
+            //Setting From , To and CC
+            mail.Body = getToken(emailTo);
+            mail.From = new MailAddress("chanhhiep2907@gmail.com");
+            mail.To.Add(new MailAddress(emailTo));
+            mail.Subject = "Active User Account";
+            // mail.CC.Add(new MailAddress((string)Session["email"]));
+
+            smtpClient.Send(mail);
+        }
+        public Boolean active(String token)
+        {
+            return Models.Dao.UserDao.activeUser(token);
+        }
+        public string getToken(string email)
+        {
+            String result = "";
+            String rs = Models.Dao.UserDao.getToken(email);
+            if (rs == null)
+            {
+                result = "sorry your email already have in my sytem";
+            }
+            else
+            {
+                result = "bạn đã đăng ký thành công vui lòng link vào link sau để active tài khoản :" + " https://localhost:44332/Account/activeUser?token=" + rs;
+            }
+            return result;
+        }
     }
 }
