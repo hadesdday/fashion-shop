@@ -3,10 +3,7 @@ using fashion_shop_group32.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
-using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace fashion_shop_group32.Controllers

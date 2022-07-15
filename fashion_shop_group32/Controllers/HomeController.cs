@@ -10,10 +10,6 @@ namespace fashion_shop_group32.Controllers
         {
             _product = new MockProduct();
         }
-        //public HomeController(IProduct product)
-        //{
-        //    _product = new MockProduct();
-        //}
 
         public ViewResult Index()
         {

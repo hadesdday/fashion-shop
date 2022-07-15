@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace fashion_shop_group32.Models
+﻿namespace fashion_shop_group32.Models
 {
     public class Customer
     {

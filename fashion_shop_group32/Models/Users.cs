@@ -1,7 +1,4 @@
-﻿using Microsoft.OData.Edm;
-using System;
-
-namespace fashion_shop_group32.Models
+﻿namespace fashion_shop_group32.Models
 {
     public class Users
     {

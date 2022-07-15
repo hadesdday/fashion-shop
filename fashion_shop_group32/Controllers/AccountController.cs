@@ -1,17 +1,8 @@
-﻿using Databases;
-using fashion_shop_group32.Models;
-using MySqlConnector;
+﻿using fashion_shop_group32.Models;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace fashion_shop_group32.Controllers
 {

@@ -586,13 +586,11 @@
     <Compile Include="Controllers\admin\SaleController.cs" />
     <Compile Include="Controllers\admin\SizeController.cs" />
     <Compile Include="Controllers\admin\UserController.cs" />
-    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\WishlistController.cs" />
     <Compile Include="Databases\CauHinh.cs" />
     <Compile Include="Databases\KetNoi.cs" />
     <Compile Include="Databases\Program.cs" />
@@ -1916,8 +1914,6 @@
     <Folder Include="Content\upload\product\somi nu\ÁO SƠMI W2SMD05201FOSCR\" />
     <Folder Include="Content\upload\product\somi nu\ÁO SƠMI W2SMD11101FOSCR\" />
     <Folder Include="Content\upload\product\thun nu\ÁO THUN W2ATN01220BOSBA\" />
-    <Folder Include="Views\OrderDetailsManagement\" />
-    <Folder Include="Views\ProductDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -1975,14 +1971,11 @@
     <Content Include="fonts\admin\fonts\weathericons-regular-webfont.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Blog\BlogHome.cshtml" />
     <Content Include="Views\Cart\CartHome.cshtml" />
-    <Content Include="Views\Blog\SingleBlog.cshtml" />
     <Content Include="Views\Checkout\CheckoutHome.cshtml" />
     <Content Include="Views\Contact\ContactPage.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Product\ProductDetails.cshtml" />
-    <Content Include="Views\Wishlist\WishlistHome.cshtml" />
     <Content Include="Scripts\admin\js\lib\data-table\vi.json" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />

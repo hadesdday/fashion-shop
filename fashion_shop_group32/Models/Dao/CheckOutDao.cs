@@ -3,8 +3,6 @@ using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Web;
 
 namespace fashion_shop_group32.Models.Dao
 {
@@ -42,7 +40,7 @@ namespace fashion_shop_group32.Models.Dao
             string sqlCus = "insert into khachhang(id_khachhang,ten_kh,diachi,sodt,email) " +
                "values(@id_khachhang,@ten_kh,@diachi,@sodt,@email)";
             MySqlCommand cmd = new MySqlCommand(sqlCus, connectCus);
-            int id_kh = (int)cmd.LastInsertedId;    
+            int id_kh = (int)cmd.LastInsertedId;
             cmd.Parameters.AddWithValue("@id_khachhang", id_kh);
             cmd.Parameters.AddWithValue("@ten_kh", ten_kh);
             cmd.Parameters.AddWithValue("@diachi", diachi);
