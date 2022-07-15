@@ -32,6 +32,8 @@ namespace fashion_shop_group32.Controllers
         {
             MockProduct mockProduct = new MockProduct();
             Product product = mockProduct.GetProductsByID(product_id);
+            //toast thong bao o day
+            TempData["message"] = "Added";
             if (Session["cart"] == null)
             {
                 List<CartDao> carts = new List<CartDao>();

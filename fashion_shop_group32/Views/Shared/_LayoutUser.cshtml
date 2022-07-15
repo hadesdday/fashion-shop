@@ -8,6 +8,7 @@
     @*@Styles.Render("~/Content/css")*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Bootstrap -->
+    <link rel="icon" href="~/Content/img/icon.png" type="image/gif">
     <link href="~/Content/css/bootstrap.css" rel="stylesheet">
     <!-- SmartMenus jQuery Bootstrap Addon CSS -->
     <link href="~/Content/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
@@ -85,65 +86,69 @@
                             <!-- / logo  -->
                             <!-- cart box -->
                             @{
-                                int numberItem;
-                                List<CartDao> carts = (List<CartDao>)Session["cart"];
-                                if (carts == null)
-                                {
+                            int numberItem;
+                            List<CartDao>
+                                carts = (List<CartDao>
+                                    )Session["cart"];
+                                    if (carts == null)
+                                    {
                                     numberItem = 0;
-                                }
-                                else
-                                {
+                                    }
+                                    else
+                                    {
                                     numberItem = carts.Count();
-                                }
-                            }
+                                    }
+                                    }
 
 
-                            <div class="aa-cartbox">
+                                    <div class="aa-cartbox">
 
-                                <a class="aa-cart-link" href="/Cart">
-                                    <span class="fa fa-shopping-basket"></span>
-                                    <span class="aa-cart-title">GIỎ HÀNG</span>
-                                    <span class="aa-cart-notify">@numberItem</span>
-                                </a>
-                                @if (Session["cart"] == null)
-                                {
-                                    <div class="aa-cartbox-summary">
-                                        <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
+                                        <a class="aa-cart-link" href="/Cart">
+                                            <span class="fa fa-shopping-basket"></span>
+                                            <span class="aa-cart-title">GIỎ HÀNG</span>
+                                            <span class="aa-cart-notify">@numberItem</span>
+                                        </a>
+                                        @if (Session["cart"] == null)
+                                        {
+                                        <div class="aa-cartbox-summary">
+                                            <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
+                                        </div>
+                                        }
+                                        @if (Session["cart"] != null)
+                                        {
+
+                                        <div class="aa-cartbox-summary">
+
+                                            <ul>
+                                                @foreach (CartDao item in (List
+                                                <CartDao>
+                                                    )Session["cart"])
+                                                    {
+                                                    <li>
+                                                        <a class="aa-cartbox-img" href="#"><img src="/@item.Pro.imgs[0]" alt="img" width="50" height="50"></a>
+                                                        <div class="aa-cartbox-info">
+                                                            <h4><a href="#">@item.Pro.ten_sp</a></h4>
+                                                            <p>@item.Pro.quantitySold x @item.Pro.gia</p>
+                                                        </div>
+                                                        <a class="aa-remove-product" href="@Url.Action( " DeleteCart", "Cart" , new { product_id=item.Pro.id_sanpham }, null)"><span class="fa fa-times"></span></a>
+                                                    </li>
+                                                    }
+                                            </ul>
+                                            <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
+                                        </div>
+
+                                        }
                                     </div>
-                                }
-                                @if (Session["cart"] != null)
-                                {
 
-                                    <div class="aa-cartbox-summary">
-
-                                        <ul>
-                                            @foreach (CartDao item in (List<CartDao>)Session["cart"])
-                                            {
-                                                <li>
-                                                    <a class="aa-cartbox-img" href="#"><img src="/@item.Pro.imgs[0]" alt="img" width="50" height="50"></a>
-                                                    <div class="aa-cartbox-info">
-                                                        <h4><a href="#">@item.Pro.ten_sp</a></h4>
-                                                        <p>@item.Pro.quantitySold x @item.Pro.gia</p>
-                                                    </div>
-                                                    <a class="aa-remove-product" href="@Url.Action( "DeleteCart", "Cart", new { product_id = item.Pro.id_sanpham }, null)"><span class="fa fa-times"></span></a>
-                                                </li>
-                                            }
-                                        </ul>
-                                        <a class="aa-cartbox-checkout aa-primary-btn" href="/Checkout">Checkout</a>
+                                    <!-- / cart box -->
+                                    <!-- search box -->
+                                    <div class="aa-search-box">
+                                        <form action="/Product/ProductList">
+                                            <input type="text" name="keyword" id="" placeholder="Search here ex. 'man' ">
+                                            <button type="submit"><span class="fa fa-search"></span></button>
+                                        </form>
                                     </div>
-
-                                }
-                            </div>
-
-                            <!-- / cart box -->
-                            <!-- search box -->
-                            <div class="aa-search-box">
-                                <form action="/Product/ProductList">
-                                    <input type="text" name="keyword" id="" placeholder="Search here ex. 'man' ">
-                                    <button type="submit"><span class="fa fa-search"></span></button>
-                                </form>
-                            </div>
-                            <!-- / search box -->
+                                    <!-- / search box -->
                         </div>
                     </div>
                 </div>

@@ -49,7 +49,14 @@ namespace fashion_shop_group32.Models.Dao
                 if (usersList.Count != 1) return null;
                 Users user = usersList[0];
                 Console.WriteLine("success login");
-                if (!user.username.Equals(username) || verify(user.password, password) == false) return null;
+                try
+                {
+                    if (!user.username.Equals(username) || verify(user.password, password) == false) return null;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
                 return user;
             }
         }
@@ -67,18 +74,6 @@ namespace fashion_shop_group32.Models.Dao
         }
         public static String generateId()
         {
-            /*
-             StringBuilder builder = new StringBuilder();
-Enumerable
-   .Range(65, 26)
-    .Select(e => ((char)e).ToString())
-    .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
-    .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
-    .OrderBy(e => Guid.NewGuid())
-    .Take(11)
-    .ToList().ForEach(e => builder.Append(e));
-string id = builder.ToString();
-            */
             return Guid.NewGuid().ToString();
         }
         public static Boolean register(String username, String password, String email, String ten_kh, String diachi, String sodt)
@@ -268,8 +263,7 @@ string id = builder.ToString();
                 while (reader.Read())
                 {
                     listCus.Add(new Customer(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),
-                        reader.GetString(3), reader.GetString(4),
-                        reader.GetDateTime(5), reader.GetDateTime(6)));
+                        reader.GetString(3), reader.GetString(4)));
                 }
                 reader.Close();
             }

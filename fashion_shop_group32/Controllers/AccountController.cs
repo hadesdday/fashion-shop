@@ -105,7 +105,8 @@ namespace fashion_shop_group32.Controllers
         [HttpPost]
         public ActionResult EditInfoCus(string namecus, string address, string phone, string email)
         {
-            if (doEditCus(Int32.Parse((string)Session["Idkh"]), namecus, address, phone, email))
+            Object id = Session["Idkh"];
+            if (doEditCus(Int32.Parse(id.ToString()), namecus, address, phone, email))
             {
                 ViewBag.Message = namecus + "sucess register";
                 return RedirectToAction("UserInfomation");

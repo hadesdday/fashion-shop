@@ -26,18 +26,8 @@ namespace fashion_shop_group32.Controllers.admin
                         ma_mau = ord.ma_mau,
                         ma_size = ord.ma_size
                     };
-                    int quantity = context.sanpham.Where(t => (t.id_sanpham.Equals(ord.id_sanpham))).FirstOrDefault<ProductEntity>().soluongton;
-                    if (ord.soluong <= quantity)
-                    {
-                        context.chitiethoadon.Add(orderDetails);
-                        ProductEntity p = context.sanpham.Where(t => t.id_sanpham.Equals(ord.id_sanpham)).FirstOrDefault<ProductEntity>();
-                        p.soluongton = quantity - ord.soluong;
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        return new JsonHttpStatusResult("Số lượng không được vượt quá số lượng hàng tồn kho", HttpStatusCode.InternalServerError);
-                    }
+                    context.chitiethoadon.Add(orderDetails);
+                    context.SaveChanges();
                 }
                 catch (DbUpdateException ex)
                 {
@@ -55,19 +45,25 @@ namespace fashion_shop_group32.Controllers.admin
         public JsonResult GetOrderDetailsList()
         {
             List<OrderDetailsEntity> detailsList = new List<OrderDetailsEntity>();
-
-            using (var ctx = new AdminDbContext())
+            try
             {
-                detailsList = ctx.chitiethoadon.ToList<OrderDetailsEntity>();
-            }
+                using (var ctx = new AdminDbContext())
+                {
+                    detailsList = ctx.chitiethoadon.ToList<OrderDetailsEntity>();
+                }
 
-            if (detailsList.Count == 0)
+                if (detailsList.Count == 0)
+                {
+                    return new JsonHttpStatusResult("error", HttpStatusCode.InternalServerError);
+                }
+
+                var jsonArray = Json(new { data = detailsList }, JsonRequestBehavior.AllowGet);
+                return jsonArray;
+            }
+            catch (Exception e)
             {
                 return new JsonHttpStatusResult("error", HttpStatusCode.InternalServerError);
             }
-
-            var jsonArray = Json(new { data = detailsList }, JsonRequestBehavior.AllowGet);
-            return jsonArray;
         }
 
         public JsonResult GetOrderDetails(int id)

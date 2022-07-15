@@ -7,7 +7,7 @@ namespace fashion_shop_group32.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=.net;port=3306;user=root;password=;charset=utf8;");
+            optionsBuilder.UseMySQL("server=localhost;database=.net2;port=3306;user=root;password=;charset=utf8;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

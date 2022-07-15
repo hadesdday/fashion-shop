@@ -730,6 +730,18 @@
     <Content Include="Content\css\theme-color\yellow-theme.css" />
     <Content Include="Content\img\avatar.jpg" />
     <Content Include="Content\img\avatar.png" />
+    <Content Include="Content\img\banner.jpg" />
+    <Content Include="Content\img\banner1.jpg" />
+    <Content Include="Content\img\banner10.jpg" />
+    <Content Include="Content\img\banner11.jpg" />
+    <Content Include="Content\img\banner2.jpg" />
+    <Content Include="Content\img\banner3.jpg" />
+    <Content Include="Content\img\banner4.jpg" />
+    <Content Include="Content\img\banner5.jpg" />
+    <Content Include="Content\img\banner6.jpg" />
+    <Content Include="Content\img\banner7.jpg" />
+    <Content Include="Content\img\banner8.jpg" />
+    <Content Include="Content\img\banner9.jpg" />
     <Content Include="Content\img\client-brand-css3.png" />
     <Content Include="Content\img\client-brand-html5.png" />
     <Content Include="Content\img\client-brand-java.png" />
@@ -754,6 +766,7 @@
     <Content Include="Content\img\fashion\fashion-header-bg-8.jpg" />
     <Content Include="Content\img\flag\english.jpg" />
     <Content Include="Content\img\flag\french.jpg" />
+    <Content Include="Content\img\icon.png" />
     <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\man-small-1.jpg" />
     <Content Include="Content\img\man\noi-com-dien-cuckoo-1-8-lit-cp-0661.png" />
