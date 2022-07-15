@@ -57,7 +57,6 @@
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right">
                                     <li class="hidden-xs"><a href="/Cart">Giỏ hàng</a></li>
-                                    <li class="hidden-xs"><a href="/Checkout">Checkout</a></li>
                                     <li><a href="@Url.Action("UserInfomation","Account",null)" data-target="#login-modal">Xin chào, @Session["UserName"].ToString()</a></li>
                                 </ul>
                             </div>
@@ -121,7 +120,7 @@
                                             @foreach (CartDao item in (List<CartDao>)Session["cart"])
                                             {
                                                 <li>
-                                                    <a class="aa-cartbox-img" href="#"><img src="@item.Pro.imgs[0]" alt="img" width="50" height="50"></a>
+                                                    <a class="aa-cartbox-img" href="#"><img src="/@item.Pro.imgs[0]" alt="img" width="50" height="50"></a>
                                                     <div class="aa-cartbox-info">
                                                         <h4><a href="#">@item.Pro.ten_sp</a></h4>
                                                         <p>@item.Pro.quantitySold x @item.Pro.gia</p>
@@ -134,8 +133,6 @@
                                     </div>
 
                                 }
-
-
                             </div>
 
                             <!-- / cart box -->
@@ -172,53 +169,29 @@
                     <div class="navbar-collapse collapse">
                         <!-- Left nav -->
                         <ul class="nav navbar-nav">
-                            <li><a href="/">Home</a></li>
+                            <li><a href="/">Trang chủ</a></li>
                             <li>
-                                <a href="#">Men <span class="caret"></span></a>
+                                <a href="#">Nam <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Product/ProductList?cat=casual&&loai=men&&gia=&&size=&&mau=">Casual</a></li>
-                                    <li><a href="/Product/ProductList?cat=sport&&loai=men&&gia=&&size=&&mau=">Sports</a></li>
-                                    <li><a href="/Product/ProductList?cat=formal&&loai=men&&gia=&&size=&&mau=">Formal</a></li>
-                                    <li><a href="/Product/ProductList?cat=standard&&loai=men&&gia=&&size=&&mau=">Standard</a></li>
-                                    <li><a href="/Product/ProductList?cat=t-shirt&&loai=men&&gia=&&size=&&mau=">T-Shirts</a></li>
-                                    <li><a href="/Product/ProductList?cat=shirt&&loai=men&&gia=&&size=&&mau=">Shirts</a></li>
-                                    <li><a href="/Product/ProductList?cat=jean&&loai=men&&gia=&&size=&&mau=">Jeans</a></li>
-                                    <li><a href="/Product/ProductList?cat=trouser&&loai=men&&gia=&&size=&&mau=">Trousers</a></li>
+                                    <li><a href="/Product/ProductList?cat=aokhoac&&loai=men&&gia=&&size=&&mau=">Áo khoác</a></li>
+                                    <li><a href="/Product/ProductList?cat=aothun&&loai=men&&gia=&&size=&&mau=">Áo thun</a></li>
+                                    <li><a href="/Product/ProductList?cat=quandai&&loai=men&&gia=&&size=&&mau=">Quần dài</a></li>
+                                    <li><a href="/Product/ProductList?cat=quanshort&&loai=men&&gia=&&size=&&mau=">Quần short</a></li>
+                                    <li><a href="/Product/ProductList?cat=somi&&loai=men&&gia=&&size=&&mau=">Sơ mi</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Women <span class="caret"></span></a>
+                                <a href="#">Nữ <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Product/ProductList?cat=trouser&&loai=women&&gia=&&size=&&mau=">Trousers</a></li>
-                                    <li><a href="/Product/ProductList?cat=casual&&loai=women&&gia=&&size=&&mau=">Casual</a></li>
-                                    <li><a href="/Product/ProductList?cat=sport&&loai=women&&gia=&&size=&&mau=">Sports</a></li>
-                                    <li><a href="/Product/ProductList?cat=formal&&loai=women&&gia=&&size=&&mau=">Formal</a></li>
-                                    <li><a href="/Product/ProductList?cat=shoe&&loai=women&&gia=&&size=&&mau=">Shoes</a></li>
+                                    <li><a href="/Product/ProductList?cat=aokhoac&&loai=women&&gia=&&size=&&mau=">Áo khoác</a></li>
+                                    <li><a href="/Product/ProductList?cat=aothun&&loai=women&&gia=&&size=&&mau=">Áo thun</a></li>
+                                    <li><a href="/Product/ProductList?cat=quandai&&loai=women&&gia=&&size=&&mau=">Quần dài</a></li>
+                                    <li><a href="/Product/ProductList?cat=quanshort&&loai=women&&gia=&&size=&&mau=">Quần short</a></li>
+                                    <li><a href="/Product/ProductList?cat=somi&&loai=women&&gia=&&size=&&mau=">Sơ mi</a></li>
 
                                 </ul>
                             </li>
-                            <li>
-                                <a href="#">Kids <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/Product/ProductList?cat=casual&&loai=women&&gia=&&size=&&mau=">Casual</a></li>
-                                    <li><a href="/Product/ProductList?cat=sport&&loai=women&&gia=&&size=&&mau=">Sports</a></li>
-                                    <li><a href="/Product/ProductList?cat=formal&&loai=women&&gia=&&size=&&mau=">Formal</a></li>
-                                    <li><a href="/Product/ProductList?cat=standard&&loai=women&&gia=&&size=&&mau=">Standard</a></li>
-                                    <li><a href="/Product/ProductList?cat=t-shirt&&loai=women&&gia=&&size=&&mau=">T-Shirts</a></li>
-                                    <li><a href="/Product/ProductList?cat=shirt&&loai=women&&gia=&&size=&&mau=">Shirts</a></li>
-                                    <li><a href="/Product/ProductList?cat=jean&&loai=women&&gia=&&size=&&mau=">Jeans</a></li>
-                                    <li><a href="/Product/ProductList?cat=trouser&&loai=women&&gia=&&size=&&mau=">Trousers</a></li>
-
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="/Blog">Blog <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/Blog/SingleBlog">Blog Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/Contact">Contact</a></li>
+                            <li><a href="/Contact">Liên hệ</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -226,24 +199,6 @@
         </div>
     </section>
     @RenderBody()
-    <section id="aa-subscribe">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="aa-subscribe-area">
-                        <h3>Subscribe our newsletter </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, velit!</p>
-                        <form action="" class="aa-subscribe-form">
-                            <input type="email" name="" id="" placeholder="Enter your Email">
-                            <input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- / Subscribe section -->
-    <!-- footer -->
     <footer id="aa-footer">
         <!-- footer bottom -->
         <div class="aa-footer-top">
@@ -252,60 +207,31 @@
                     <div class="col-md-12">
                         <div class="aa-footer-top-area">
                             <div class="row">
-                                <div class="col-md-3 col-sm-6">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="aa-footer-widget">
-                                        <h3>Main Menu</h3>
+                                        <h3>Group32</h3>
                                         <ul class="aa-footer-nav">
-                                            <li><a href="#">Home</a></li>
-                                            <li><a href="#">Our Services</a></li>
-                                            <li><a href="#">Our Products</a></li>
-                                            <li><a href="#">About Us</a></li>
-                                            <li><a href="#">Contact Us</a></li>
+                                            <li><a href="/">Trang chủ</a></li>
+                                            <li><a href="/Product/ProductList?cat=aokhoac&&loai=men&&gia=&&size=&&mau=">Áo khoác</a></li>
+                                            <li><a href="/Product/ProductList?cat=aothun&&loai=men&&gia=&&size=&&mau=">Áo thun</a></li>
+                                            <li><a href="/Product/ProductList?cat=quandai&&loai=men&&gia=&&size=&&mau=">Quần dài</a></li>
+                                            <li><a href="/Product/ProductList?cat=quanshort&&loai=men&&gia=&&size=&&mau=">Quần short</a></li>
+                                            <li><a href="/Product/ProductList?cat=somi&&loai=men&&gia=&&size=&&mau=">Sơ mi</a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="aa-footer-widget">
-                                        <div class="aa-footer-widget">
-                                            <h3>Knowledge Base</h3>
-                                            <ul class="aa-footer-nav">
-                                                <li><a href="#">Delivery</a></li>
-                                                <li><a href="#">Returns</a></li>
-                                                <li><a href="#">Services</a></li>
-                                                <li><a href="#">Discount</a></li>
-                                                <li><a href="#">Special Offer</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="aa-footer-widget">
-                                        <div class="aa-footer-widget">
-                                            <h3>Useful Links</h3>
-                                            <ul class="aa-footer-nav">
-                                                <li><a href="#">Site Map</a></li>
-                                                <li><a href="#">Search</a></li>
-                                                <li><a href="#">Advanced Search</a></li>
-                                                <li><a href="#">Suppliers</a></li>
-                                                <li><a href="#">FAQ</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="aa-footer-widget">
                                         <div class="aa-footer-widget">
                                             <h3>Contact Us</h3>
                                             <address>
-                                                <p> 25 Astor Pl, NY 10003, USA</p>
-                                                <p><span class="fa fa-phone"></span>+1 212-982-4589</p>
-                                                <p><span class="fa fa-envelope"></span>dailyshop@gmail.com</p>
+                                                <p> Khu Phố 6 ,Phường Linh Trung , Thành Phố Thủ Đức</p>
+                                                <p><span class="fa fa-phone"></span>0987654321</p>
+                                                <p><span class="fa fa-envelope"></span>group32@gmail.com</p>
                                             </address>
                                             <div class="aa-footer-social">
                                                 <a href="#"><span class="fa fa-facebook"></span></a>
                                                 <a href="#"><span class="fa fa-twitter"></span></a>
-                                                <a href="#"><span class="fa fa-google-plus"></span></a>
-                                                <a href="#"><span class="fa fa-youtube"></span></a>
                                             </div>
                                         </div>
                                     </div>
