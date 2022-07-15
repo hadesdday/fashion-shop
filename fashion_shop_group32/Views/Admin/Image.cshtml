@@ -214,7 +214,7 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    $("#other-image").attr("src", data['path']);
+                    $("#other-image").attr("src", "/" + data['path']);
                     $("input[name='editimgUrl']").val(data['path']);
                     toastr.success('Upload hình ảnh thành công', 'Thành công');
                 },
@@ -237,7 +237,7 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    $("input[name='imgUrl']").val(data['path']);
+                    $("input[name='imgUrl']").val("/" + data['path']);
                     toastr.success('Upload hình ảnh thành công', 'Thành công')
                 },
                 error: function (data) {
@@ -279,7 +279,7 @@
     function setData(data) {
         $("input[name='editid']").val(data.id_anh);
         $("input[name='editimgUrl']").val(data.link_anh);
-        $("#other-image").attr("src", data.link_anh);
+        $("#other-image").attr("src", "/" + data.link_anh);
     }
 
     function onEdit(elm) {

@@ -40,6 +40,9 @@ namespace fashion_shop_group32.Controllers
             if (doPayment(mgg, paymentMt, getMoneyOfCart(), ten_kh, diachi, sodt, email, carts))
             {
                 ViewBag.Message = "sucess register payment";
+
+                //toast thong bao o day
+                TempData["message"] = "Payment";
                 return RedirectToAction("ClearOrder");
             }
             else

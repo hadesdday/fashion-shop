@@ -333,7 +333,7 @@
             success: data => {
                 let returnedData = data["data"];
                 returnedData.map(x => {
-                    let elm = "<option value='" + x["ma_loaisp"] + "'>" + x["ten_loaisp"] + "</option>";
+                    let elm = "<option value='" + x["ma_loaisp"] + "'>" + x["ma_loaisp"] + "</option>";
                     $("select[name='tid']").append(elm);
                     $("select[name='edittid']").append(elm);
                 });
@@ -396,12 +396,12 @@
                 method: "POST",
                 success: function (data) {
                     reloadTable();
-                    swal("Thành công", "Thêm hóa đơn mới thành công", "success");
+                    swal("Thành công", "Thêm sản phẩm mới thành công", "success");
                     clearData();
                     closeModal("#addModal");
                 },
                 error: function (data) {
-                    swal("Thất bại", "Thêm hóa đơn mới thất bại", "error");
+                    swal("Thất bại", "Thêm sản phẩm mới thất bại", "error");
                 }
             });
         }
