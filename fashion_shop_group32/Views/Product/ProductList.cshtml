@@ -38,17 +38,44 @@
                             @foreach (var item in Model.list1)
                             {
                                 <!-- start single product item -->
-                                <li>
-                                    <figure pid="@item.id_sanpham" pname="@item.ten_sp">
-                                        <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp"><img class="imgmain" src="/@item.imageMain" alt="polo shirt img"></a>
-                                        <a class="aa-add-card-btn" href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
-                                        <figcaption>
-                                            <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp">@item.ten_sp</a></h4>
-                                            <span class="aa-product-price">@item.gia</span>
-                                            <p class="aa-product-descrip">@item.mota</p>
-                                        </figcaption>
-                                    </figure>
-                                </li>
+                            <li>
+                                <figure pid="@item.id_sanpham" pname="@item.ten_sp">
+                                    <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp"><img class="imgmain" src="/@item.imageMain" alt="polo shirt img"></a>
+                                    <a class="aa-add-card-btn" href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                    <figcaption>
+                                        <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham&&name=@item.ten_sp">@item.ten_sp</a></h4>
+                                        @if (item.id_km == "")
+                                        {
+
+                                            <span class="aa-product-price">@item.gia</span>}
+                                        else
+                                        {
+                                            <span class="aa-product-price">@(item.gia*(1-item.rateDiscount))</span><span class="aa-product-price"><del>@item.gia</del></span>
+                                        }
+                                        <p class="aa-product-descrip">@item.mota</p>
+                                    </figcaption>
+                                </figure>
+                                <div class="aa-product-hvr-content">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
+                                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
+                                </div>
+                                @if (item.id_km != "")
+                                {
+                                    <!-- product badge -->
+                                    <span class="aa-badge aa-sale" href="#">SALE!</span>
+                                }
+                                else if (item.active == "2")
+                                {
+                                    <!-- product badge -->
+                                    <span class="aa-badge aa-sold-out" href="#">Sold Out!</span>
+                                }
+                                else if (item.soluongton < 5)
+                                {
+                                    <!-- product badge -->
+                                    <span class="aa-badge aa-hot" href="#">HOT!</span>
+                                }
+                            </li>
                             }
                         </ul>
                         <!-- quick view modal -->
