@@ -120,7 +120,7 @@
                                             @foreach (CartDao item in (List<CartDao>)Session["cart"])
                                             {
                                                 <li>
-                                                    <a class="aa-cartbox-img" href="#"><img src="@item.Pro.imgs[0]" alt="img" width="50" height="50"></a>
+                                                    <a class="aa-cartbox-img" href="#"><img src="/@item.Pro.imgs[0]" alt="img" width="50" height="50"></a>
                                                     <div class="aa-cartbox-info">
                                                         <h4><a href="#">@item.Pro.ten_sp</a></h4>
                                                         <p>@item.Pro.quantitySold x @item.Pro.gia</p>
@@ -133,15 +133,13 @@
                                     </div>
 
                                 }
-
-
                             </div>
 
                             <!-- / cart box -->
                             <!-- search box -->
                             <div class="aa-search-box">
                                 <form action="/Product/ProductList">
-                                    <input type="text" name="keyword" id="" placeholder="Search here ex. 'man' ">
+                                    <input type="text" name="keyword" id="" placeholder="Tìm kiếm">
                                     <button type="submit"><span class="fa fa-search"></span></button>
                                 </form>
                             </div>
@@ -171,37 +169,29 @@
                     <div class="navbar-collapse collapse">
                         <!-- Left nav -->
                         <ul class="nav navbar-nav">
-                            <li><a href="/">Home</a></li>
+                            <li><a href="/">Trang chủ</a></li>
                             <li>
-                                <a href="#">Men <span class="caret"></span></a>
+                                <a href="#">Nam <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Product/ProductList?cat=aokhoac&&loai=men&&gia=&&size=&&mau=">aokhoac</a></li>
-                                    <li><a href="/Product/ProductList?cat=aothun&&loai=men&&gia=&&size=&&mau=">aothun</a></li>
-                                    <li><a href="/Product/ProductList?cat=quandai&&loai=men&&gia=&&size=&&mau=">quandai</a></li>
-                                    <li><a href="/Product/ProductList?cat=quanshort&&loai=men&&gia=&&size=&&mau=">quanshort</a></li>
-                                    <li><a href="/Product/ProductList?cat=somi&&loai=men&&gia=&&size=&&mau=">somi</a></li>                      
+                                    <li><a href="/Product/ProductList?cat=aokhoac&&loai=men&&gia=&&size=&&mau=">Áo khoác</a></li>
+                                    <li><a href="/Product/ProductList?cat=aothun&&loai=men&&gia=&&size=&&mau=">Áo thun</a></li>
+                                    <li><a href="/Product/ProductList?cat=quandai&&loai=men&&gia=&&size=&&mau=">Quần dài</a></li>
+                                    <li><a href="/Product/ProductList?cat=quanshort&&loai=men&&gia=&&size=&&mau=">Quần short</a></li>
+                                    <li><a href="/Product/ProductList?cat=somi&&loai=men&&gia=&&size=&&mau=">Sơ mi</a></li>                      
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Women <span class="caret"></span></a>
+                                <a href="#">Nữ <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Product/ProductList?cat=aokhoac&&loai=women&&gia=&&size=&&mau=">aokhoac</a></li>
-                                    <li><a href="/Product/ProductList?cat=aothun&&loai=women&&gia=&&size=&&mau=">aothun</a></li>
-                                    <li><a href="/Product/ProductList?cat=quandai&&loai=women&&gia=&&size=&&mau=">quandai</a></li>
-                                    <li><a href="/Product/ProductList?cat=quanshort&&loai=women&&gia=&&size=&&mau=">quanshort</a></li>
-                                    <li><a href="/Product/ProductList?cat=somi&&loai=women&&gia=&&size=&&mau=">somi</a></li>
+                                    <li><a href="/Product/ProductList?cat=aokhoac&&loai=women&&gia=&&size=&&mau=">Áo khoác</a></li>
+                                    <li><a href="/Product/ProductList?cat=aothun&&loai=women&&gia=&&size=&&mau=">Áo thun</a></li>
+                                    <li><a href="/Product/ProductList?cat=quandai&&loai=women&&gia=&&size=&&mau=">Quần dài</a></li>
+                                    <li><a href="/Product/ProductList?cat=quanshort&&loai=women&&gia=&&size=&&mau=">Quần short</a></li>
+                                    <li><a href="/Product/ProductList?cat=somi&&loai=women&&gia=&&size=&&mau=">Sơ mi</a></li>
                                  
                                 </ul>
                             </li>
-                           
-
-                            <li>
-                                <a href="/Blog">Blog <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/Blog/SingleBlog">Blog Single</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/Contact">Contact</a></li>
+                            <li><a href="/Contact">Liên hệ</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -217,33 +207,20 @@
                     <div class="col-md-12">
                         <div class="aa-footer-top-area">
                             <div class="row">
-                                <div class="col-md-3 col-sm-6">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="aa-footer-widget">
-                                        <h3>Main Menu</h3>
+                                        <h3>Group32</h3>
                                         <ul class="aa-footer-nav">
                                             <li><a href="/">Trang chủ</a></li>
-                                            <li><a href="/Product/ProductList?cat=casual&&loai=men&&gia=&&size=&&mau=">Casual</a></li>
-                                            <li><a href="#">Our Products</a></li>
-                                            <li><a href="#">About Us</a></li>
-                                            <li><a href="#">Contact Us</a></li>
+                                            <li><a href="/Product/ProductList?cat=aokhoac&&loai=men&&gia=&&size=&&mau=">Áo khoác</a></li>
+                                            <li><a href="/Product/ProductList?cat=aothun&&loai=men&&gia=&&size=&&mau=">Áo thun</a></li>
+                                            <li><a href="/Product/ProductList?cat=quandai&&loai=men&&gia=&&size=&&mau=">Quần dài</a></li>
+                                            <li><a href="/Product/ProductList?cat=quanshort&&loai=men&&gia=&&size=&&mau=">Quần short</a></li>
+                                            <li><a href="/Product/ProductList?cat=somi&&loai=men&&gia=&&size=&&mau=">Sơ mi</a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="aa-footer-widget">
-                                        <div class="aa-footer-widget">
-                                            <h3>Useful Links</h3>
-                                            <ul class="aa-footer-nav">
-                                                <li><a href="#">Site Map</a></li>
-                                                <li><a href="#">Search</a></li>
-                                                <li><a href="#">Advanced Search</a></li>
-                                                <li><a href="#">Suppliers</a></li>
-                                                <li><a href="#">FAQ</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="aa-footer-widget">
                                         <div class="aa-footer-widget">
                                             <h3>Contact Us</h3>
@@ -255,8 +232,6 @@
                                             <div class="aa-footer-social">
                                                 <a href="#"><span class="fa fa-facebook"></span></a>
                                                 <a href="#"><span class="fa fa-twitter"></span></a>
-                                                <a href="#"><span class="fa fa-google-plus"></span></a>
-                                                <a href="#"><span class="fa fa-youtube"></span></a>
                                             </div>
                                         </div>
                                     </div>

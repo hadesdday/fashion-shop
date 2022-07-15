@@ -728,6 +728,8 @@
     <Content Include="Content\css\theme-color\purple-theme.css" />
     <Content Include="Content\css\theme-color\red-theme.css" />
     <Content Include="Content\css\theme-color\yellow-theme.css" />
+    <Content Include="Content\img\avatar.jpg" />
+    <Content Include="Content\img\avatar.png" />
     <Content Include="Content\img\client-brand-css3.png" />
     <Content Include="Content\img\client-brand-html5.png" />
     <Content Include="Content\img\client-brand-java.png" />

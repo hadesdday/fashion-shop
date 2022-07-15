@@ -120,36 +120,39 @@
                                 <div class="aa-product-review-area">
                                     <h4><span id="cmt__quantity">@Model.commentQuantity</span> đánh giá trong sản phẩm @Model.product.ten_sp</h4>
 
-                                    @foreach (var comment in Model.fourFirstComments)
+                                    @if (Model.commentQuantity > 0)
                                     {
-                                        <ul class="aa-review-nav">
-                                            <li>
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <a href="#">
-                                                            <img class="media-object" src="~/Content/img/testimonial-img-3.jpg" alt="girl image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading"><strong>@comment.username</strong> - <span>@comment.date</span></h4>
-                                                        <div class="aa-product-rating">
-                                                            @for (var i = 1; i <= comment.sosao; i++)
-                                                            {
-                                                                <span class="fa fa-star"></span>
-                                                            }
-                                                            @for (var j = 1; j <= 5 - comment.sosao; j++)
-                                                            {
-                                                                <span class="fa fa-star-o"></span>
-                                                            }
+                                        foreach (var comment in Model.fourFirstComments)
+                                        {
+                                            <ul class="aa-review-nav">
+                                                <li>
+                                                    <div class="media">
+                                                        <div class="media-left">
+                                                            <a href="#">
+                                                                <img class="media-object" src="~/Content/img/avatar.png" alt="girl image">
+                                                            </a>
                                                         </div>
-                                                        <p>@comment.noidung</p>
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading"><strong>@comment.username</strong> - <span>@comment.date</span></h4>
+                                                            <div class="aa-product-rating">
+                                                                @for (var i = 1; i <= comment.sosao; i++)
+                                                                {
+                                                                    <span class="fa fa-star"></span>
+                                                                }
+                                                                @for (var j = 1; j <= 5 - comment.sosao; j++)
+                                                                {
+                                                                    <span class="fa fa-star-o"></span>
+                                                                }
+                                                            </div>
+                                                            <p>@comment.noidung</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                                </li>
+                                            </ul>
+                                        }
                                     }
 
-                                   i@*f (Model.remainComments.Count > 0)
+                                    @if (Model.isRemainingComment)
                                     {
                                         <p id="view__more">Xem thêm <span id="remain__count">@Model.remainComments.Count</span> bình luận</p>
                                         <div class="d-none remain__comments">
@@ -160,7 +163,7 @@
                                                         <div class="media">
                                                             <div class="media-left">
                                                                 <a href="#">
-                                                                    <img class="media-object" src="~/Content/img/testimonial-img-3.jpg" alt="girl image">
+                                                                    <img class="media-object" src="~/Content/img/avatar.png" alt="girl image">
                                                                 </a>
                                                             </div>
                                                             <div class="media-body">
@@ -182,7 +185,7 @@
                                                 </ul>
                                             }
                                         </div>
-                                    }*@
+                                    }
 
                                     @if (Session["UserName"] != null)
                                     {
@@ -224,7 +227,7 @@
                                 <!-- start single product item -->
                                 <li>
                                     <figure>
-                                        <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img class="imgmain"  src="\@item.imageMain" alt="polo shirt img"></a>
+                                        <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img class="imgmain" src="\@item.imageMain" alt="polo shirt img"></a>
                                         <!--them vao Action Link De dua san pham qua cart (Hiep)-->
                                         <a class="aa-add-card-btn" href="@Url.Action( "AddToCart", "Cart", new { product_id = item.id_sanpham }, null)"><span class="fa fa-shopping-cart"></span></a>
                                         <figcaption>
@@ -239,11 +242,6 @@
                                             }
                                         </figcaption>
                                     </figure>
-                                    <div class="aa-product-hvr-content">
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-                                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                                    </div>
                                     @if (item.id_km != "")
                                     {
                                         <!-- product badge -->

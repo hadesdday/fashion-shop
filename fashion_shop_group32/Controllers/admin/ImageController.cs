@@ -25,7 +25,7 @@ namespace fashion_shop_group32.Controllers.admin
                 }
                 string des = Server.MapPath("~/Content/upload/") + filename;
                 image.SaveAs(des);
-                string serverPath = "/Content/upload/" + filename;
+                string serverPath = "Content/upload/" + filename;
                 return new JsonHttpStatusResult(new { path = serverPath }, HttpStatusCode.OK);
             }
             return new JsonHttpStatusResult("invalid data", HttpStatusCode.InternalServerError);

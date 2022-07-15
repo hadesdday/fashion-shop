@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Products";
+    ViewBag.Title = "Danh sách sản phẩm";
     string currentParams = "? cat =" + ViewBag.cat + "&& loai =" + ViewBag.loai + "&& filter =" + ViewBag.filter;
 
 }
@@ -10,9 +10,9 @@
     <div class="aa-catg-head-banner-area">
         <div class="container">
             <div class="aa-catg-head-banner-content">
-                <h2>Fashion</h2>
+                <h2>Sản phẩm</h2>
                 <ol class="breadcrumb">
-                    <li><a href="/">Home</a></li>
+                    <li><a href="/">Trang chủ</a></li>
                     <li class="active">@ViewBag.loai</li>
                 </ol>
             </div>
@@ -48,11 +48,6 @@
                                             <p class="aa-product-descrip">@item.mota</p>
                                         </figcaption>
                                     </figure>
-                                    <div class="aa-product-hvr-content">
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-                                        <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>
-                                    </div>
                                 </li>
                             }
                         </ul>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace fashion_shop_group32.Models
 {
@@ -11,5 +12,6 @@ namespace fashion_shop_group32.Models
         public IEnumerable<Review> fourFirstComments { get; set; }
         public IEnumerable<Review> remainComments { get; set; }
         public int commentQuantity { get; set; }
+        public bool isRemainingComment { get; set; }
     }
 }
