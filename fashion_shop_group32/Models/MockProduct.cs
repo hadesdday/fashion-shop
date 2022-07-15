@@ -250,13 +250,15 @@ namespace fashion_shop_group32.Models
                 { // Đọc từng dòng kết quả cho đến hết
                     while (reader.Read())
                     {
-                        if (reader[5]!=null) { 
-                        p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), reader.GetString("id_km"),"", reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
-                    }else
-                    {
-                        p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), "", "", reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
+                        if (!reader.IsDBNull(5))
+                        {
+                            p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), reader.GetString("id_km"), "", reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
+                        }
+                        else
+                        {
+                            p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), "", "", reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
 
-                    }
+                        }
                         if (!reader.IsDBNull(10))
                         {
                             p.rateDiscount = reader.GetDouble(10);
