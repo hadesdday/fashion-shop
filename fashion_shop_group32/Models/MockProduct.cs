@@ -155,7 +155,7 @@ namespace fashion_shop_group32.Models
             {
                 System.Diagnostics.Debug.WriteLine("dont search");
 
-                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau=c.ma_mausp and e.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ma_loaisp =@maloaisp and a.loai=@loai " + filterQuery + ")limit " + begin + ",9";
+                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active,b.rate from sanpham a LEFT JOIN khuyenmai b on a.id_km=b.id_km where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau=c.ma_mausp and e.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ma_loaisp =@maloaisp and a.loai=@loai " + filterQuery + ")limit " + begin + ",9";
                 MySqlParameter maloaisp = new MySqlParameter("@maloaisp", MySqlDbType.String);
                 maloaisp.Value = cat;
                 MySqlParameter loaisp = new MySqlParameter("@loai", MySqlDbType.String);
@@ -169,7 +169,7 @@ namespace fashion_shop_group32.Models
                 System.Diagnostics.Debug.WriteLine("search");
 
                 //string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,e.ma_mau,e.ma_size,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a, loaisanpham b,mausanpham c,sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and a.ma_mau=c.ma_mausp and a.ma_size=d.ma_sizesp and a.id_sanpham=e.id_sanpham and a.ten_sp like '%" + keyword+"%' " + filterQuery + "  limit " + begin + ",9";
-                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active from sanpham a where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c, sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau = c.ma_mausp and e.ma_size = d.ma_sizesp and a.id_sanpham = e.id_sanpham and a.ten_sp like \'%" + keyword + "%\' " + filterQuery + "  )limit " + begin + ",9";
+                string queryString = "SELECT a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active,b.rate from sanpham a LEFT JOIN khuyenmai b on a.id_km=b.id_km where a.id_sanpham in(SELECT DISTINCT a.id_sanpham from sanpham a, loaisanpham b,mausanpham c, sizesanpham d,chitietsanpham e where a.ma_loaisp = b.ma_loaisp and e.ma_mau = c.ma_mausp and e.ma_size = d.ma_sizesp and a.id_sanpham = e.id_sanpham and a.ten_sp like \'%" + keyword + "%\' " + filterQuery + "  )limit " + begin + ",9";
                 newCmd.CommandText = queryString;
 
 
@@ -189,6 +189,11 @@ namespace fashion_shop_group32.Models
                         {
                             p.ma_size = size;
                         }
+                        //System.Diagnostics.Debug.WriteLine(reader[10]);
+                        //if (reader[10] != null && reader[10]!="")
+                        //{
+                        //    p.rateDiscount = reader.GetDouble(10);
+                        //}
                         
                         if (!isContain(reader[1].ToString()))
                             _productList.Add(p);
@@ -246,8 +251,14 @@ namespace fashion_shop_group32.Models
                 { // Đọc từng dòng kết quả cho đến hết
                     while (reader.Read())
                     {
-                        p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), reader.GetString("id_km"), reader.GetString("thuonghieu"), reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
-                        _productList.Add(p);
+                        if (reader[5]!=null) { 
+                        p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), "","", reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
+                    }else
+                    {
+                        p = new Product(reader.GetString("id_sanpham"), reader.GetString("ten_sp"), reader.GetString("ma_loaisp"), reader.GetDouble("gia"), reader.GetString("loai"), "", "", reader.GetInt32("soluongton"), reader.GetString("mota"), reader.GetInt32("active").ToString());
+
+                    }
+                    _productList.Add(p);
                     }
                 }
                 else Console.WriteLine("No rows found.");
@@ -270,8 +281,9 @@ namespace fashion_shop_group32.Models
                 { // Đọc từng dòng kết quả cho đến hết
                     while (reader.Read())
                     {
+                        System.Diagnostics.Debug.WriteLine("hasrow");
                         string imglink = reader[0].ToString();
-                        if(!imglink.Contains(imglink))
+                        if(!imgs.Contains(imglink))
                             imgs.Add(imglink);
                     }
                 }
@@ -285,7 +297,14 @@ namespace fashion_shop_group32.Models
             //nên t đã thêm 1 dòng dùng để clone nó ra
             Product pro = _productList[0];
             pro.imgs = imgs;
-            pro.imageMain = imgs[0];
+            if (imgs.Count < 1)
+            {
+                pro.imageMain = "";
+            }
+            else
+            {
+                pro.imageMain = imgs[0];
+            }
             conn.Close();
 
             return pro;
@@ -346,7 +365,7 @@ namespace fashion_shop_group32.Models
         {
             MySqlConnection conn = KetNoi.GetDBConnection();
             conn.Open();
-            string queryString = "select a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active,b.rate FROM sanpham a LEFT JOIN khuyenmai b on a.id_km=b.id_km";
+            string queryString = "select a.id_sanpham,a.ten_sp,a.ma_loaisp,a.gia,a.loai,a.id_km,a.thuonghieu,a.soluongton,a.mota,a.active,b.rate FROM sanpham a LEFT JOIN khuyenmai b on a.id_km=b.id_km limit 0,16";
             MySqlCommand command = new MySqlCommand(queryString, conn);
 
             using (MySqlDataReader reader = command.ExecuteReader())

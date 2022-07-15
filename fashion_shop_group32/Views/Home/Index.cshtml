@@ -159,12 +159,12 @@
                     <div class="aa-product-area">
                         <div class="aa-product-inner">
                             <!-- start prduct navigation -->
-                            <ul class="nav nav-tabs aa-products-tab">
+                            @*<ul class="nav nav-tabs aa-products-tab">
                                 <li class="active"><a href="#men" data-toggle="tab">Men</a></li>
                                 <li><a href="#women" data-toggle="tab">Women</a></li>
                                 <li><a href="#sports" data-toggle="tab">Sports</a></li>
                                 <li><a href="#electronics" data-toggle="tab">Electronics</a></li>
-                            </ul>
+                            </ul>*@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <!-- Start men product category -->
@@ -176,7 +176,7 @@
                                             <!-- start single product item -->
                                             <li>
                                                 <figure>
-                                                    <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img src="~/Content/img/man/polo-shirt-1.png" alt="polo shirt img"></a>
+                                                    <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img class="imgmain"  src="/@item.imageMain" alt="polo shirt img"></a>
                                                     <!--them vao Action Link De dua san pham qua cart (Hiep)-->
                                                     <a class="aa-add-card-btn" href="@Url.Action( "AddToCart", "Cart", new { product_id = item.id_sanpham }, null)"><span class="fa fa-shopping-cart"></span></a>
                                                     <figcaption>
@@ -781,7 +781,7 @@
                                         <!-- start single product item -->
                                         <li>
                                             <figure>
-                                                <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img src="~/Content/img/man/polo-shirt-1.png" alt="polo shirt img"></a>
+                                                <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img class="imgmain"  src="/@item.imageMain" alt="polo shirt img"></a>
                                                 <a class="aa-add-card-btn" href="/Product/ProductDetails?id=@item.id_sanpham"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham">@item.ten_sp</a></h4>
@@ -830,7 +830,7 @@
                                         <!-- start single product item -->
                                         <li>
                                             <figure>
-                                                <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img src="~/Content/img/man/polo-shirt-1.png" alt="polo shirt img"></a>
+                                                <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img class="imgmain"  src="/@item.imageMain" alt="polo shirt img"></a>
                                                 <a class="aa-add-card-btn" href="/Product/ProductDetails?id=@item.id_sanpham"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham">@item.ten_sp</a></h4>
@@ -874,7 +874,7 @@
                                         <!-- start single product item -->
                                         <li>
                                             <figure>
-                                                <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img src="~/Content/img/man/polo-shirt-1.png" alt="polo shirt img"></a>
+                                                <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img class="imgmain" src="/@item.imageMain" alt="polo shirt img"></a>
                                                 <a class="aa-add-card-btn" href="/Product/ProductDetails?id=@item.id_sanpham"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="/Product/ProductDetails?id=@item.id_sanpham">@item.ten_sp</a></h4>

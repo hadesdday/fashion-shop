@@ -40,7 +40,7 @@
                                         <div class="simpleLens-container">
                                             <div class="simpleLens-big-image-container">
                                                 <a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image">
-                                                    <img src="\@Model.product.imgs[0]" class="simpleLens-big-image">
+                                                    <img src="\@Model.product.imageMain" class="simpleLens-big-image">
                                                 </a>
                                             </div>
                                         </div>
@@ -149,7 +149,7 @@
                                         </ul>
                                     }
 
-                                    @if (Model.remainComments.Count > 0)
+                                   i@*f (Model.remainComments.Count > 0)
                                     {
                                         <p id="view__more">Xem thêm <span id="remain__count">@Model.remainComments.Count</span> bình luận</p>
                                         <div class="d-none remain__comments">
@@ -182,7 +182,7 @@
                                                 </ul>
                                             }
                                         </div>
-                                    }
+                                    }*@
 
                                     @if (Session["UserName"] != null)
                                     {
@@ -224,7 +224,7 @@
                                 <!-- start single product item -->
                                 <li>
                                     <figure>
-                                        <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img src="~/Content/img/man/polo-shirt-1.png" alt="polo shirt img"></a>
+                                        <a class="aa-product-img" href="/Product/ProductDetails?id=@item.id_sanpham"><img class="imgmain"  src="\@item.imageMain" alt="polo shirt img"></a>
                                         <!--them vao Action Link De dua san pham qua cart (Hiep)-->
                                         <a class="aa-add-card-btn" href="@Url.Action( "AddToCart", "Cart", new { product_id = item.id_sanpham }, null)"><span class="fa fa-shopping-cart"></span></a>
                                         <figcaption>
